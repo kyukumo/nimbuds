@@ -1,0 +1,12 @@
+import { buds } from "../data/buds";
+import { Bud } from "../types";
+import { getUniqueRandomNumbers } from "./getUniqueRandomNumbers";
+
+const getBud = (index: number) => buds[index];
+
+const getRandomBuds = (count = 3) => {
+  const numbers = getUniqueRandomNumbers(count, buds.length);
+  return numbers.map(getBud);
+};
+
+export const getStarterBuds = () => getRandomBuds(1) as [Bud];

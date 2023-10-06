@@ -1,0 +1,13 @@
+main {
+  text-align: left;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+p:nth-of-type(even) {
+  color: red;
+}
+
+p:nth-of-type(odd) {
+  color: blue;
+}
