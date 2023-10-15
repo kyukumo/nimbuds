@@ -11,11 +11,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@xstate/react": "^3.2.2",
+    "classnames": "^2.3.2",
+    "immer": "^10.0.3",
+    "profane-js": "^0.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rune-games-sdk": "^4.15.1",
-    "xstate": "^4.38.2"
+    "zustand": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.8.2",

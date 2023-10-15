@@ -1,0 +1,360 @@
+:root {
+  --fire: #ff4200;
+  --wind: #9394fe;
+  --earth: #51ff00;
+  --water: #64a5ff;
+  --light: #ffff00;
+  --dark: #a5a5a5;
+
+  --dark-fire-1: #bb8d7c;
+  --dark-fire-2: #d17453;
+  --dark-fire-3: #e85b2a;
+
+  --dark-earth-1: #90bb7c;
+  --dark-earth-2: #7cd153;
+  --dark-earth-3: #67e82a;
+
+  --dark-light-1: #bbbb7c;
+  --dark-light-2: #d1d153;
+  --dark-light-3: #e8e82a;
+
+  --dark-water-1: #95a5bb;
+  --dark-water-2: #85a5d1;
+  --dark-water-3: #75a5e8;
+
+  --dark-wind-1: #a1a1bb;
+  --dark-wind-2: #9d9dd1;
+  --dark-wind-3: #9899e7;
+
+  --fire-light-1: #ff7100;
+  --fire-light-2: #ffa000;
+  --fire-light-3: #ffcf00;
+
+  --fire-water-1: #d95a40;
+  --fire-water-2: #b2737f;
+  --fire-water-3: #8b8cbf;
+
+  --fire-wind-1: #e4563f;
+  --fire-wind-2: #ca6a7e;
+  --fire-wind-3: #af7fbe;
+
+  --earth-fire-1: #7cd000;
+  --earth-fire-2: #a7a100;
+  --earth-fire-3: #d37200;
+
+  --earth-light-1: #7cff00;
+  --earth-light-2: #a7ff00;
+  --earth-light-3: #d3ff00;
+
+  --earth-water-1: #55e940;
+  --earth-water-2: #5ad37f;
+  --earth-water-3: #5fbcbf;
+
+  --earth-wind-1: #61e53f;
+  --earth-wind-2: #71ca7e;
+  --earth-wind-3: #82afbe;
+
+  --light-water-1: #d9e940;
+  --light-water-2: #b2d37f;
+  --light-water-3: #8bbcbf;
+
+  --light-wind-1: #e4e53f;
+  --light-wind-2: #caca7e;
+  --light-wind-3: #afafbe;
+
+  --water-wind-1: #6fa1ff;
+  --water-wind-2: #7b9dff;
+  --water-wind-3: #8799ff;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+dd,
+dl {
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  line-height: 1;
+}
+
+main {
+  box-sizing: border-box;
+  height: calc(100vh - 1.5rem);
+  margin: 0.75rem;
+  padding: 0.75rem;
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* backgrounds */
+
+.dark {
+  background-color: var(--dark);
+}
+
+.dark-fire {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-fire-1) 20%,
+    var(--dark-fire-1) 40%,
+    var(--dark-fire-2) 40%,
+    var(--dark-fire-2) 60%,
+    var(--dark-fire-3) 60%,
+    var(--dark-fire-3) 80%,
+    var(--fire) 80%,
+    var(--fire) 100%
+  );
+}
+
+.dark-earth {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-earth-1) 20%,
+    var(--dark-earth-1) 40%,
+    var(--dark-earth-2) 40%,
+    var(--dark-earth-2) 60%,
+    var(--dark-earth-3) 60%,
+    var(--dark-earth-3) 80%,
+    var(--earth) 80%,
+    var(--earth) 100%
+  );
+}
+
+.dark-light {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-light-1) 20%,
+    var(--dark-light-1) 40%,
+    var(--dark-light-2) 40%,
+    var(--dark-light-2) 60%,
+    var(--dark-light-3) 60%,
+    var(--dark-light-3) 80%,
+    var(--light) 80%,
+    var(--light) 100%
+  );
+}
+
+.dark-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-water-1) 20%,
+    var(--dark-water-1) 40%,
+    var(--dark-water-2) 40%,
+    var(--dark-water-2) 60%,
+    var(--dark-water-3) 60%,
+    var(--dark-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.dark-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-wind-1) 20%,
+    var(--dark-wind-1) 40%,
+    var(--dark-wind-2) 40%,
+    var(--dark-wind-2) 60%,
+    var(--dark-wind-3) 60%,
+    var(--dark-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.fire {
+  background-color: var(--fire);
+}
+
+.earth-fire {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-fire-1) 20%,
+    var(--earth-fire-1) 40%,
+    var(--earth-fire-2) 40%,
+    var(--earth-fire-2) 60%,
+    var(--earth-fire-3) 60%,
+    var(--earth-fire-3) 80%,
+    var(--fire) 80%,
+    var(--fire) 100%
+  );
+}
+
+.fire-light {
+  background-image: linear-gradient(
+    to bottom,
+    var(--fire) 0%,
+    var(--fire) 20%,
+    var(--fire-light-1) 20%,
+    var(--fire-light-1) 40%,
+    var(--fire-light-2) 40%,
+    var(--fire-light-2) 60%,
+    var(--fire-light-3) 60%,
+    var(--fire-light-3) 80%,
+    var(--light) 80%,
+    var(--light) 100%
+  );
+}
+
+.fire-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--fire) 0%,
+    var(--fire) 20%,
+    var(--fire-water-1) 20%,
+    var(--fire-water-1) 40%,
+    var(--fire-water-2) 40%,
+    var(--fire-water-2) 60%,
+    var(--fire-water-3) 60%,
+    var(--fire-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.fire-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--fire) 0%,
+    var(--fire) 20%,
+    var(--fire-wind-1) 20%,
+    var(--fire-wind-1) 40%,
+    var(--fire-wind-2) 40%,
+    var(--fire-wind-2) 60%,
+    var(--fire-wind-3) 60%,
+    var(--fire-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.earth {
+  background-color: var(--earth);
+}
+
+.earth-light {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-light-1) 20%,
+    var(--earth-light-1) 40%,
+    var(--earth-light-2) 40%,
+    var(--earth-light-2) 60%,
+    var(--earth-light-3) 60%,
+    var(--earth-light-3) 80%,
+    var(--light) 80%,
+    var(--light) 100%
+  );
+}
+
+.earth-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-water-1) 20%,
+    var(--earth-water-1) 40%,
+    var(--earth-water-2) 40%,
+    var(--earth-water-2) 60%,
+    var(--earth-water-3) 60%,
+    var(--earth-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.earth-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-wind-1) 20%,
+    var(--earth-wind-1) 40%,
+    var(--earth-wind-2) 40%,
+    var(--earth-wind-2) 60%,
+    var(--earth-wind-3) 60%,
+    var(--earth-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.light {
+  background-color: var(--light);
+}
+
+.light-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--light) 0%,
+    var(--light) 20%,
+    var(--light-water-1) 20%,
+    var(--light-water-1) 40%,
+    var(--light-water-2) 40%,
+    var(--light-water-2) 60%,
+    var(--light-water-3) 60%,
+    var(--light-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.light-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--light) 0%,
+    var(--light) 20%,
+    var(--light-wind-1) 20%,
+    var(--light-wind-1) 40%,
+    var(--light-wind-2) 40%,
+    var(--light-wind-2) 60%,
+    var(--light-wind-3) 60%,
+    var(--light-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.water {
+  background-color: var(--water);
+}
+
+.water-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--water) 0%,
+    var(--water) 20%,
+    var(--water-wind-1) 20%,
+    var(--water-wind-1) 40%,
+    var(--water-wind-2) 40%,
+    var(--water-wind-2) 60%,
+    var(--water-wind-3) 60%,
+    var(--water-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.wind {
+  background-color: var(--wind);
+}

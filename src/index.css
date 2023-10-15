@@ -1,13 +1,55 @@
-main {
-  text-align: left;
-  word-wrap: break-word;
-  white-space: pre-wrap;
+@font-face {
+  font-family: "Redensek";
+  src: url("/fonts/Redensek.woff2") format("woff2"),
+    url("/fonts/Redensek.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-p:nth-of-type(even) {
-  color: red;
+.sr-only {
+  -webkit-clip-path: inset(50%) !important;
+  border: 0 !important;
+  clip-path: inset(50%) !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
 }
 
-p:nth-of-type(odd) {
-  color: blue;
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  clip: auto !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  width: auto !important;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffde00;
+  font-family: "Redensek", cursive;
+  font-size: max(2vw, 3rem);
+  overflow: hidden;
+  font-smooth: never;
+  line-height: 0.5;
+}
+
+canvas {
+  image-rendering: pixelated;
 }

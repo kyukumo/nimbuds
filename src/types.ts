@@ -1,8 +1,27 @@
 import { RuneClient } from "rune-games-sdk";
 
+export enum Element {
+  Dark = "dark",
+  Earth = "earth",
+  Fire = "fire",
+  Light = "light",
+  Water = "water",
+  Wind = "wind",
+}
+
+type Tile = {
+  x: number;
+  y: number;
+};
+
 export type Bud = {
+  element: Element[];
+  description: string;
   id: string;
   name: string;
+  next?: string;
+  previous?: string;
+  tile: Tile;
 };
 
 export enum ItemType {
@@ -39,14 +58,20 @@ export type Player = {
   id: string;
   inventory: Inventory;
   lastEvent: number;
+  name: string;
   stars: number;
 };
 
+export type Players = Record<string, Player>;
+
 export interface GameState {
-  players: Record<string, Player>;
+  players: Players;
 }
 
-type GameActions = {};
+export type GameActions = {
+  advance: ({ id }: { id: string }) => void;
+  setPlayerName: ({ id, name }: { id: string; name: string }) => void;
+};
 
 declare global {
   const Rune: RuneClient<GameState, GameActions>;
