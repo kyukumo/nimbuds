@@ -23,10 +23,11 @@ const draw = ({
 }) => {
   if (!canvas || !activeBud) return;
 
-  const { left } = canvas.getBoundingClientRect();
-  canvas.width = window.innerWidth - left * 2;
-  const height = canvas.width * 0.7;
+  const width = window.innerWidth;
+  const height = width * 0.7;
+
   canvas.height = height;
+  canvas.width = width;
 
   const context = canvas.getContext("2d");
   if (!context) return;
@@ -38,7 +39,7 @@ const draw = ({
     tile: { x, y },
   } = activeBud;
 
-  const size = canvas.width / 2;
+  const size = canvas.width / 3;
   const isReducedMotionPreferred = getIsReducedMotionPreferred();
   const animate = !isReducedMotionPreferred && frame % speed < speed / 2;
   const bop = animate ? y + block : y;
@@ -68,7 +69,7 @@ export function BudCanvas() {
       frameRef.current = requestAnimationFrame(render);
     };
 
-    requestAnimationFrame(render);
+    frameRef.current = requestAnimationFrame(render);
     return () => cancelAnimationFrame(frameRef.current);
   }, [activeBud]);
 

@@ -110,11 +110,6 @@ strong: wind
 weak: water
 resist: wind
 
-(fire/earth)
-strong: wind, water
-weak: n/a
-resist: wind, water
-
 (fire/light)
 strong: wind, dark
 weak: water, dark
@@ -130,11 +125,6 @@ strong: wind, earth
 weak: water
 resist: wind, earth
 
-(earth)
-strong: water
-weak: wind
-resist: water
-
 (earth/light)
 strong: water, dark
 weak: wind, dark
@@ -144,16 +134,6 @@ resist: water
 strong: water, fire
 weak: wind
 resist: water, fire
-
-(earth/wind)
-strong: water, earth
-weak: fire
-resist: water, earth
-
-(light)
-strong: dark
-weak: dark
-resist: n/a
 
 (light/water)
 strong: dark, fire
@@ -165,17 +145,46 @@ strong: dark, earth
 weak: dark, fire
 resist: earth
 
-(water)
-strong: fire
-weak: earth
-resist: fire
+(earth/wind)
+strong: water, earth
+weak: fire
+resist: water, earth
 
 (water/wind)
 strong: fire, earth
 weak: n/a
 resist: fire, earth
 
+(fire/earth)
+strong: wind, water
+weak: n/a
+resist: wind, water
+
 (wind)
 strong: earth
 weak: fire
 resist: earth
+
+(water)
+strong: fire
+weak: earth
+resist: fire
+
+(light)
+strong: dark
+weak: dark
+resist: n/a
+
+(earth)
+strong: water
+weak: wind
+resist: water
+
+---
+
+Train
+
+Rival
+
+> Trade
+> Taunt

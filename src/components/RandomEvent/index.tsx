@@ -1,21 +1,16 @@
 import { selectLastEvent } from "../../selectors";
 import { useStore } from "../../hooks/useStore";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useVisibleOnChange } from "../../hooks/useVisibleOnChange";
 
 export function RandomEvent() {
   const ref = useRef<HTMLParagraphElement>(null);
   const lastEvent = useStore(selectLastEvent);
 
-  useEffect(() => {
-    if (ref.current) ref.current.style.display = "block";
-
-    const timeout = setTimeout(() => {
-      clearTimeout(timeout);
-      if (ref.current) ref.current.style.display = "none";
-    }, 5000);
-
-    return () => clearTimeout(timeout);
-  }, [lastEvent]);
+  useVisibleOnChange({
+    ref,
+    value: lastEvent,
+  });
 
   return (
     <p
@@ -23,7 +18,7 @@ export function RandomEvent() {
         ref,
       }}
     >
-      {Boolean(lastEvent) && "Random event!"}
+      Random event!
     </p>
   );
 }

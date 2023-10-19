@@ -1,4 +1,4 @@
-import type { Bud, Player, Players } from "./types";
+import { Phase, type Bud, type Player, type Players } from "./types";
 import { getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
 import { getRandomNumber } from "./lib/getRandomNumber";
@@ -18,6 +18,7 @@ const createPlayer = (id: string): Player => ({
   inventory: getStarterInventory(),
   lastEvent: Rune.gameTime() / 1000,
   name: id,
+  ping: 0,
   stars: 3000,
 });
 
@@ -26,10 +27,14 @@ const createPlayers = (players: Players, id: string) => ({
   [id]: createPlayer(id),
 });
 
+const MATCH = 300; // seconds
+
 Rune.initLogic({
   minPlayers: 1,
   maxPlayers: 4,
   setup: (ids) => ({
+    duration: 0,
+    phase: Phase.Train,
     players: ids.reduce(createPlayers, {}),
   }),
   events: {
@@ -41,7 +46,16 @@ Rune.initLogic({
     },
   },
   actions: {
-    advance: ({ id }, { game }) => {
+    battle: (_, { game }) => {
+      game.phase = Phase.Battle;
+    },
+    train: (_, { game }) => {
+      game.phase = Phase.Train;
+    },
+    ping: ({ id }, { game: { players } }) => {
+      players[id].ping = Rune.gameTime();
+    },
+    ascend: ({ id }, { game }) => {
       const player = game.players[id];
       const [bud] = player.buds;
 
@@ -58,22 +72,28 @@ Rune.initLogic({
     },
   },
   update: ({ allPlayerIds, game }) => {
-    const time = Rune.gameTime() / 1000;
-    const { players } = game;
+    game.duration = Rune.gameTime();
+    const seconds = game.duration / 1000;
 
-    const setRandomEvent = (id: string) => {
-      const player = players[id];
-      player.lastEvent = time;
-    };
+    // if (seconds === MATCH) Rune.actions.battle();
 
-    const tryRandomEvent = (id: string) => {
-      const randomDelay = getRandomNumber(15, 120);
-      const player = players[id];
-      const { lastEvent } = player;
-      const elapsedTime = time - lastEvent;
-      if (elapsedTime > randomDelay) setRandomEvent(id);
-    };
+    if (game.phase === Phase.Train) {
+      const { players } = game;
 
-    allPlayerIds.forEach(tryRandomEvent);
+      const setRandomEvent = (id: string) => {
+        const player = players[id];
+        player.lastEvent = seconds;
+      };
+
+      const tryRandomEvent = (id: string) => {
+        const randomDelay = getRandomNumber(15, 120);
+        const player = players[id];
+        const { lastEvent } = player;
+        const elapsedTime = seconds - lastEvent;
+        if (elapsedTime > randomDelay) setRandomEvent(id);
+      };
+
+      allPlayerIds.forEach(tryRandomEvent);
+    }
   },
 });
