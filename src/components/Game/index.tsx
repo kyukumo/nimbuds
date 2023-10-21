@@ -4,6 +4,7 @@ import { selectPhase } from "../../selectors";
 import { Phase } from "../../types";
 import { Battle } from "../Battle";
 import { Train } from "../Train";
+import styles from "./index.module.css";
 
 export function Game() {
   useRuneClient();
@@ -15,7 +16,7 @@ export function Game() {
 
   return (
     <>
-      <button onClick={changePhase} type="button">
+      <button className={styles.phase} onClick={changePhase} type="button">
         Phase!
       </button>
 

@@ -1,4 +1,3 @@
-import "./index.css";
 import { RandomEvent } from "../RandomEvent";
 import {
   selectActiveBudDescription,
@@ -6,119 +5,99 @@ import {
   selectActiveBudStats,
   selectCanActiveBudAscend,
   selectPlayerId,
-  selectRivals,
 } from "../../selectors";
 import { useStore } from "../../hooks/useStore";
-import { BudCanvas } from "../BudCanvas";
-import { ElementCanvas } from "../ElementCanvas";
-import { Ping } from "../Ping";
+import { MainBudCanvas } from "../MainBudCanvas";
+import { MainElementCanvas } from "../MainElementCanvas";
+import { Attacks } from "../Attacks";
+import { PlayerButtons } from "../PlayerButtons";
+import styles from "./index.module.css";
 
 export function Train() {
   const canAscend = useStore(selectCanActiveBudAscend);
   const description = useStore(selectActiveBudDescription);
   const id = useStore(selectPlayerId);
   const name = useStore(selectActiveBudName);
-  const rivals = useStore(selectRivals);
   const stats = useStore(selectActiveBudStats);
 
   return (
-    <main>
-      <header>
-        <h2>
-          <dl>
-            <dt className="sr-only">Name:</dt>
-            <dd>{name}</dd>
-          </dl>
-        </h2>
+    <>
+      <main className={styles.train}>
+        <header>
+          <h1 className="sr-only">Train!</h1>
 
-        <ElementCanvas />
-      </header>
+          <div>
+            <dl>
+              <dt className="sr-only">Name:</dt>
+              <dd>{name}</dd>
+            </dl>
 
-      <div className="content">
-        <section className="window">
-          <BudCanvas />
-
-          <div className="events">
-            <RandomEvent />
-            <Ping />
+            <MainElementCanvas />
           </div>
-        </section>
+        </header>
 
-        {description && <p>{description}</p>}
+        <div className="content">
+          <section className={styles.window}>
+            <MainBudCanvas />
 
-        <dl className="stats">
-          {stats?.attack && (
-            <>
-              <dt>Attack</dt>
-              <dd>{stats?.attack}</dd>
-            </>
-          )}
+            <div className={styles.events}>
+              <RandomEvent />
+            </div>
+          </section>
 
-          {stats?.defense && (
-            <>
-              <dt>Defense</dt>
-              <dd>{stats?.defense}</dd>
-            </>
-          )}
+          <nav>
+            <Attacks />
 
-          {stats?.speed && (
-            <>
-              <dt>Speed</dt>
-              <dd>{stats?.speed}</dd>
-            </>
-          )}
-        </dl>
-
-        <hr />
-
-        <nav>
-          <ul>
-            <li>
-              <button type="button">Train</button>
-            </li>
-
-            <li>
-              <button type="button">Switch</button>
-            </li>
-
-            {canAscend && (
+            <ul>
               <li>
-                <button
-                  onClick={() =>
-                    Rune.actions.ascend({
-                      id,
-                    })
-                  }
-                  type="button"
-                >
-                  Ascend!
-                </button>
+                <button type="button">Switch</button>
               </li>
+
+              {canAscend && (
+                <li>
+                  <button
+                    onClick={() =>
+                      Rune.actions.ascend({
+                        id,
+                      })
+                    }
+                    type="button"
+                  >
+                    Ascend!
+                  </button>
+                </li>
+              )}
+            </ul>
+
+            <PlayerButtons />
+          </nav>
+
+          <dl className={styles.stats}>
+            {stats?.attack && (
+              <>
+                <dt className="sr-only">Attack</dt>
+                <dd>{stats?.attack}</dd>
+              </>
             )}
-          </ul>
-        </nav>
 
-        <hr />
+            {stats?.defense && (
+              <>
+                <dt className="sr-only">Defense</dt>
+                <dd>{stats?.defense}</dd>
+              </>
+            )}
 
-        <nav>
-          <ul>
-            {rivals.map(({ id, name }) => (
-              <li key={id}>
-                <button
-                  onClick={() =>
-                    Rune.actions.ping({
-                      id,
-                    })
-                  }
-                  type="button"
-                >
-                  {name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </main>
+            {stats?.speed && (
+              <>
+                <dt className="sr-only">Speed</dt>
+                <dd>{stats?.speed}</dd>
+              </>
+            )}
+          </dl>
+
+          {description && <p className={styles.description}>{description}</p>}
+        </div>
+      </main>
+    </>
   );
 }

@@ -1,8 +1,9 @@
 import { create } from "zustand";
-import { GameState, Phase, Player, Players } from "../types";
+import { BattleType, GameState, Phase, Player, Players } from "../types";
 import { produce } from "immer";
 
 export type Store = {
+  battleType: BattleType;
   phase: Phase;
   player: Player | null;
   players: Players;
@@ -13,6 +14,7 @@ export type Store = {
 };
 
 export const useStore = create<Store>((set) => ({
+  battleType: BattleType.Four,
   phase: Phase.Train,
   player: null,
   players: {},

@@ -1,4 +1,11 @@
-import { Phase, type Bud, type Player, type Players } from "./types";
+import {
+  Phase,
+  type Player,
+  type Players,
+  BattleType,
+  Move,
+  Cooldowns,
+} from "./types";
 import { getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
 import { getRandomNumber } from "./lib/getRandomNumber";
@@ -14,6 +21,7 @@ import { buds } from "./data/buds";
 
 const createPlayer = (id: string): Player => ({
   buds: getStarterBuds(),
+  cooldowns: {},
   id,
   inventory: getStarterInventory(),
   lastEvent: Rune.gameTime() / 1000,
@@ -33,6 +41,7 @@ Rune.initLogic({
   minPlayers: 1,
   maxPlayers: 4,
   setup: (ids) => ({
+    battleType: BattleType.Four,
     duration: 0,
     phase: Phase.Train,
     players: ids.reduce(createPlayers, {}),
@@ -46,6 +55,9 @@ Rune.initLogic({
     },
   },
   actions: {
+    attack: ({ id, move, speed }, { game: { players } }) => {
+      players[id].cooldowns[move] = 6 - speed;
+    },
     battle: (_, { game }) => {
       game.phase = Phase.Battle;
     },
@@ -62,9 +74,8 @@ Rune.initLogic({
       const { next } = bud;
       if (!next) return;
 
-      // todo: find by index
       const nextBud = buds[next];
-      player.buds = [nextBud];
+      player.buds[0] = nextBud;
     },
     setPlayerName: ({ id, name }, { game }) => {
       const player = game.players[id];
@@ -74,26 +85,46 @@ Rune.initLogic({
   update: ({ allPlayerIds, game }) => {
     game.duration = Rune.gameTime();
     const seconds = game.duration / 1000;
+    const { players } = game;
 
-    // if (seconds === MATCH) Rune.actions.battle();
+    const setRandomEvent = (id: string) => {
+      const player = players[id];
+      player.lastEvent = seconds;
+    };
 
-    if (game.phase === Phase.Train) {
-      const { players } = game;
+    const reduceCooldowns = (id: string) => {
+      const player = players[id];
 
-      const setRandomEvent = (id: string) => {
-        const player = players[id];
-        player.lastEvent = seconds;
-      };
+      const getReducedCooldowns = (
+        all: Cooldowns,
+        [key, value]: [string, number]
+      ) => ({
+        ...all,
+        ...(value && {
+          [<Move>key]: value - 1,
+        }),
+      });
 
-      const tryRandomEvent = (id: string) => {
+      player.cooldowns = Object.entries(player.cooldowns).reduce<Cooldowns>(
+        getReducedCooldowns,
+        {}
+      );
+    };
+
+    const makeUpdates = (id: string) => {
+      reduceCooldowns(id);
+
+      // if (seconds === MATCH) Rune.actions.battle();
+
+      if (game.phase === Phase.Train) {
         const randomDelay = getRandomNumber(15, 120);
         const player = players[id];
         const { lastEvent } = player;
         const elapsedTime = seconds - lastEvent;
         if (elapsedTime > randomDelay) setRandomEvent(id);
-      };
+      }
+    };
 
-      allPlayerIds.forEach(tryRandomEvent);
-    }
+    allPlayerIds.forEach(makeUpdates);
   },
 });

@@ -1,0 +1,8 @@
+.dialog {
+  max-width: unset;
+  width: 100%;
+
+  &::backdrop {
+    background-color: #00000080;
+  }
+}

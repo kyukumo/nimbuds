@@ -20,14 +20,40 @@ type Stats = {
   speed: number;
 };
 
+export enum Move {
+  Blaze = "blaze",
+  Blossom = "blossom",
+  Breeze = "breeze",
+  Cascade = "cascade",
+  Drench = "drench",
+  Eclipse = "eclipse",
+  Flower = "flower",
+  Gleam = "gleam",
+  Gloom = "gloom",
+  Gust = "gust",
+  Ignite = "ignite",
+  Inferno = "inferno",
+  Seed = "seed",
+  Shade = "shade",
+  Soak = "soak",
+  Starfall = "starfall",
+  Tornado = "tornado",
+  Twinkle = "twinkle",
+}
+
+type Moves = [Move] | [Move, Move];
+
 export type Bud = {
   element: Element[];
   description: string;
   id: string;
+  level?: number;
+  moves: Moves;
   name: string;
   next?: string;
   previous?: string;
   tile: Tile;
+  stage: number;
   stats: Stats;
 };
 
@@ -60,8 +86,11 @@ export type Inventory = [
   Item?
 ];
 
+export type Cooldowns = Partial<Record<Move, number>>;
+
 export type Player = {
   buds: Buds;
+  cooldowns: Cooldowns;
   id: string;
   inventory: Inventory;
   lastEvent: number;
@@ -72,18 +101,34 @@ export type Player = {
 
 export type Players = Record<string, Player>;
 
+export enum BattleType {
+  "Four" = "Four",
+  "Three" = "Three",
+  "Two" = "Two",
+}
+
 export enum Phase {
   Train = "train",
   Battle = "battle",
 }
 
 export interface GameState {
+  battleType: BattleType;
   duration: number;
   phase: Phase;
   players: Players;
 }
 
 export type GameActions = {
+  attack: ({
+    id,
+    move,
+    speed,
+  }: {
+    id: string;
+    move: Move;
+    speed: number;
+  }) => void;
   ascend: ({ id }: { id: string }) => void;
   battle: () => void;
   ping: ({ id }: { id: string }) => void;

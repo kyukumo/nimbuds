@@ -1,4 +1,4 @@
-import { Bud, Element } from "../types";
+import { Bud, Element, Move } from "../types";
 
 export const starters = [
   "amazwing",
@@ -30,16 +30,18 @@ export const buds: Record<string, Bud> = {
       "This mysterious and eerie reptile lurks in the shadows, using its ghastly powers to frighten and confuse opponents.",
     element: [Element.Dark],
     id: "spookecko",
+    moves: [Move.Gloom],
     name: "Spookecko",
     next: "shadile",
-    tile: {
-      x: 0,
-      y: 0,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 2,
       speed: 1,
+    },
+    tile: {
+      x: 0,
+      y: 0,
     },
   },
   shadile: {
@@ -47,17 +49,19 @@ export const buds: Record<string, Bud> = {
       "It lurks in the depths of the night, preying on the fears and weaknesses of its opponents with its sinister powers.",
     element: [Element.Dark],
     id: "shadile",
+    moves: [Move.Shade],
     name: "Shadile",
     next: "spectraptor",
     previous: "spookecko",
-    tile: {
-      x: 10,
-      y: 0,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 2,
       speed: 1,
+    },
+    tile: {
+      x: 10,
+      y: 0,
     },
   },
   spectraptor: {
@@ -65,32 +69,36 @@ export const buds: Record<string, Bud> = {
       "If you feel a sudden chill, you may be experiencing the ghostly aura of this sinister raptor, silently stalking its prey.",
     element: [Element.Dark],
     id: "spectraptor",
+    moves: [Move.Eclipse],
     name: "Spectraptor",
     previous: "shadile",
-    tile: {
-      x: 20,
-      y: 0,
-    },
+    stage: 3,
     stats: {
       attack: 4,
       defense: 3,
       speed: 1,
+    },
+    tile: {
+      x: 20,
+      y: 0,
     },
   },
   smoldit: {
     description: "The smoldering embodiment of lingering spectral energy.",
     element: [Element.Dark, Element.Fire],
     id: "smoldit",
+    moves: [Move.Blaze],
     name: "Smoldit",
     next: "embergeist",
-    tile: {
-      x: 0,
-      y: 20,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 1,
       speed: 3,
+    },
+    tile: {
+      x: 0,
+      y: 20,
     },
   },
   embergeist: {
@@ -98,16 +106,18 @@ export const buds: Record<string, Bud> = {
       "Flickering, mysterious flames that haunt their surroundings with an ominous presence.",
     element: [Element.Dark, Element.Fire],
     id: "embergeist",
+    moves: [Move.Inferno],
     name: "Embergeist",
     previous: "smoldit",
-    tile: {
-      x: 10,
-      y: 20,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 3,
       speed: 4,
+    },
+    tile: {
+      x: 10,
+      y: 20,
     },
   },
   specalf: {
@@ -115,16 +125,18 @@ export const buds: Record<string, Bud> = {
       "Awaiting the return of its doting parent, this bovine animal conceals itself beneath a veil of spectral flora.",
     element: [Element.Dark, Element.Earth],
     id: "specalf",
+    moves: [Move.Shade, Move.Flower],
     name: "Specalf",
     next: "thornox",
-    tile: {
-      x: 0,
-      y: 40,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 3,
       speed: 1,
+    },
+    tile: {
+      x: 0,
+      y: 40,
     },
   },
   thornox: {
@@ -132,16 +144,18 @@ export const buds: Record<string, Bud> = {
       "It seeks to exact revenge on anyone it can find using its razor-sharp thorns.",
     element: [Element.Dark, Element.Earth],
     id: "thornox",
+    moves: [Move.Eclipse, Move.Blossom],
     name: "Thornox",
     previous: "specalf",
-    tile: {
-      x: 10,
-      y: 40,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 4,
       speed: 2,
+    },
+    tile: {
+      x: 10,
+      y: 40,
     },
   },
   voidixie: {
@@ -149,16 +163,18 @@ export const buds: Record<string, Bud> = {
       "The few who have witnessed its otherworldly aura have professed conflicting feelings of curiosity and trepidation.",
     element: [Element.Dark, Element.Light],
     id: "voidixie",
+    moves: [Move.Shade, Move.Gleam],
     name: "Voidixie",
     next: "faeclipse",
-    tile: {
-      x: 0,
-      y: 60,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 1,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 60,
     },
   },
   faeclipse: {
@@ -166,16 +182,18 @@ export const buds: Record<string, Bud> = {
       "Hauntingly sinister, menacing, and alluring. It has an aura of cosmic destruction.",
     element: [Element.Dark, Element.Light],
     id: "faeclipse",
+    moves: [Move.Eclipse, Move.Starfall],
     name: "Faeclipse",
     previous: "voidixie",
-    tile: {
-      x: 10,
-      y: 60,
-    },
+    stage: 2,
     stats: {
       attack: 4,
       defense: 1,
       speed: 3,
+    },
+    tile: {
+      x: 10,
+      y: 60,
     },
   },
   gloominnow: {
@@ -183,16 +201,18 @@ export const buds: Record<string, Bud> = {
       "A glint from its shimmering, iridescent scales will catch your eye from deep below the waters.",
     element: [Element.Dark, Element.Water],
     id: "gloominnow",
+    moves: [Move.Gloom, Move.Soak],
     name: "Gloominnow",
     next: "barrabyss",
-    tile: {
-      x: 0,
-      y: 80,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 1,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 80,
     },
   },
   barrabyss: {
@@ -200,17 +220,19 @@ export const buds: Record<string, Bud> = {
       "Be careful where you swim. Legend has it that when you see its eerie, glowing eyes, it's already too late for you.",
     element: [Element.Dark, Element.Water],
     id: "barrabyss",
+    moves: [Move.Shade, Move.Drench],
     name: "Barrabyss",
     next: "umbracuda",
     previous: "gloominnow",
-    tile: {
-      x: 10,
-      y: 80,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 1,
       speed: 3,
+    },
+    tile: {
+      x: 10,
+      y: 80,
     },
   },
   umbracuda: {
@@ -218,16 +240,18 @@ export const buds: Record<string, Bud> = {
       "Its sleek, etherial fins cascade through the water, appearing in and vanishing from the ocean at will.",
     element: [Element.Dark, Element.Water],
     id: "umbracuda",
+    moves: [Move.Eclipse, Move.Cascade],
     name: "Umbracuda",
     previous: "barrabyss",
-    tile: {
-      x: 20,
-      y: 80,
-    },
+    stage: 3,
     stats: {
       attack: 4,
       defense: 1,
       speed: 4,
+    },
+    tile: {
+      x: 20,
+      y: 80,
     },
   },
   nebulon: {
@@ -235,16 +259,18 @@ export const buds: Record<string, Bud> = {
       "Often mistaken for an unidentified flying object, it has a markedly unassuming face.",
     element: [Element.Dark, Element.Wind],
     id: "nebulon",
+    moves: [Move.Shade, Move.Gust],
     name: "Nebulon",
     next: "nebulisk",
-    tile: {
-      x: 0,
-      y: 100,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 4,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 100,
     },
   },
   nebulisk: {
@@ -252,32 +278,36 @@ export const buds: Record<string, Bud> = {
       "Seemingly extraterrestrial, it is highly skilled in piloting its sleek spacecraft.",
     element: [Element.Dark, Element.Wind],
     id: "nebulisk",
+    moves: [Move.Eclipse, Move.Tornado],
     name: "Nebulisk",
     previous: "nebulon",
-    tile: {
-      x: 10,
-      y: 100,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 3,
       speed: 3,
+    },
+    tile: {
+      x: 10,
+      y: 100,
     },
   },
   snakelit: {
     description: "An emerald, fiery glow emits from this serpentine creature.",
     element: [Element.Fire],
     id: "snakelit",
+    moves: [Move.Ignite],
     name: "Snakelit",
     next: "serpyro",
-    tile: {
-      x: 0,
-      y: 120,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 2,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 120,
     },
   },
   serpyro: {
@@ -285,17 +315,19 @@ export const buds: Record<string, Bud> = {
       "It uses the scorching jade flames emitting from its tail to extinguish its opponents.",
     element: [Element.Fire],
     id: "serpyro",
+    moves: [Move.Blaze],
     name: "Serpyro",
     next: "pyroconda",
     previous: "snakelit",
-    tile: {
-      x: 10,
-      y: 120,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 2,
       speed: 3,
+    },
+    tile: {
+      x: 10,
+      y: 120,
     },
   },
   pyroconda: {
@@ -303,32 +335,36 @@ export const buds: Record<string, Bud> = {
       "Majestic, some consider it a deity. Its fiery plumage exudes power and grace.",
     element: [Element.Fire],
     id: "pyroconda",
+    moves: [Move.Inferno],
     name: "Pyroconda",
     previous: "serpyro",
-    tile: {
-      x: 20,
-      y: 120,
-    },
+    stage: 3,
     stats: {
       attack: 4,
       defense: 2,
       speed: 4,
+    },
+    tile: {
+      x: 20,
+      y: 120,
     },
   },
   oakindle: {
     description: "A small seedling engulfed in flames.",
     element: [Element.Earth, Element.Fire],
     id: "oakindle",
+    moves: [Move.Flower, Move.Blaze],
     name: "Oakindle",
     next: "torchwood",
-    tile: {
-      x: 0,
-      y: 140,
-    },
+    stage: 1,
     stats: {
       attack: 3,
       defense: 1,
       speed: 1,
+    },
+    tile: {
+      x: 0,
+      y: 140,
     },
   },
   torchwood: {
@@ -336,16 +372,18 @@ export const buds: Record<string, Bud> = {
       "It is fiercely loyal to mother nature, using her powers to protect those it considers vulnerable.",
     element: [Element.Earth, Element.Fire],
     id: "torchwood",
+    moves: [Move.Blossom, Move.Inferno],
     name: "Torchwood",
     previous: "oakindle",
-    tile: {
-      x: 10,
-      y: 140,
-    },
+    stage: 2,
     stats: {
       attack: 4,
       defense: 1,
       speed: 1,
+    },
+    tile: {
+      x: 10,
+      y: 140,
     },
   },
   wispyre: {
@@ -353,15 +391,17 @@ export const buds: Record<string, Bud> = {
       "It's playful and mischievous, dazzling its opponents with sublime flames and whimsical charm.",
     element: [Element.Fire, Element.Light],
     id: "wispyre",
+    moves: [Move.Inferno, Move.Starfall],
     name: "Wispyre",
-    tile: {
-      x: 0,
-      y: 160,
-    },
+    stage: 1,
     stats: {
       attack: 4,
       defense: 3,
       speed: 4,
+    },
+    tile: {
+      x: 0,
+      y: 160,
     },
   },
   flagoon: {
@@ -369,16 +409,18 @@ export const buds: Record<string, Bud> = {
       "It releases infernal steam to drive intruders away from its den.",
     element: [Element.Fire, Element.Water],
     id: "flagoon",
+    moves: [Move.Ignite, Move.Soak],
     name: "Flagoon",
     next: "blazesea",
-    tile: {
-      x: 0,
-      y: 180,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 2,
       speed: 3,
+    },
+    tile: {
+      x: 0,
+      y: 180,
     },
   },
   blazesea: {
@@ -386,17 +428,19 @@ export const buds: Record<string, Bud> = {
       "It is widely known that Blazesea should not be approached. It unceasingly combusts as it maintains a cooling aura of water around its body.",
     element: [Element.Fire, Element.Water],
     id: "blazesea",
+    moves: [Move.Blaze, Move.Drench],
     name: "Blazesea",
     next: "infernocean",
     previous: "flagoon",
-    tile: {
-      x: 10,
-      y: 180,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 1,
       speed: 2,
+    },
+    tile: {
+      x: 10,
+      y: 180,
     },
   },
   infernocean: {
@@ -404,16 +448,18 @@ export const buds: Record<string, Bud> = {
       "It is described as titanic, commanding the destructive power of roaring tides and wildfire.",
     element: [Element.Fire, Element.Water],
     id: "infernocean",
+    moves: [Move.Inferno, Move.Cascade],
     name: "Infernocean",
     previous: "blazesea",
-    tile: {
-      x: 20,
-      y: 180,
-    },
+    stage: 3,
     stats: {
       attack: 4,
       defense: 2,
       speed: 1,
+    },
+    tile: {
+      x: 20,
+      y: 180,
     },
   },
   flarva: {
@@ -421,16 +467,18 @@ export const buds: Record<string, Bud> = {
       "On a clear summer night, you can see the faint blue glow of Flarva swarming on the trees.",
     element: [Element.Fire, Element.Wind],
     id: "flarva",
+    moves: [Move.Ignite, Move.Breeze],
     name: "Flarva",
     next: "chrysfire",
-    tile: {
-      x: 0,
-      y: 200,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 2,
       speed: 1,
+    },
+    tile: {
+      x: 0,
+      y: 200,
     },
   },
   chrysfire: {
@@ -438,17 +486,19 @@ export const buds: Record<string, Bud> = {
       "Its shell is warm to the touch. Wildfire experts relocate Chrysfire away from forests before they hatch.",
     element: [Element.Fire, Element.Wind],
     id: "chrysfire",
+    moves: [Move.Blaze, Move.Gust],
     name: "Chrysfire",
     next: "ignimoth",
     previous: "flarva",
-    tile: {
-      x: 10,
-      y: 200,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 4,
       speed: 1,
+    },
+    tile: {
+      x: 10,
+      y: 200,
     },
   },
   ignimoth: {
@@ -456,16 +506,18 @@ export const buds: Record<string, Bud> = {
       "It flutters, trailed by delicate blue sparks. Many Chrysfire do not survive relocation, so it is said that an Ignimoth sighting brings one good luck.",
     element: [Element.Fire, Element.Wind],
     id: "ignimoth",
+    moves: [Move.Inferno, Move.Tornado],
     name: "Ignimoth",
     previous: "chrysfire",
-    tile: {
-      x: 20,
-      y: 200,
-    },
+    stage: 3,
     stats: {
       attack: 4,
       defense: 1,
       speed: 2,
+    },
+    tile: {
+      x: 20,
+      y: 200,
     },
   },
   meadowisp: {
@@ -473,15 +525,17 @@ export const buds: Record<string, Bud> = {
       "A stoic spirit of nature. If you look closely, you can find it tailing far behind you as you walk the forest trails.",
     element: [Element.Earth],
     id: "meadowisp",
+    moves: [Move.Blossom],
     name: "Meadowisp",
-    tile: {
-      x: 0,
-      y: 220,
-    },
+    stage: 1,
     stats: {
       attack: 4,
       defense: 4,
       speed: 1,
+    },
+    tile: {
+      x: 0,
+      y: 220,
     },
   },
   cherubud: {
@@ -489,16 +543,18 @@ export const buds: Record<string, Bud> = {
       "It has a serene nature and captivating aroma that will bring peace to anyone in its presence.",
     element: [Element.Earth, Element.Light],
     id: "cherubud",
+    moves: [Move.Flower, Move.Gleam],
     name: "Cherubud",
     next: "angelily",
-    tile: {
-      x: 0,
-      y: 240,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 2,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 240,
     },
   },
   angelily: {
@@ -506,16 +562,18 @@ export const buds: Record<string, Bud> = {
       "Its many faces resemble flowers that radiate a pure and heavenly aura. Culturally, it symbolizes a return to happiness.",
     element: [Element.Earth, Element.Light],
     id: "angelily",
+    moves: [Move.Blossom, Move.Starfall],
     name: "Angelily",
     previous: "cherubud",
-    tile: {
-      x: 10,
-      y: 240,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 3,
       speed: 3,
+    },
+    tile: {
+      x: 10,
+      y: 240,
     },
   },
   sproutide: {
@@ -523,16 +581,18 @@ export const buds: Record<string, Bud> = {
       "A playful dragon hatchling born from a river, embodying the energy of nature.",
     element: [Element.Earth, Element.Water],
     id: "sproutide",
+    moves: [Move.Flower, Move.Drench],
     name: "Sproutide",
     next: "floriver",
-    tile: {
-      x: 0,
-      y: 260,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 1,
       speed: 4,
+    },
+    tile: {
+      x: 0,
+      y: 260,
     },
   },
   floriver: {
@@ -540,16 +600,18 @@ export const buds: Record<string, Bud> = {
       "A revered deity of the river. It manipulates the flow of water where it swims, growing lily pads in its wake.",
     element: [Element.Earth, Element.Water],
     id: "floriver",
+    moves: [Move.Blossom, Move.Cascade],
     name: "Floriver",
     previous: "sproutide",
-    tile: {
-      x: 10,
-      y: 260,
-    },
+    stage: 2,
     stats: {
       attack: 4,
       defense: 2,
       speed: 2,
+    },
+    tile: {
+      x: 10,
+      y: 260,
     },
   },
   windeed: {
@@ -557,16 +619,18 @@ export const buds: Record<string, Bud> = {
       "It hides among planted beetroots, zipping into the sky before it is picked.",
     element: [Element.Earth, Element.Wind],
     id: "windeed",
+    moves: [Move.Flower, Move.Gust],
     name: "Windeed",
     next: "zephyroot",
-    tile: {
-      x: 0,
-      y: 280,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 3,
       speed: 3,
+    },
+    tile: {
+      x: 0,
+      y: 280,
     },
   },
   zephyroot: {
@@ -574,16 +638,18 @@ export const buds: Record<string, Bud> = {
       "A spring festival celebrates the migration of Zephyroot. They carry themselves on the air with a fan of leaves.",
     element: [Element.Earth, Element.Wind],
     id: "zephyroot",
+    moves: [Move.Blossom, Move.Tornado],
     name: "Zephyroot",
     previous: "windeed",
-    tile: {
-      x: 10,
-      y: 280,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 4,
       speed: 4,
+    },
+    tile: {
+      x: 10,
+      y: 280,
     },
   },
   flitten: {
@@ -591,16 +657,18 @@ export const buds: Record<string, Bud> = {
       "It's known for its mischievous, playful nature. It manipulates your dreams, hoping to be fed when you wake.",
     element: [Element.Light],
     id: "flitten",
+    moves: [Move.Gleam],
     name: "Flitten",
     next: "glimmew",
-    tile: {
-      x: 0,
-      y: 300,
-    },
+    stage: 1,
     stats: {
       attack: 3,
       defense: 2,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 300,
     },
   },
   glimmew: {
@@ -608,16 +676,18 @@ export const buds: Record<string, Bud> = {
       "Nocturnal, its luminescent fur glimmers in the moonlight, charming opponents with its graceful movements.",
     element: [Element.Light],
     id: "glimmew",
+    moves: [Move.Starfall],
     name: "Glimmew",
     previous: "flitten",
-    tile: {
-      x: 10,
-      y: 300,
-    },
+    stage: 2,
     stats: {
       attack: 4,
       defense: 2,
       speed: 3,
+    },
+    tile: {
+      x: 10,
+      y: 300,
     },
   },
   silten: {
@@ -625,16 +695,18 @@ export const buds: Record<string, Bud> = {
       "It posesses a protective shell that provides for it remarkable resilience and adaptability.",
     element: [Element.Light, Element.Water],
     id: "silten",
+    moves: [Move.Twinkle, Move.Soak],
     name: "Silten",
     next: "boglow",
-    tile: {
-      x: 0,
-      y: 320,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 3,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 320,
     },
   },
   boglow: {
@@ -642,17 +714,19 @@ export const buds: Record<string, Bud> = {
       "A tiny luminescent creature with a resilient body. It thrives in extreme aquatic environments.",
     element: [Element.Light, Element.Water],
     id: "boglow",
+    moves: [Move.Gleam, Move.Drench],
     name: "Boglow",
     next: "gleamoss",
     previous: "silten",
-    tile: {
-      x: 10,
-      y: 320,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 4,
       speed: 2,
+    },
+    tile: {
+      x: 10,
+      y: 320,
     },
   },
   gleamoss: {
@@ -660,16 +734,18 @@ export const buds: Record<string, Bud> = {
       "Its shimmering moss-like exterior grants it the ability to regenerate and endure harsh environments. It is not visible to the naked eye.",
     element: [Element.Light, Element.Water],
     id: "gleamoss",
+    moves: [Move.Starfall, Move.Cascade],
     name: "Gleamoss",
     previous: "boglow",
-    tile: {
-      x: 20,
-      y: 320,
-    },
+    stage: 3,
     stats: {
       attack: 3,
       defense: 4,
       speed: 1,
+    },
+    tile: {
+      x: 20,
+      y: 320,
     },
   },
   amazwing: {
@@ -677,16 +753,18 @@ export const buds: Record<string, Bud> = {
       "Tales of cupid can usually be attributed to Amazwing. It spreads love and joy as it flies.",
     element: [Element.Light, Element.Wind],
     id: "amazwing",
+    moves: [Move.Twinkle, Move.Breeze],
     name: "Amazwing",
     next: "featherall",
-    tile: {
-      x: 0,
-      y: 340,
-    },
+    stage: 1,
     stats: {
       attack: 1,
       defense: 1,
       speed: 4,
+    },
+    tile: {
+      x: 0,
+      y: 340,
     },
   },
   featherall: {
@@ -694,17 +772,19 @@ export const buds: Record<string, Bud> = {
       "It enchants the hearts of those it pierces with its tail feathers.",
     element: [Element.Light, Element.Wind],
     id: "featherall",
+    moves: [Move.Gleam, Move.Gust],
     name: "Featherall",
     next: "enchantalon",
     previous: "amazwing",
-    tile: {
-      x: 10,
-      y: 340,
-    },
+    stage: 2,
     stats: {
       attack: 2,
       defense: 2,
       speed: 4,
+    },
+    tile: {
+      x: 10,
+      y: 340,
     },
   },
   enchantalon: {
@@ -712,16 +792,18 @@ export const buds: Record<string, Bud> = {
       "It is a graceful and affectionate parter, but it lulls its enemies into a false sense of security with its enchanting melodies.",
     element: [Element.Light, Element.Wind],
     id: "enchantalon",
+    moves: [Move.Starfall, Move.Tornado],
     name: "Enchantalon",
     previous: "featherall",
-    tile: {
-      x: 20,
-      y: 340,
-    },
+    stage: 3,
     stats: {
       attack: 3,
       defense: 3,
       speed: 4,
+    },
+    tile: {
+      x: 20,
+      y: 340,
     },
   },
   luxureef: {
@@ -729,16 +811,18 @@ export const buds: Record<string, Bud> = {
       "Vibrant coral climbs its body. It is capable of producing captivating displays of bioluminescence.",
     element: [Element.Water],
     id: "luxureef",
+    moves: [Move.Drench],
     name: "Luxureef",
     next: "coraluxe",
-    tile: {
-      x: 0,
-      y: 360,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 3,
       speed: 2,
+    },
+    tile: {
+      x: 0,
+      y: 360,
     },
   },
   coraluxe: {
@@ -746,33 +830,37 @@ export const buds: Record<string, Bud> = {
       "It can manipulate the flow of water currents, which often results in conflict with Floriver. Whirlpools form where they clash.",
     element: [Element.Water],
     id: "coraluxe",
+    moves: [Move.Cascade],
     name: "Coraluxe",
     previous: "luxureef",
-    tile: {
-      x: 10,
-      y: 360,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 4,
       speed: 3,
     },
+    tile: {
+      x: 10,
+      y: 360,
+    },
   },
   galephin: {
     description:
-      "Its sleek dolphin-like body allows it to soar through the sky. Funnel clouds form behind it.",
+      "Its sleek dolphin-like body allows it to soar through the sky. Funnel clouds form in its trail.",
     element: [Element.Water, Element.Wind],
     id: "galephin",
+    moves: [Move.Drench, Move.Gust],
     name: "Galephin",
     next: "typhorca",
-    tile: {
-      x: 0,
-      y: 380,
-    },
+    stage: 1,
     stats: {
       attack: 3,
       defense: 1,
       speed: 3,
+    },
+    tile: {
+      x: 0,
+      y: 380,
     },
   },
   typhorca: {
@@ -780,16 +868,18 @@ export const buds: Record<string, Bud> = {
       "Gliding through the air with agility, it uses its windswept tail to create powerful gusts and summon storms at sea.",
     element: [Element.Water, Element.Wind],
     id: "typhorca",
+    moves: [Move.Cascade, Move.Tornado],
     name: "Typhorca",
     previous: "galephin",
-    tile: {
-      x: 10,
-      y: 380,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 1,
       speed: 4,
+    },
+    tile: {
+      x: 10,
+      y: 380,
     },
   },
   lopilot: {
@@ -797,16 +887,18 @@ export const buds: Record<string, Bud> = {
       "Its large ears allow it to effortlessly navigate the winds. Lost travelers are guided by Lopilot to safety.",
     element: [Element.Wind],
     id: "lopilot",
+    moves: [Move.Gust],
     name: "Lopilot",
     next: "aviare",
-    tile: {
-      x: 0,
-      y: 400,
-    },
+    stage: 1,
     stats: {
       attack: 2,
       defense: 2,
       speed: 3,
+    },
+    tile: {
+      x: 0,
+      y: 400,
     },
   },
   aviare: {
@@ -814,16 +906,18 @@ export const buds: Record<string, Bud> = {
       "A skilled pilot of the skies, it is rare to see Aviare on solid ground. Its fur has evolved to resemble fluffy clouds.",
     element: [Element.Wind],
     id: "aviare",
+    moves: [Move.Tornado],
     name: "Aviare",
     previous: "lopilot",
-    tile: {
-      x: 10,
-      y: 400,
-    },
+    stage: 2,
     stats: {
       attack: 3,
       defense: 2,
       speed: 4,
+    },
+    tile: {
+      x: 10,
+      y: 400,
     },
   },
 };

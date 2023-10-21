@@ -188,3 +188,73 @@ Rival
 
 > Trade
 > Taunt
+
+```
+if (attack >= defense) {
+    damage = attack * 2 - defense;
+} else {
+    damage = attack * attack / defense;
+}
+
+damage = (a.atk * 4) - (b.def * 2);
+
+xpNeededToLevelUp = currentLevel^x + C
+levelUpXP = (lastLevel + currentlevel) \* 1.2
+
+https://howtomakeanrpg.com/a/how-to-make-an-rpg-levels.html
+function nextLevel(level)
+    return round((4 \* (level ^ 3)) / 5)
+end
+
+(stat * 1.5) * level = stat scale
+
+HP
+floor(((B × 2) × L) ÷ 10) + L + 4.
+Math.floor(((base * 2) * level) / 10) + level + 4
+
+Attack, Defense, Speed
+floor(((B × 2) × L) ÷ 10) + 2
+Math.floor(((base * 2) * level) / 10) + 2
+```
+
+```
+damage = attack >= defense
+    ? (attack * 2 - defense)
+    : (attack * attack / defense)
+
+//hp
+Math.floor((level * 2) / 10) + level + 4
+
+//stats
+Math.floor(((base * 2) * level) / 10) + 2
+```
+
+moves & cooldowns based on speed
+maybe moves are just named after elements
+defend increase defense temporarily
+
+---
+
+- gloom
+- shade
+- eclipse
+
+- twinkle
+- gleam
+- starfall
+
+- ignite
+- blaze
+- inferno
+
+- soak
+- drench
+- cascade
+
+- seed
+- flower
+- blossom
+
+- breeze
+- gust
+- tornado

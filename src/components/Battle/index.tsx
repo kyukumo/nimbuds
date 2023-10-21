@@ -1,53 +1,64 @@
-import "./index.css";
 import {
-  selectActiveBudName,
-  selectActiveBudStats,
-  selectRivals,
+  selectActiveBud,
+  selectBattleType,
+  selectRivalActiveBuds,
 } from "../../selectors";
 import { useStore } from "../../hooks/useStore";
+import { BattleType } from "../../types";
+import { SubBudCanvas } from "../SubBudCanvas";
+import { Attacks } from "../Attacks";
+import styles from "./index.module.css";
+
+const label = {
+  [BattleType.Four]: "4v4",
+  [BattleType.Three]: "3v1",
+  [BattleType.Two]: "2v2",
+};
 
 export function Battle() {
-  const bud = useStore(selectActiveBudName);
-  const rivals = useStore(selectRivals);
-  const stats = useStore(selectActiveBudStats);
+  const activeBud = useStore(selectActiveBud);
+  const battleType = useStore(selectBattleType);
+  const rivalActiveBuds = useStore(selectRivalActiveBuds);
 
   return (
-    <main>
+    <main className={styles.battle}>
       <header>
-        <h1>{bud}</h1>
+        <h1>Battle!</h1>
       </header>
 
       <section>
-        <dl className="stats">
-          {stats?.attack && (
-            <>
-              <dt>Attack</dt>
-              <dd>{stats?.attack}</dd>
-            </>
-          )}
+        <p>{label[battleType]}</p>
 
-          {stats?.defense && (
-            <>
-              <dt>Defense</dt>
-              <dd>{stats?.defense}</dd>
-            </>
-          )}
+        <fieldset className={styles.buds}>
+          <legend>Choose a Target</legend>
 
-          {stats?.speed && (
-            <>
-              <dt>Speed</dt>
-              <dd>{stats?.speed}</dd>
-            </>
-          )}
-        </dl>
+          {rivalActiveBuds.map(({ name, playerId, ...bud }) => (
+            <label key={`${playerId}-rival-bud`}>
+              <input
+                className="sr-only"
+                name="rival-target"
+                type="radio"
+                value={playerId}
+              />
 
-        <hr aria-hidden="true" />
+              <span className="sr-only">{name}</span>
 
-        <ul>
-          {rivals.map(({ id, name }) => (
-            <li key={id}>{name}</li>
+              <SubBudCanvas
+                bud={{
+                  ...bud,
+                  name,
+                }}
+              />
+            </label>
           ))}
-        </ul>
+
+          {activeBud && <SubBudCanvas bud={activeBud} />}
+        </fieldset>
+
+        <nav>
+          <Attacks />
+          <button type="button">Switch</button>
+        </nav>
       </section>
     </main>
   );

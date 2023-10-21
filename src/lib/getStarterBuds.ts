@@ -4,7 +4,11 @@ import { getUniqueRandomNumbers } from "./getUniqueRandomNumbers";
 
 const getBud = (index: number) => {
   const id = starters[index];
-  return buds[id];
+
+  return {
+    ...buds[id],
+    level: 1,
+  };
 };
 
 const getRandomBuds = (count = 3) => {
@@ -12,4 +16,4 @@ const getRandomBuds = (count = 3) => {
   return numbers.map(getBud);
 };
 
-export const getStarterBuds = () => getRandomBuds(1) as [Bud];
+export const getStarterBuds = () => getRandomBuds(3) as [Bud];

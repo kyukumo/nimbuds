@@ -1,6 +1,7 @@
+import styles from "./index.module.css";
 import { selectLastEvent } from "../../selectors";
-import { useStore } from "../../hooks/useStore";
 import { useRef } from "react";
+import { useStore } from "../../hooks/useStore";
 import { useVisibleOnChange } from "../../hooks/useVisibleOnChange";
 
 export function RandomEvent() {
@@ -14,6 +15,7 @@ export function RandomEvent() {
 
   return (
     <p
+      className={styles.event}
       {...{
         ref,
       }}
