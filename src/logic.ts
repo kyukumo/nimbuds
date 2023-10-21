@@ -11,6 +11,9 @@ import { getStarterInventory } from "./lib/getStarterInventory";
 import { getRandomNumber } from "./lib/getRandomNumber";
 import { buds } from "./data/buds";
 
+const baseXp = 2;
+const maxLevel = 100;
+
 // everyone gets a set amount of points/money
 // shop to buy things for your creatures/buy creatures
 // random events happen to give you items/money
@@ -76,6 +79,7 @@ Rune.initLogic({
 
       const nextBud = buds[next];
       player.buds[0] = nextBud;
+      player.cooldowns = {};
     },
     setPlayerName: ({ id, name }, { game }) => {
       const player = game.players[id];
@@ -95,20 +99,62 @@ Rune.initLogic({
     const reduceCooldowns = (id: string) => {
       const player = players[id];
 
+      type CompleteCooldowns = {
+        cooldowns: Cooldowns;
+        complete: number;
+      };
+
       const getReducedCooldowns = (
-        all: Cooldowns,
+        all: CompleteCooldowns,
         [key, value]: [string, number]
-      ) => ({
-        ...all,
-        ...(value && {
-          [<Move>key]: value - 1,
-        }),
+      ) => {
+        const { cooldowns, complete } = all;
+
+        if (!value)
+          return {
+            cooldowns,
+            complete: complete + 1,
+          };
+
+        return {
+          complete,
+          cooldowns: {
+            ...cooldowns,
+            [<Move>key]: value - 1,
+          },
+        };
+      };
+
+      const { complete, cooldowns } = Object.entries(
+        player.cooldowns
+      ).reduce<CompleteCooldowns>(getReducedCooldowns, {
+        cooldowns: {},
+        complete: 0,
       });
 
-      player.cooldowns = Object.entries(player.cooldowns).reduce<Cooldowns>(
-        getReducedCooldowns,
-        {}
-      );
+      player.cooldowns = cooldowns;
+
+      const levelUp = () => {
+        const [
+          {
+            moves: { length },
+            stats,
+          },
+        ] = player.buds;
+
+        const { level = 1, xp = 0 } = stats;
+        stats.xp = xp + baseXp * (1 / length);
+        const levelUpXP = Math.ceil((level * 2 - 1) * 1.2);
+        if (stats.xp >= levelUpXP) stats.level = level + 1;
+      };
+
+      const [
+        {
+          stats: { level = 0 },
+        },
+      ] = player.buds;
+
+      if (level < maxLevel) Array(complete).fill(null).forEach(levelUp);
     };
 
     const makeUpdates = (id: string) => {

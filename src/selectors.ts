@@ -38,7 +38,7 @@ export const selectActiveBudMoves = (state: Store) => {
 
   const getMove = (move: Move) => ({
     ...moves[move],
-    cooldown: cooldowns?.[move] ?? 0,
+    cooldown: cooldowns?.[move],
     move,
   });
 

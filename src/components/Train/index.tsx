@@ -73,24 +73,38 @@ export function Train() {
           </nav>
 
           <dl className={styles.stats}>
+            {stats?.level && (
+              <>
+                <dt className="sr-only">Level</dt>
+                <dd>{stats.level}</dd>
+              </>
+            )}
+
             {stats?.attack && (
               <>
                 <dt className="sr-only">Attack</dt>
-                <dd>{stats?.attack}</dd>
+                <dd>{stats.attack}</dd>
               </>
             )}
 
             {stats?.defense && (
               <>
                 <dt className="sr-only">Defense</dt>
-                <dd>{stats?.defense}</dd>
+                <dd>{stats.defense}</dd>
               </>
             )}
 
             {stats?.speed && (
               <>
                 <dt className="sr-only">Speed</dt>
-                <dd>{stats?.speed}</dd>
+                <dd>{stats.speed}</dd>
+              </>
+            )}
+
+            {stats?.xp && (
+              <>
+                <dt className="sr-only">XP</dt>
+                <dd>{stats.xp}</dd>
               </>
             )}
           </dl>

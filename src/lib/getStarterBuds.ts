@@ -4,10 +4,15 @@ import { getUniqueRandomNumbers } from "./getUniqueRandomNumbers";
 
 const getBud = (index: number) => {
   const id = starters[index];
+  const bud = buds[id];
 
   return {
-    ...buds[id],
-    level: 1,
+    ...bud,
+    stats: {
+      ...bud.stats,
+      level: 1,
+      xp: 0,
+    },
   };
 };
 

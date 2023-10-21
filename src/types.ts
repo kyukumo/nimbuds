@@ -17,7 +17,9 @@ type Tile = {
 type Stats = {
   attack: number;
   defense: number;
+  level?: number;
   speed: number;
+  xp?: number;
 };
 
 export enum Move {
@@ -47,7 +49,6 @@ export type Bud = {
   element: Element[];
   description: string;
   id: string;
-  level?: number;
   moves: Moves;
   name: string;
   next?: string;

@@ -12,13 +12,14 @@ export function Attack({
   label,
   move,
 }: {
-  cooldown: number;
+  cooldown?: number;
   element: Element;
   label: string;
   move: Move;
 }) {
   const id = useStore(selectPlayerId);
   const speed = useStore(selectActiveBudSpeed);
+  const disabled = typeof cooldown !== "undefined";
 
   const onClick = () =>
     Rune.actions.attack({
@@ -30,9 +31,9 @@ export function Attack({
   return (
     <li>
       <button
-        disabled={Boolean(cooldown)}
         type="button"
         {...{
+          disabled,
           onClick,
         }}
       >
