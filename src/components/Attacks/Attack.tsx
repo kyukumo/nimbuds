@@ -2,40 +2,40 @@ import { useStore } from "../../hooks/useStore";
 import { selectActiveBudSpeed, selectPlayerId } from "../../selectors";
 import { Element, Move } from "../../types";
 import { SubElementCanvas } from "../SubElementCanvas";
-
-// if you click on an attack before cool down,
-// cool down will reset
+import styles from "./index.module.css";
 
 export function Attack({
   cooldown,
+  disabled: groupDisabled,
   element,
   label,
   move,
 }: {
   cooldown?: number;
+  disabled?: boolean;
   element: Element;
   label: string;
   move: Move;
 }) {
   const id = useStore(selectPlayerId);
   const speed = useStore(selectActiveBudSpeed);
-  const disabled = typeof cooldown !== "undefined";
+  const disabled = groupDisabled || typeof cooldown !== "undefined";
 
-  const onClick = () =>
+  const attack = () =>
     Rune.actions.attack({
       id,
       move,
       speed,
     });
 
+  const progressBarId = `${move}-progress`;
+
   return (
     <li>
       <button
+        className={[disabled && styles.disabled].filter(Boolean).join(" ")}
+        onClick={attack}
         type="button"
-        {...{
-          disabled,
-          onClick,
-        }}
       >
         <SubElementCanvas
           {...{
@@ -45,6 +45,11 @@ export function Attack({
 
         <span>{label}</span>
       </button>
+
+      <div className="sr-only">
+        <label htmlFor={progressBarId}>Loading:</label>
+        <progress aria-busy={disabled} id={progressBarId} />
+      </div>
     </li>
   );
 }

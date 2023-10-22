@@ -1,12 +1,40 @@
 import { moves } from "./data/moves";
 import { Store } from "./hooks/useStore";
-import { Bud, Move } from "./types";
+import { Bud, Move, Phase, Player } from "./types";
+
+export const selectReady = (state: Store) => state.ready;
 
 export const selectPlayer = (state: Store) => state.player;
+
+export const selectGameEnded = (state: Store) => state.ended;
+
+export const selectGameOver = (state: Store) => {
+  const player = selectPlayer(state);
+  return player?.gameOver;
+};
+
+export const selectTarget = (state: Store) => {
+  const player = selectPlayer(state);
+  return player?.target;
+};
 
 export const selectCooldowns = (state: Store) => {
   const player = selectPlayer(state);
   return player?.cooldowns;
+};
+
+export const selectHasCooldown = (state: Store) => {
+  const cooldowns = selectCooldowns(state);
+  if (!cooldowns) return false;
+  return Boolean(Object.keys(cooldowns).length);
+};
+
+export const selectDuration = (state: Store) => {
+  return state.duration;
+};
+
+export const selectTrainPhaseDuration = (state: Store) => {
+  return state.phases[Phase.Train] ?? 0;
 };
 
 export const selectPlayers = (state: Store) => state.players;
@@ -20,16 +48,33 @@ export const selectPlayerId = (state: Store) => {
   return player?.id ?? "";
 };
 
+export const selectIsSpectator = (state: Store) => {
+  const id = selectPlayerId(state);
+  return !id;
+};
+
 export const selectLastEvent = (state: Store) => {
   const player = selectPlayer(state);
   return player?.lastEvent ?? null;
 };
 
-export const selectActiveBud = (state: Store) => {
+export const selectBuds = (state: Store) => {
   const player = selectPlayer(state);
   if (!player) return null;
-  const [activeBud] = player.buds;
+  return player.buds;
+};
+
+export const selectActiveBud = (state: Store) => {
+  const buds = selectBuds(state);
+  if (!buds) return null;
+  const [activeBud] = buds;
   return activeBud;
+};
+
+export const selectCanSwitch = (state: Store) => {
+  const buds = selectBuds(state);
+  if (!buds) return false;
+  return buds?.length > 1;
 };
 
 export const selectActiveBudMoves = (state: Store) => {
@@ -76,9 +121,20 @@ export const selectAscendedActiveBud = (state: Store) => {
   return activeBud?.next;
 };
 
+export const selectActiveBudAscendsAt = (state: Store) => {
+  const activeBud = selectActiveBud(state);
+  return activeBud?.ascends;
+};
+
 export const selectCanActiveBudAscend = (state: Store) => {
-  const advancedActiveBud = selectAscendedActiveBud(state);
-  return Boolean(advancedActiveBud);
+  const ascendedBud = selectAscendedActiveBud(state);
+  if (!ascendedBud) return false;
+  const stats = selectActiveBudStats(state);
+  if (!stats) return false;
+  const { level = 1 } = stats;
+  const ascendsAt = selectActiveBudAscendsAt(state);
+  if (!ascendsAt) return false;
+  return level >= ascendsAt;
 };
 
 export const selectMyBuds = (state: Store) => {
@@ -106,13 +162,41 @@ export const selectRivalActiveBuds = (state: Store) => {
   const rivals = selectRivals(state);
 
   return rivals.reduce<RivalBud[]>(
-    (a, { buds: [bud], id }) => [
-      ...a,
-      {
-        ...bud,
-        playerId: id,
-      },
-    ],
+    (a, { buds: [bud], id }) =>
+      bud
+        ? [
+            ...a,
+            {
+              ...bud,
+              playerId: id,
+            },
+          ]
+        : [],
     []
   );
+};
+
+export const selectActiveBuds = (state: Store) => {
+  const players = selectPlayers(state);
+
+  const getActiveBud = (
+    all: RivalBud[],
+    { buds: [bud], id: playerId }: Player
+  ) =>
+    bud
+      ? [
+          ...all,
+          {
+            ...bud,
+            playerId,
+          },
+        ]
+      : all;
+
+  const activeBuds = Object.values(players).reduce<RivalBud[]>(
+    getActiveBud,
+    []
+  );
+
+  return activeBuds;
 };

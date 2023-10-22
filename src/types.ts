@@ -17,6 +17,7 @@ type Tile = {
 type Stats = {
   attack: number;
   defense: number;
+  hp?: number;
   level?: number;
   speed: number;
   xp?: number;
@@ -46,16 +47,19 @@ export enum Move {
 type Moves = [Move] | [Move, Move];
 
 export type Bud = {
-  element: Element[];
+  advantage: Element[];
+  ascends?: number;
   description: string;
+  disadvantage: Element[];
+  element: Element[];
   id: string;
   moves: Moves;
   name: string;
   next?: string;
   previous?: string;
-  tile: Tile;
   stage: number;
   stats: Stats;
+  tile: Tile;
 };
 
 export enum ItemType {
@@ -70,7 +74,8 @@ export type Item = {
   type: ItemType;
 };
 
-export type Buds = [Bud] | [Bud, Bud] | [Bud, Bud, Bud];
+export type CurrentBuds = [Bud] | [Bud, Bud] | [Bud, Bud, Bud];
+export type Buds = [] | CurrentBuds;
 
 export type Inventory = [
   Item?,
@@ -92,12 +97,14 @@ export type Cooldowns = Partial<Record<Move, number>>;
 export type Player = {
   buds: Buds;
   cooldowns: Cooldowns;
+  gameOver: boolean;
   id: string;
   inventory: Inventory;
   lastEvent: number;
   name: string;
   ping: number;
   stars: number;
+  target: string | null;
 };
 
 export type Players = Record<string, Player>;
@@ -113,11 +120,16 @@ export enum Phase {
   Battle = "battle",
 }
 
+export type Phases = Partial<Record<Phase, number>>;
+
 export interface GameState {
   battleType: BattleType;
   duration: number;
+  ended: boolean;
   phase: Phase;
+  phases: Phases;
   players: Players;
+  playerIds: string[];
 }
 
 export type GameActions = {
@@ -132,8 +144,9 @@ export type GameActions = {
   }) => void;
   ascend: ({ id }: { id: string }) => void;
   battle: () => void;
-  ping: ({ id }: { id: string }) => void;
   setPlayerName: ({ id, name }: { id: string; name: string }) => void;
+  switch: ({ id }: { id: string }) => void;
+  target: ({ id, target }: { id: string; target: string }) => void;
   train: () => void;
 };
 

@@ -1,4 +1,5 @@
 .dialog {
+  inset-block-start: unset;
   max-width: unset;
   width: 100%;
 

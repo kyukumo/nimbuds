@@ -12,10 +12,35 @@
   }
 }
 
-.buds {
-  display: grid;
-  grid-auto-flow: row;
-  grid-auto-rows: auto;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+
+  & .buds {
+    display: grid;
+    gap: 0.5em;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* TODO: merge with Rival */
+  & .bud {
+    align-items: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    opacity: 0.5;
+
+    > * {
+      grid-column-start: 1;
+      grid-row-start: 1;
+    }
+  }
 }

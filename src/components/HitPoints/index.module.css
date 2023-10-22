@@ -1,0 +1,26 @@
+.hp {
+  width: 100%;
+
+  &,
+  &::-webkit-meter-bar {
+    background-color: transparent;
+    border: 0;
+    height: 0.5em;
+  }
+
+  &::-webkit-meter-bar {
+    border-radius: 0;
+  }
+
+  &::-webkit-meter-optimum-value {
+    background-color: var(--green);
+  }
+
+  &::-webkit-meter-suboptimum-value {
+    background-color: var(--yellow);
+  }
+
+  &::-webkit-meter-even-less-good-value {
+    background-color: var(--red);
+  }
+}

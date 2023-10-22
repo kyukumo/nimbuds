@@ -1,14 +1,25 @@
-.attacks {
-  list-style: none;
+.fieldset {
+  border: 0;
+  margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
 
-  & button {
-    align-items: center;
+  & .attacks {
     display: flex;
-    gap: 1em;
-    padding: 1em;
-    width: 100%;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & button {
+      align-items: center;
+      display: flex;
+      gap: 1em;
+      padding: 1em;
+      width: 100%;
+
+      &.disabled {
+        opacity: 0.5;
+      }
+    }
   }
 }

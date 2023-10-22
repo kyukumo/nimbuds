@@ -1,5 +1,6 @@
 import {
   selectActiveBud,
+  selectActiveBudStats,
   selectBattleType,
   selectRivalActiveBuds,
 } from "../../selectors";
@@ -8,6 +9,9 @@ import { BattleType } from "../../types";
 import { SubBudCanvas } from "../SubBudCanvas";
 import { Attacks } from "../Attacks";
 import styles from "./index.module.css";
+import { Switch } from "../Switch";
+import { Rival } from "../Rival";
+import { HitPoints } from "../HitPoints";
 
 const label = {
   [BattleType.Four]: "4v4",
@@ -19,6 +23,8 @@ export function Battle() {
   const activeBud = useStore(selectActiveBud);
   const battleType = useStore(selectBattleType);
   const rivalActiveBuds = useStore(selectRivalActiveBuds);
+  const stats = useStore(selectActiveBudStats);
+  const { level, hp } = stats ?? {};
 
   return (
     <main className={styles.battle}>
@@ -29,35 +35,39 @@ export function Battle() {
       <section>
         <p>{label[battleType]}</p>
 
-        <fieldset className={styles.buds}>
+        <fieldset className={styles.fieldset}>
           <legend>Choose a Target</legend>
 
-          {rivalActiveBuds.map(({ name, playerId, ...bud }) => (
-            <label key={`${playerId}-rival-bud`}>
-              <input
-                className="sr-only"
-                name="rival-target"
-                type="radio"
-                value={playerId}
-              />
+          <div className={styles.buds}>
+            {activeBud && (
+              <div className={styles.bud}>
+                <HitPoints
+                  id="my-hp"
+                  {...{
+                    hp,
+                    level,
+                  }}
+                />
 
-              <span className="sr-only">{name}</span>
+                <SubBudCanvas bud={activeBud} />
+              </div>
+            )}
 
-              <SubBudCanvas
-                bud={{
+            {rivalActiveBuds.map(({ playerId, ...bud }) => (
+              <Rival
+                key={`${playerId}-rival-bud`}
+                {...{
                   ...bud,
-                  name,
+                  playerId,
                 }}
               />
-            </label>
-          ))}
-
-          {activeBud && <SubBudCanvas bud={activeBud} />}
+            ))}
+          </div>
         </fieldset>
 
         <nav>
           <Attacks />
-          <button type="button">Switch</button>
+          <Switch />
         </nav>
       </section>
     </main>

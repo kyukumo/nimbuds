@@ -31,3 +31,21 @@ export const tile = {
     y: 15,
   },
 };
+
+export const disadvantage: Record<Element, Element> = {
+  [Element.Dark]: Element.Light,
+  [Element.Earth]: Element.Wind,
+  [Element.Fire]: Element.Water,
+  [Element.Light]: Element.Dark,
+  [Element.Water]: Element.Earth,
+  [Element.Wind]: Element.Fire,
+};
+
+export const advantage: Record<Element, Element> = {
+  [Element.Dark]: Element.Light,
+  [Element.Earth]: Element.Water,
+  [Element.Fire]: Element.Wind,
+  [Element.Light]: Element.Dark,
+  [Element.Water]: Element.Fire,
+  [Element.Wind]: Element.Earth,
+};

@@ -16,7 +16,7 @@ const draw = ({
   sprites,
 }: {
   animate: boolean;
-  bud: Bud | null;
+  bud?: Bud | null;
   canvas: HTMLCanvasElement | null;
   sprites: HTMLImageElement;
 }) => {

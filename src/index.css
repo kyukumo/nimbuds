@@ -47,7 +47,7 @@ body {
 }
 
 canvas {
-  box-shadow: inset 0 0 0 1px lime;
+  background-color: transparent;
   image-rendering: pixelated;
 }
 
@@ -61,4 +61,77 @@ main {
   line-height: 1.2;
   margin: 0 auto;
   max-width: 100%;
+}
+
+:root {
+  --fire: #ff4200;
+  --wind: #9394fe;
+  --earth: #51ff00;
+  --water: #64a5ff;
+  --light: #ffff00;
+  --dark: #a5a5a5;
+
+  --green: var(--earth);
+  --yellow: var(--light);
+  --red: var(--fire);
+
+  --dark-fire-1: #bb8d7c;
+  --dark-fire-2: #d17453;
+  --dark-fire-3: #e85b2a;
+
+  --dark-earth-1: #90bb7c;
+  --dark-earth-2: #7cd153;
+  --dark-earth-3: #67e82a;
+
+  --dark-light-1: #bbbb7c;
+  --dark-light-2: #d1d153;
+  --dark-light-3: #e8e82a;
+
+  --dark-water-1: #95a5bb;
+  --dark-water-2: #85a5d1;
+  --dark-water-3: #75a5e8;
+
+  --dark-wind-1: #a1a1bb;
+  --dark-wind-2: #9d9dd1;
+  --dark-wind-3: #9899e7;
+
+  --fire-light-1: #ff7100;
+  --fire-light-2: #ffa000;
+  --fire-light-3: #ffcf00;
+
+  --fire-water-1: #d95a40;
+  --fire-water-2: #b2737f;
+  --fire-water-3: #8b8cbf;
+
+  --fire-wind-1: #e4563f;
+  --fire-wind-2: #ca6a7e;
+  --fire-wind-3: #af7fbe;
+
+  --earth-fire-1: #7cd000;
+  --earth-fire-2: #a7a100;
+  --earth-fire-3: #d37200;
+
+  --earth-light-1: #7cff00;
+  --earth-light-2: #a7ff00;
+  --earth-light-3: #d3ff00;
+
+  --earth-water-1: #55e940;
+  --earth-water-2: #5ad37f;
+  --earth-water-3: #5fbcbf;
+
+  --earth-wind-1: #61e53f;
+  --earth-wind-2: #71ca7e;
+  --earth-wind-3: #82afbe;
+
+  --light-water-1: #d9e940;
+  --light-water-2: #b2d37f;
+  --light-water-3: #8bbcbf;
+
+  --light-wind-1: #e4e53f;
+  --light-wind-2: #caca7e;
+  --light-wind-3: #afafbe;
+
+  --water-wind-1: #6fa1ff;
+  --water-wind-2: #7b9dff;
+  --water-wind-3: #8799ff;
 }

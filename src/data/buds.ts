@@ -26,8 +26,11 @@ export const starters = [
 
 export const buds: Record<string, Bud> = {
   spookecko: {
+    advantage: [],
+    ascends: 10,
     description:
       "This mysterious and eerie reptile lurks in the shadows, using its ghastly powers to frighten and confuse opponents.",
+    disadvantage: [Element.Light],
     element: [Element.Dark],
     id: "spookecko",
     moves: [Move.Gloom],
@@ -45,8 +48,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   shadile: {
+    advantage: [],
+    ascends: 20,
     description:
       "It lurks in the depths of the night, preying on the fears and weaknesses of its opponents with its sinister powers.",
+    disadvantage: [Element.Light],
     element: [Element.Dark],
     id: "shadile",
     moves: [Move.Shade],
@@ -65,8 +71,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   spectraptor: {
+    advantage: [],
     description:
       "If you feel a sudden chill, you may be experiencing the ghostly aura of this sinister raptor, silently stalking its prey.",
+    disadvantage: [Element.Light],
     element: [Element.Dark],
     id: "spectraptor",
     moves: [Move.Eclipse],
@@ -84,7 +92,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   smoldit: {
+    advantage: [Element.Wind],
+    ascends: 20,
     description: "The smoldering embodiment of lingering spectral energy.",
+    disadvantage: [Element.Light, Element.Water],
     element: [Element.Dark, Element.Fire],
     id: "smoldit",
     moves: [Move.Blaze],
@@ -102,8 +113,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   embergeist: {
+    advantage: [Element.Wind],
     description:
       "Flickering, mysterious flames that haunt their surroundings with an ominous presence.",
+    disadvantage: [Element.Light, Element.Water],
     element: [Element.Dark, Element.Fire],
     id: "embergeist",
     moves: [Move.Inferno],
@@ -121,8 +134,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   specalf: {
+    advantage: [Element.Water],
+    ascends: 20,
     description:
       "Awaiting the return of its doting parent, this bovine animal conceals itself beneath a veil of spectral flora.",
+    disadvantage: [Element.Light, Element.Wind],
     element: [Element.Dark, Element.Earth],
     id: "specalf",
     moves: [Move.Shade, Move.Flower],
@@ -140,8 +156,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   thornox: {
+    advantage: [Element.Water],
     description:
       "It seeks to exact revenge on anyone it can find using its razor-sharp thorns.",
+    disadvantage: [Element.Light, Element.Wind],
     element: [Element.Dark, Element.Earth],
     id: "thornox",
     moves: [Move.Eclipse, Move.Blossom],
@@ -159,8 +177,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   voidixie: {
+    advantage: [],
+    ascends: 20,
     description:
       "The few who have witnessed its otherworldly aura have professed conflicting feelings of curiosity and trepidation.",
+    disadvantage: [Element.Dark, Element.Light],
     element: [Element.Dark, Element.Light],
     id: "voidixie",
     moves: [Move.Shade, Move.Gleam],
@@ -178,8 +199,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   faeclipse: {
+    advantage: [],
     description:
       "Hauntingly sinister, menacing, and alluring. It has an aura of cosmic destruction.",
+    disadvantage: [Element.Dark, Element.Light],
     element: [Element.Dark, Element.Light],
     id: "faeclipse",
     moves: [Move.Eclipse, Move.Starfall],
@@ -197,8 +220,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   gloominnow: {
+    advantage: [Element.Fire],
+    ascends: 10,
     description:
       "A glint from its shimmering, iridescent scales will catch your eye from deep below the waters.",
+    disadvantage: [Element.Earth, Element.Light],
     element: [Element.Dark, Element.Water],
     id: "gloominnow",
     moves: [Move.Gloom, Move.Soak],
@@ -216,8 +242,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   barrabyss: {
+    advantage: [Element.Fire],
+    ascends: 20,
     description:
       "Be careful where you swim. Legend has it that when you see its eerie, glowing eyes, it's already too late for you.",
+    disadvantage: [Element.Earth, Element.Light],
     element: [Element.Dark, Element.Water],
     id: "barrabyss",
     moves: [Move.Shade, Move.Drench],
@@ -236,8 +265,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   umbracuda: {
+    advantage: [Element.Fire],
     description:
       "Its sleek, etherial fins cascade through the water, appearing in and vanishing from the ocean at will.",
+    disadvantage: [Element.Earth, Element.Light],
     element: [Element.Dark, Element.Water],
     id: "umbracuda",
     moves: [Move.Eclipse, Move.Cascade],
@@ -255,8 +286,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   nebulon: {
+    advantage: [Element.Earth],
+    ascends: 10,
     description:
       "Often mistaken for an unidentified flying object, it has a markedly unassuming face.",
+    disadvantage: [Element.Fire, Element.Light],
     element: [Element.Dark, Element.Wind],
     id: "nebulon",
     moves: [Move.Shade, Move.Gust],
@@ -274,8 +308,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   nebulisk: {
+    advantage: [Element.Earth],
     description:
       "Seemingly extraterrestrial, it is highly skilled in piloting its sleek spacecraft.",
+    disadvantage: [Element.Fire, Element.Light],
     element: [Element.Dark, Element.Wind],
     id: "nebulisk",
     moves: [Move.Eclipse, Move.Tornado],
@@ -293,7 +329,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   snakelit: {
+    advantage: [Element.Wind],
+    ascends: 10,
     description: "An emerald, fiery glow emits from this serpentine creature.",
+    disadvantage: [Element.Water],
     element: [Element.Fire],
     id: "snakelit",
     moves: [Move.Ignite],
@@ -311,8 +350,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   serpyro: {
+    advantage: [Element.Wind],
+    ascends: 20,
     description:
       "It uses the scorching jade flames emitting from its tail to extinguish its opponents.",
+    disadvantage: [Element.Water],
     element: [Element.Fire],
     id: "serpyro",
     moves: [Move.Blaze],
@@ -331,8 +373,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   pyroconda: {
+    advantage: [Element.Wind],
     description:
       "Majestic, some consider it a deity. Its fiery plumage exudes power and grace.",
+    disadvantage: [Element.Water],
     element: [Element.Fire],
     id: "pyroconda",
     moves: [Move.Inferno],
@@ -350,7 +394,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   oakindle: {
+    advantage: [Element.Water, Element.Wind],
+    ascends: 20,
     description: "A small seedling engulfed in flames.",
+    disadvantage: [],
     element: [Element.Earth, Element.Fire],
     id: "oakindle",
     moves: [Move.Flower, Move.Blaze],
@@ -368,8 +415,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   torchwood: {
+    advantage: [Element.Water, Element.Wind],
     description:
       "It is fiercely loyal to mother nature, using her powers to protect those it considers vulnerable.",
+    disadvantage: [],
     element: [Element.Earth, Element.Fire],
     id: "torchwood",
     moves: [Move.Blossom, Move.Inferno],
@@ -387,8 +436,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   wispyre: {
+    advantage: [Element.Wind],
     description:
       "It's playful and mischievous, dazzling its opponents with sublime flames and whimsical charm.",
+    disadvantage: [Element.Dark, Element.Water],
     element: [Element.Fire, Element.Light],
     id: "wispyre",
     moves: [Move.Inferno, Move.Starfall],
@@ -405,8 +456,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   flagoon: {
+    advantage: [Element.Fire, Element.Wind],
+    ascends: 10,
     description:
       "It releases infernal steam to drive intruders away from its den.",
+    disadvantage: [Element.Earth],
     element: [Element.Fire, Element.Water],
     id: "flagoon",
     moves: [Move.Ignite, Move.Soak],
@@ -424,8 +478,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   blazesea: {
+    advantage: [Element.Fire, Element.Wind],
+    ascends: 20,
     description:
       "It is widely known that Blazesea should not be approached. It unceasingly combusts as it maintains a cooling aura of water around its body.",
+    disadvantage: [Element.Earth],
     element: [Element.Fire, Element.Water],
     id: "blazesea",
     moves: [Move.Blaze, Move.Drench],
@@ -444,8 +501,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   infernocean: {
+    advantage: [Element.Fire, Element.Wind],
     description:
       "It is described as titanic, commanding the destructive power of roaring tides and wildfire.",
+    disadvantage: [Element.Earth],
     element: [Element.Fire, Element.Water],
     id: "infernocean",
     moves: [Move.Inferno, Move.Cascade],
@@ -463,8 +522,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   flarva: {
+    advantage: [Element.Earth, Element.Wind],
+    ascends: 10,
     description:
       "On a clear summer night, you can see the faint blue glow of Flarva swarming on the trees.",
+    disadvantage: [Element.Water],
     element: [Element.Fire, Element.Wind],
     id: "flarva",
     moves: [Move.Ignite, Move.Breeze],
@@ -482,8 +544,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   chrysfire: {
+    advantage: [Element.Earth, Element.Wind],
+    ascends: 20,
     description:
       "Its shell is warm to the touch. Wildfire experts relocate Chrysfire away from forests before they hatch.",
+    disadvantage: [Element.Water],
     element: [Element.Fire, Element.Wind],
     id: "chrysfire",
     moves: [Move.Blaze, Move.Gust],
@@ -502,8 +567,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   ignimoth: {
+    advantage: [Element.Earth, Element.Wind],
     description:
       "It flutters, trailed by delicate blue sparks. Many Chrysfire do not survive relocation, so it is said that an Ignimoth sighting brings one good luck.",
+    disadvantage: [Element.Water],
     element: [Element.Fire, Element.Wind],
     id: "ignimoth",
     moves: [Move.Inferno, Move.Tornado],
@@ -521,8 +588,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   meadowisp: {
+    advantage: [Element.Water],
     description:
       "A stoic spirit of nature. If you look closely, you can find it tailing far behind you as you walk the forest trails.",
+    disadvantage: [Element.Wind],
     element: [Element.Earth],
     id: "meadowisp",
     moves: [Move.Blossom],
@@ -539,8 +608,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   cherubud: {
+    advantage: [Element.Water],
+    ascends: 20,
     description:
       "It has a serene nature and captivating aroma that will bring peace to anyone in its presence.",
+    disadvantage: [Element.Dark, Element.Wind],
     element: [Element.Earth, Element.Light],
     id: "cherubud",
     moves: [Move.Flower, Move.Gleam],
@@ -558,8 +630,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   angelily: {
+    advantage: [Element.Water],
     description:
       "Its many faces resemble flowers that radiate a pure and heavenly aura. Culturally, it symbolizes a return to happiness.",
+    disadvantage: [Element.Dark, Element.Wind],
     element: [Element.Earth, Element.Light],
     id: "angelily",
     moves: [Move.Blossom, Move.Starfall],
@@ -577,8 +651,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   sproutide: {
+    advantage: [Element.Fire, Element.Water],
+    ascends: 20,
     description:
       "A playful dragon hatchling born from a river, embodying the energy of nature.",
+    disadvantage: [Element.Wind],
     element: [Element.Earth, Element.Water],
     id: "sproutide",
     moves: [Move.Flower, Move.Drench],
@@ -596,8 +673,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   floriver: {
+    advantage: [Element.Fire, Element.Water],
     description:
       "A revered deity of the river. It manipulates the flow of water where it swims, growing lily pads in its wake.",
+    disadvantage: [Element.Wind],
     element: [Element.Earth, Element.Water],
     id: "floriver",
     moves: [Move.Blossom, Move.Cascade],
@@ -615,8 +694,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   windeed: {
+    advantage: [Element.Earth, Element.Water],
+    ascends: 20,
     description:
       "It hides among planted beetroots, zipping into the sky before it is picked.",
+    disadvantage: [Element.Fire],
     element: [Element.Earth, Element.Wind],
     id: "windeed",
     moves: [Move.Flower, Move.Gust],
@@ -634,8 +716,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   zephyroot: {
+    advantage: [Element.Earth, Element.Water],
     description:
       "A spring festival celebrates the migration of Zephyroot. They carry themselves on the air with a fan of leaves.",
+    disadvantage: [Element.Fire],
     element: [Element.Earth, Element.Wind],
     id: "zephyroot",
     moves: [Move.Blossom, Move.Tornado],
@@ -653,8 +737,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   flitten: {
+    advantage: [],
+    ascends: 20,
     description:
       "It's known for its mischievous, playful nature. It manipulates your dreams, hoping to be fed when you wake.",
+    disadvantage: [Element.Dark],
     element: [Element.Light],
     id: "flitten",
     moves: [Move.Gleam],
@@ -672,8 +759,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   glimmew: {
+    advantage: [],
     description:
       "Nocturnal, its luminescent fur glimmers in the moonlight, charming opponents with its graceful movements.",
+    disadvantage: [Element.Dark],
     element: [Element.Light],
     id: "glimmew",
     moves: [Move.Starfall],
@@ -691,8 +780,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   silten: {
+    advantage: [Element.Fire],
+    ascends: 10,
     description:
       "It posesses a protective shell that provides for it remarkable resilience and adaptability.",
+    disadvantage: [Element.Dark, Element.Earth],
     element: [Element.Light, Element.Water],
     id: "silten",
     moves: [Move.Twinkle, Move.Soak],
@@ -710,8 +802,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   boglow: {
+    advantage: [Element.Fire],
+    ascends: 20,
     description:
       "A tiny luminescent creature with a resilient body. It thrives in extreme aquatic environments.",
+    disadvantage: [Element.Dark, Element.Earth],
     element: [Element.Light, Element.Water],
     id: "boglow",
     moves: [Move.Gleam, Move.Drench],
@@ -730,8 +825,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   gleamoss: {
+    advantage: [Element.Fire],
     description:
       "Its shimmering moss-like exterior grants it the ability to regenerate and endure harsh environments. It is not visible to the naked eye.",
+    disadvantage: [Element.Dark, Element.Earth],
     element: [Element.Light, Element.Water],
     id: "gleamoss",
     moves: [Move.Starfall, Move.Cascade],
@@ -749,8 +846,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   amazwing: {
+    advantage: [Element.Earth],
+    ascends: 10,
     description:
       "Tales of cupid can usually be attributed to Amazwing. It spreads love and joy as it flies.",
+    disadvantage: [Element.Dark, Element.Fire],
     element: [Element.Light, Element.Wind],
     id: "amazwing",
     moves: [Move.Twinkle, Move.Breeze],
@@ -768,8 +868,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   featherall: {
+    advantage: [Element.Earth],
+    ascends: 20,
     description:
       "It enchants the hearts of those it pierces with its tail feathers.",
+    disadvantage: [Element.Dark, Element.Fire],
     element: [Element.Light, Element.Wind],
     id: "featherall",
     moves: [Move.Gleam, Move.Gust],
@@ -788,8 +891,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   enchantalon: {
+    advantage: [Element.Earth],
     description:
       "It is a graceful and affectionate parter, but it lulls its enemies into a false sense of security with its enchanting melodies.",
+    disadvantage: [Element.Dark, Element.Fire],
     element: [Element.Light, Element.Wind],
     id: "enchantalon",
     moves: [Move.Starfall, Move.Tornado],
@@ -807,8 +912,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   luxureef: {
+    advantage: [Element.Fire],
+    ascends: 20,
     description:
       "Vibrant coral climbs its body. It is capable of producing captivating displays of bioluminescence.",
+    disadvantage: [Element.Earth],
     element: [Element.Water],
     id: "luxureef",
     moves: [Move.Drench],
@@ -826,8 +934,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   coraluxe: {
+    advantage: [Element.Fire],
     description:
       "It can manipulate the flow of water currents, which often results in conflict with Floriver. Whirlpools form where they clash.",
+    disadvantage: [Element.Earth],
     element: [Element.Water],
     id: "coraluxe",
     moves: [Move.Cascade],
@@ -845,8 +955,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   galephin: {
+    advantage: [Element.Earth, Element.Fire],
+    ascends: 20,
     description:
       "Its sleek dolphin-like body allows it to soar through the sky. Funnel clouds form in its trail.",
+    disadvantage: [],
     element: [Element.Water, Element.Wind],
     id: "galephin",
     moves: [Move.Drench, Move.Gust],
@@ -864,8 +977,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   typhorca: {
+    advantage: [Element.Earth, Element.Fire],
     description:
       "Gliding through the air with agility, it uses its windswept tail to create powerful gusts and summon storms at sea.",
+    disadvantage: [],
     element: [Element.Water, Element.Wind],
     id: "typhorca",
     moves: [Move.Cascade, Move.Tornado],
@@ -883,8 +998,11 @@ export const buds: Record<string, Bud> = {
     },
   },
   lopilot: {
+    advantage: [Element.Earth],
+    ascends: 20,
     description:
       "Its large ears allow it to effortlessly navigate the winds. Lost travelers are guided by Lopilot to safety.",
+    disadvantage: [Element.Fire],
     element: [Element.Wind],
     id: "lopilot",
     moves: [Move.Gust],
@@ -902,8 +1020,10 @@ export const buds: Record<string, Bud> = {
     },
   },
   aviare: {
+    advantage: [Element.Earth],
     description:
       "A skilled pilot of the skies, it is rare to see Aviare on solid ground. Its fur has evolved to resemble fluffy clouds.",
+    disadvantage: [Element.Fire],
     element: [Element.Wind],
     id: "aviare",
     moves: [Move.Tornado],
