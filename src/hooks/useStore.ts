@@ -13,6 +13,7 @@ export type Store = {
   battleType: BattleType;
   duration: number;
   ended: boolean;
+  events: [];
   phase: Phase;
   phases: Phases;
   player: Player | null;
@@ -28,13 +29,14 @@ export const useStore = create<Store>((set) => ({
   battleType: BattleType.Four,
   duration: 0,
   ended: false,
+  events: [],
   phase: Phase.Train,
   phases: {},
   player: null,
   players: {},
   ready: false,
   setGame: ({
-    game: { duration, ended, phase, phases, players: allPlayers },
+    game: { duration, ended, events, phase, phases, players: allPlayers },
     yourPlayerId = "",
   }) =>
     set(
@@ -42,6 +44,7 @@ export const useStore = create<Store>((set) => ({
         const { [yourPlayerId]: player, ...players } = allPlayers;
         state.duration = duration;
         state.ended = ended;
+        state.events = events;
         state.phase = phase;
         state.phases = phases;
         state.player = player;

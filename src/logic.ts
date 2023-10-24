@@ -8,6 +8,7 @@ import {
   Buds,
   Bud,
   CurrentBuds,
+  GameState,
 } from "./types";
 import { getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
@@ -18,6 +19,12 @@ import { moves } from "./data/moves";
 
 const baseXp = 300;
 const maxLevel = 100;
+const eventCount = 10;
+
+const setEvent = ({ event, game }: { event: string; game: GameState }) => {
+  if (game.events.length === eventCount) game.events.shift();
+  game.events.push(event);
+};
 
 // everyone gets a set amount of points/money
 // shop to buy things for your creatures/buy creatures
@@ -74,11 +81,12 @@ const getReducedCooldowns = (
 
 Rune.initLogic({
   minPlayers: 2,
-  maxPlayers: 2,
+  maxPlayers: 4,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
     ended: false,
+    events: [],
     phase: Phase.Train,
     phases: {
       [Phase.Battle]: 60 * 3 * 1000, // 3 mins
@@ -123,7 +131,8 @@ Rune.initLogic({
     train: (_, { game }) => {
       game.phase = Phase.Train;
     },
-    ascend: ({ id }, { game: { players } }) => {
+    ascend: ({ id }, { game }) => {
+      const { players } = game;
       const player = players[id];
 
       const [bud] = player.buds;
@@ -150,6 +159,11 @@ Rune.initLogic({
 
       player.buds[0] = nextBud;
       player.cooldowns = {};
+
+      setEvent({
+        event: `${bud.name} ascended to ${nextBud.name}!`,
+        game,
+      });
     },
     switch: ({ id }, { game: { players } }) => {
       const player = players[id];
@@ -256,17 +270,20 @@ Rune.initLogic({
         const rival = players[target];
         if (!rival.buds.length) return;
 
-        const [{ advantage, disadvantage, stats: rivalStats }] = rival.buds;
+        const [rivalBud] = rival.buds;
+        const { advantage, disadvantage, stats: rivalStats } = rivalBud;
         const { hp: rivalHp = 1, defense: rivalDefense } = rivalStats;
         const { attack: baseAttack } = budStats;
 
-        const { element } = moves[move];
+        const { element, label: moveName } = moves[move];
         const resist = advantage.includes(element);
         const weak = disadvantage.includes(element);
 
         let attack = baseAttack;
         if (resist) attack *= 0.5;
         if (weak) attack *= 2;
+
+        // critical hit
 
         const damage = Math.ceil(
           attack >= rivalDefense
@@ -275,6 +292,20 @@ Rune.initLogic({
         );
 
         rivalStats.hp = rivalHp - damage;
+
+        const event = [
+          `${bud.name} used ${moveName} on ${rivalBud.name}!`,
+          resist && "It's ineffective...",
+          weak && "It's effective!",
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        setEvent({
+          event,
+          game,
+        });
+
         return;
       };
 

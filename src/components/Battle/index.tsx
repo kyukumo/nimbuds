@@ -26,6 +26,8 @@ export function Battle() {
   const stats = useStore(selectActiveBudStats);
   const { level, hp } = stats ?? {};
 
+  console.log(rivalActiveBuds);
+
   return (
     <main className={styles.battle}>
       <header>

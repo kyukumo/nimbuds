@@ -1,0 +1,12 @@
+.events {
+  align-items: flex-end;
+  display: flex;
+  max-height: 10vh;
+  overflow: hidden;
+
+  & ul {
+    font-size: 0.65em;
+    list-style: none;
+    padding: 0;
+  }
+}

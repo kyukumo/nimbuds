@@ -1,0 +1,6 @@
+.button {
+  & canvas {
+    height: 3em;
+    width: auto;
+  }
+}

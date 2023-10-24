@@ -126,6 +126,7 @@ export interface GameState {
   battleType: BattleType;
   duration: number;
   ended: boolean;
+  events: string[];
   phase: Phase;
   phases: Phases;
   players: Players;

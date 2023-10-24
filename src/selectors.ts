@@ -2,6 +2,8 @@ import { moves } from "./data/moves";
 import { Store } from "./hooks/useStore";
 import { Bud, Move, Phase, Player } from "./types";
 
+export const selectEvents = (state: Store) => state.events;
+
 export const selectReady = (state: Store) => state.ready;
 
 export const selectPlayer = (state: Store) => state.player;

@@ -14,7 +14,7 @@ const draw = ({
   sprites,
 }: {
   animate: boolean;
-  bud: Bud | null;
+  bud?: Bud | null;
   canvas: HTMLCanvasElement | null;
   sprites: HTMLImageElement;
 }) => {
@@ -48,7 +48,7 @@ const draw = ({
   return;
 };
 
-export function SubBudCanvas({ bud }: { bud: Bud }) {
+export function SubBudCanvas({ bud }: { bud?: Bud }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const spritesRef = useRef<HTMLImageElement>(new Image());
 
