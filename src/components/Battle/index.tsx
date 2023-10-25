@@ -13,20 +13,11 @@ import { Switch } from "../Switch";
 import { Rival } from "../Rival";
 import { HitPoints } from "../HitPoints";
 
-const label = {
-  [BattleType.Four]: "4v4",
-  [BattleType.Three]: "3v1",
-  [BattleType.Two]: "2v2",
-};
-
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
-  const battleType = useStore(selectBattleType);
   const rivalActiveBuds = useStore(selectRivalActiveBuds);
   const stats = useStore(selectActiveBudStats);
   const { level, hp } = stats ?? {};
-
-  console.log(rivalActiveBuds);
 
   return (
     <main className={styles.battle}>
@@ -35,8 +26,6 @@ export function Battle() {
       </header>
 
       <section>
-        <p>{label[battleType]}</p>
-
         <fieldset className={styles.fieldset}>
           <legend>Choose a Target</legend>
 

@@ -1,6 +1,20 @@
-.button {
-  & canvas {
-    height: 3em;
-    width: auto;
+.players {
+  & li {
+    border-color: var(--black);
+    border-style: solid;
+    border-width: 0;
+
+    &:not(:last-of-type) {
+      border-right-width: 1px;
+    }
+
+    & .button {
+      padding: 0;
+
+      & canvas {
+        height: 3em;
+        width: auto;
+      }
+    }
   }
 }

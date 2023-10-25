@@ -1,6 +1,7 @@
 import { RandomEvent } from "../RandomEvent";
 import {
   selectActiveBudDescription,
+  selectActiveBudElements,
   selectActiveBudName,
   selectCanActiveBudAscend,
   selectPlayerId,
@@ -21,62 +22,68 @@ export function Train() {
   const id = useStore(selectPlayerId);
   const name = useStore(selectActiveBudName);
   const phaseDuration = useStore(selectTrainPhaseDuration);
+  const elements = useStore(selectActiveBudElements);
 
   return (
     <>
       <main className={styles.train}>
+        <div
+          aria-hidden
+          className={[styles.background, elements?.join("-")].join(" ")}
+        />
+
         <header>
-          <Timer time={phaseDuration} />
           <h1 className="sr-only">Train!</h1>
 
-          <div>
-            <dl>
-              <dt className="sr-only">Name:</dt>
-              <dd>{name}</dd>
-            </dl>
+          <div className={styles.heading}>
+            <div>
+              <span className={styles.type} id="bud-description">
+                Basic Nimbud
+              </span>
+
+              <dl aria-describedby="bud-description">
+                <dt className="sr-only">Name:</dt>
+                <dd>{name}</dd>
+              </dl>
+            </div>
 
             <MainElementCanvas />
           </div>
         </header>
 
-        <div className="content">
-          <section className={styles.window}>
-            <MainBudCanvas />
+        <section className={styles.window}>
+          <MainBudCanvas />
 
-            <div className={styles.events}>
-              <RandomEvent />
-            </div>
-          </section>
+          <div className={styles.actions}>
+            <span></span>
+            <span></span>
 
-          <nav>
-            <Attacks />
+            <Switch />
 
-            <ul>
-              <li>
-                <Switch />
-              </li>
+            <button
+              className={styles.ascend}
+              disabled={!canAscend}
+              onClick={() =>
+                Rune.actions.ascend({
+                  id,
+                })
+              }
+              type="button"
+            >
+              Ascend!
+            </button>
+          </div>
 
-              {canAscend && (
-                <li>
-                  <button
-                    onClick={() =>
-                      Rune.actions.ascend({
-                        id,
-                      })
-                    }
-                    type="button"
-                  >
-                    Ascend!
-                  </button>
-                </li>
-              )}
-            </ul>
+          <Timer time={phaseDuration} />
+        </section>
 
-            <PlayerButtons />
-          </nav>
+        <Attacks />
+
+        <footer>
+          <PlayerButtons />
 
           {description && <p className={styles.description}>{description}</p>}
-        </div>
+        </footer>
       </main>
     </>
   );

@@ -1,6 +1,7 @@
 import { buds, starters } from "../data/buds";
-import { Buds } from "../types";
+import { Bud, Buds } from "../types";
 import { getHp } from "./getHp";
+import { getRandomNumber } from "./getRandomNumber";
 import { getUniqueRandomNumbers } from "./getUniqueRandomNumbers";
 
 const getBud = (index: number) => {
@@ -15,7 +16,13 @@ const getBud = (index: number) => {
       level: 1,
       xp: 0,
     },
-  };
+  } as Bud;
+};
+
+export const getRandomBud = () => {
+  const index = getRandomNumber(0, starters.length - 1);
+  const bud = getBud(index);
+  return bud;
 };
 
 const getRandomBuds = (count = 3) => {

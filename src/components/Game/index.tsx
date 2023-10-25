@@ -9,7 +9,6 @@ import {
 } from "../../selectors";
 import { Phase } from "../../types";
 import { Battle } from "../Battle";
-import { Events } from "../Events";
 import { Spectate } from "../Spectate";
 import { Train } from "../Train";
 import styles from "./index.module.css";
@@ -38,8 +37,6 @@ export function Game() {
 
   return (
     <>
-      <Events />
-
       <button className={styles.phase} onClick={changePhase} type="button">
         Phase!
       </button>

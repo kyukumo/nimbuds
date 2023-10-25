@@ -10,7 +10,7 @@ import {
   CurrentBuds,
   GameState,
 } from "./types";
-import { getStarterBuds } from "./lib/getStarterBuds";
+import { getRandomBud, getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
 import { getRandomNumber } from "./lib/getRandomNumber";
 import { buds } from "./data/buds";
@@ -20,6 +20,7 @@ import { moves } from "./data/moves";
 const baseXp = 300;
 const maxLevel = 100;
 const eventCount = 10;
+const maxBuds = 3;
 
 const setEvent = ({ event, game }: { event: string; game: GameState }) => {
   if (game.events.length === eventCount) game.events.shift();
@@ -210,6 +211,7 @@ Rune.initLogic({
         const targetIndex = nextPlayerId >= playerIds.length ? 0 : nextPlayerId;
         const target = playerIds[targetIndex];
         player.target = target;
+        player.cooldowns = {};
       };
 
       playerIds.forEach(setPlayerForBattle);
@@ -218,10 +220,15 @@ Rune.initLogic({
     const setRandomEvent = (id: string) => {
       const player = players[id];
       player.lastEvent = duration;
+
+      if (player.buds.length < maxBuds) {
+        const nextBud = getRandomBud();
+        player.buds = [...player.buds, nextBud] as Buds;
+      }
     };
 
     const tryRandomEvent = (id: string) => {
-      const randomDelay = getRandomNumber(15, 120);
+      const randomDelay = getRandomNumber(60000, 120000);
       const player = players[id];
       const { lastEvent } = player;
       const elapsedTime = duration - lastEvent;
@@ -279,11 +286,14 @@ Rune.initLogic({
         const resist = advantage.includes(element);
         const weak = disadvantage.includes(element);
 
+        const chance = getRandomNumber(0, 255);
+        const threshold = getRandomNumber(0, 2);
+        const critical = chance <= threshold;
+
         let attack = baseAttack;
         if (resist) attack *= 0.5;
         if (weak) attack *= 2;
-
-        // critical hit
+        if (critical) attack *= 1.5;
 
         const damage = Math.ceil(
           attack >= rivalDefense
@@ -295,6 +305,7 @@ Rune.initLogic({
 
         const event = [
           `${bud.name} used ${moveName} on ${rivalBud.name}!`,
+          critical && "Critical hit!",
           resist && "It's ineffective...",
           weak && "It's effective!",
         ]

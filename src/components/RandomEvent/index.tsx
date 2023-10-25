@@ -9,6 +9,7 @@ export function RandomEvent() {
   const lastEvent = useStore(selectLastEvent);
 
   useVisibleOnChange({
+    defaultValue: 0,
     ref,
     value: lastEvent,
   });
@@ -16,6 +17,9 @@ export function RandomEvent() {
   return (
     <p
       className={styles.event}
+      style={{
+        visibility: "hidden",
+      }}
       {...{
         ref,
       }}

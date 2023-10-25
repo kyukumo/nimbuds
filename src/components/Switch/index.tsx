@@ -4,6 +4,7 @@ import {
   selectHasCooldown,
   selectPlayerId,
 } from "../../selectors";
+import styles from "./index.module.css";
 
 export function Switch() {
   const id = useStore(selectPlayerId);
@@ -16,10 +17,13 @@ export function Switch() {
     });
 
   return (
-    canSwitch && (
-      <button disabled={hasCooldown} onClick={onClick} type="button">
-        Switch
-      </button>
-    )
+    <button
+      className={styles.button}
+      disabled={hasCooldown || !canSwitch}
+      onClick={onClick}
+      type="button"
+    >
+      Switch
+    </button>
   );
 }

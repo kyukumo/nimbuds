@@ -7,62 +7,6 @@
   font-display: swap;
 }
 
-.sr-only {
-  -webkit-clip-path: inset(50%) !important;
-  border: 0 !important;
-  clip-path: inset(50%) !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  white-space: nowrap !important;
-  width: 1px !important;
-}
-
-.sr-only-focusable:focus,
-.sr-only-focusable:active {
-  -webkit-clip-path: none !important;
-  clip-path: none !important;
-  clip: auto !important;
-  height: auto !important;
-  margin: auto !important;
-  overflow: visible !important;
-  white-space: normal !important;
-  width: auto !important;
-}
-
-body,
-html,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: cursive;
-  overflow: hidden;
-}
-
-canvas {
-  background-color: transparent;
-  image-rendering: pixelated;
-}
-
-main {
-  aspect-ratio: 9/16;
-  display: grid;
-  font-size: max(3vh, 1rem);
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  height: 100%;
-  line-height: 1.2;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
 :root {
   --fire: #ff4200;
   --wind: #9394fe;
@@ -70,6 +14,9 @@ main {
   --water: #64a5ff;
   --light: #ffff00;
   --dark: #a5a5a5;
+
+  --black: #00000075;
+  --gray: #00000025;
 
   --green: var(--earth);
   --yellow: var(--light);
@@ -134,4 +81,337 @@ main {
   --water-wind-1: #6fa1ff;
   --water-wind-2: #7b9dff;
   --water-wind-3: #8799ff;
+}
+
+.sr-only {
+  -webkit-clip-path: inset(50%) !important;
+  border: 0 !important;
+  clip-path: inset(50%) !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  clip: auto !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  width: auto !important;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+* {
+  font-family: cursive;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+  padding: 1em;
+}
+
+canvas {
+  background-color: transparent;
+  image-rendering: pixelated;
+}
+
+main {
+  aspect-ratio: 9/16;
+  border-radius: 1em;
+  box-shadow: inset 0 0 0 1em var(--yellow);
+  box-sizing: border-box;
+  font-size: max(3vh, 1rem);
+  line-height: 1.2;
+  margin: 0 auto;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 1.5em 2em;
+}
+
+/* backgrounds */
+
+.dark {
+  background-color: var(--dark);
+}
+
+.dark-fire {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-fire-1) 20%,
+    var(--dark-fire-1) 40%,
+    var(--dark-fire-2) 40%,
+    var(--dark-fire-2) 60%,
+    var(--dark-fire-3) 60%,
+    var(--dark-fire-3) 80%,
+    var(--fire) 80%,
+    var(--fire) 100%
+  );
+}
+
+.dark-earth {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-earth-1) 20%,
+    var(--dark-earth-1) 40%,
+    var(--dark-earth-2) 40%,
+    var(--dark-earth-2) 60%,
+    var(--dark-earth-3) 60%,
+    var(--dark-earth-3) 80%,
+    var(--earth) 80%,
+    var(--earth) 100%
+  );
+}
+
+.dark-light {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-light-1) 20%,
+    var(--dark-light-1) 40%,
+    var(--dark-light-2) 40%,
+    var(--dark-light-2) 60%,
+    var(--dark-light-3) 60%,
+    var(--dark-light-3) 80%,
+    var(--light) 80%,
+    var(--light) 100%
+  );
+}
+
+.dark-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-water-1) 20%,
+    var(--dark-water-1) 40%,
+    var(--dark-water-2) 40%,
+    var(--dark-water-2) 60%,
+    var(--dark-water-3) 60%,
+    var(--dark-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.dark-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dark) 0%,
+    var(--dark) 20%,
+    var(--dark-wind-1) 20%,
+    var(--dark-wind-1) 40%,
+    var(--dark-wind-2) 40%,
+    var(--dark-wind-2) 60%,
+    var(--dark-wind-3) 60%,
+    var(--dark-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.fire {
+  background-color: var(--fire);
+}
+
+.earth-fire {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-fire-1) 20%,
+    var(--earth-fire-1) 40%,
+    var(--earth-fire-2) 40%,
+    var(--earth-fire-2) 60%,
+    var(--earth-fire-3) 60%,
+    var(--earth-fire-3) 80%,
+    var(--fire) 80%,
+    var(--fire) 100%
+  );
+}
+
+.fire-light {
+  background-image: linear-gradient(
+    to bottom,
+    var(--fire) 0%,
+    var(--fire) 20%,
+    var(--fire-light-1) 20%,
+    var(--fire-light-1) 40%,
+    var(--fire-light-2) 40%,
+    var(--fire-light-2) 60%,
+    var(--fire-light-3) 60%,
+    var(--fire-light-3) 80%,
+    var(--light) 80%,
+    var(--light) 100%
+  );
+}
+
+.fire-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--fire) 0%,
+    var(--fire) 20%,
+    var(--fire-water-1) 20%,
+    var(--fire-water-1) 40%,
+    var(--fire-water-2) 40%,
+    var(--fire-water-2) 60%,
+    var(--fire-water-3) 60%,
+    var(--fire-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.fire-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--fire) 0%,
+    var(--fire) 20%,
+    var(--fire-wind-1) 20%,
+    var(--fire-wind-1) 40%,
+    var(--fire-wind-2) 40%,
+    var(--fire-wind-2) 60%,
+    var(--fire-wind-3) 60%,
+    var(--fire-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.earth {
+  background-color: var(--earth);
+}
+
+.earth-light {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-light-1) 20%,
+    var(--earth-light-1) 40%,
+    var(--earth-light-2) 40%,
+    var(--earth-light-2) 60%,
+    var(--earth-light-3) 60%,
+    var(--earth-light-3) 80%,
+    var(--light) 80%,
+    var(--light) 100%
+  );
+}
+
+.earth-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-water-1) 20%,
+    var(--earth-water-1) 40%,
+    var(--earth-water-2) 40%,
+    var(--earth-water-2) 60%,
+    var(--earth-water-3) 60%,
+    var(--earth-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.earth-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--earth) 0%,
+    var(--earth) 20%,
+    var(--earth-wind-1) 20%,
+    var(--earth-wind-1) 40%,
+    var(--earth-wind-2) 40%,
+    var(--earth-wind-2) 60%,
+    var(--earth-wind-3) 60%,
+    var(--earth-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.light {
+  background-color: var(--light);
+}
+
+.light-water {
+  background-image: linear-gradient(
+    to bottom,
+    var(--light) 0%,
+    var(--light) 20%,
+    var(--light-water-1) 20%,
+    var(--light-water-1) 40%,
+    var(--light-water-2) 40%,
+    var(--light-water-2) 60%,
+    var(--light-water-3) 60%,
+    var(--light-water-3) 80%,
+    var(--water) 80%,
+    var(--water) 100%
+  );
+}
+
+.light-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--light) 0%,
+    var(--light) 20%,
+    var(--light-wind-1) 20%,
+    var(--light-wind-1) 40%,
+    var(--light-wind-2) 40%,
+    var(--light-wind-2) 60%,
+    var(--light-wind-3) 60%,
+    var(--light-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.water {
+  background-color: var(--water);
+}
+
+.water-wind {
+  background-image: linear-gradient(
+    to bottom,
+    var(--water) 0%,
+    var(--water) 20%,
+    var(--water-wind-1) 20%,
+    var(--water-wind-1) 40%,
+    var(--water-wind-2) 40%,
+    var(--water-wind-2) 60%,
+    var(--water-wind-3) 60%,
+    var(--water-wind-3) 80%,
+    var(--wind) 80%,
+    var(--wind) 100%
+  );
+}
+
+.wind {
+  background-color: var(--wind);
 }
