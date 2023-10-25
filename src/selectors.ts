@@ -160,22 +160,21 @@ interface RivalBud extends Bud {
   playerId: string;
 }
 
+const hasBuds = ({ buds: { length } }: Player) => Boolean(length);
+
 export const selectRivalActiveBuds = (state: Store) => {
   const rivals = selectRivals(state);
 
-  return rivals.reduce<RivalBud[]>(
-    (a, { buds: [bud], id }) =>
-      bud
-        ? [
-            ...a,
-            {
-              ...bud,
-              playerId: id,
-            },
-          ]
-        : [],
-    []
-  );
+  const getRivalBuds = (a: RivalBud[], { buds: [bud], id }: Player) => [
+    ...a,
+    {
+      ...bud,
+      playerId: id,
+    } as RivalBud,
+  ];
+
+  const rivalBuds = rivals.filter(hasBuds).reduce<RivalBud[]>(getRivalBuds, []);
+  return rivalBuds;
 };
 
 export const selectActiveBuds = (state: Store) => {
