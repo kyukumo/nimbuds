@@ -17,7 +17,7 @@ import { buds } from "./data/buds";
 import { getHp } from "./lib/getHp";
 import { moves } from "./data/moves";
 
-const baseXp = 300;
+const baseXp = 1;
 const maxLevel = 100;
 const eventCount = 10;
 const maxBuds = 3;
@@ -253,6 +253,7 @@ Rune.initLogic({
         const [
           {
             moves: { length },
+            name,
             stats,
           },
         ] = player.buds;
@@ -260,8 +261,18 @@ Rune.initLogic({
         const { level = 1, xp = 0 } = stats;
         stats.xp = xp + baseXp * (1 / length);
         const levelUpXP = Math.ceil((level * 2 - 1) * 1.2);
-        if (stats.xp >= levelUpXP) stats.level = level + 1;
-        stats.hp = getHp(stats.level);
+
+        console.log(stats.xp >= levelUpXP, stats.xp, levelUpXP);
+        if (stats.xp >= levelUpXP) {
+          stats.level = level + 1;
+          stats.hp = getHp(stats.level);
+
+          setEvent({
+            event: `${name} leveled up to ${stats.level}!`,
+            game,
+          });
+        }
+
         return;
       };
 

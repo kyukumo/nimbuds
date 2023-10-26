@@ -12,6 +12,7 @@ import styles from "./index.module.css";
 import { Switch } from "../Switch";
 import { Rival } from "../Rival";
 import { HitPoints } from "../HitPoints";
+import { Events } from "../Events";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
@@ -61,6 +62,8 @@ export function Battle() {
           <Switch />
         </nav>
       </section>
+
+      <Events />
     </main>
   );
 }

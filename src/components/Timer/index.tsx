@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { selectDuration } from "../../selectors";
 import { useStore } from "../../hooks/useStore";
+import styles from "./index.module.css";
 
 enum Live {
   Assertive = "assertive",
@@ -41,11 +42,12 @@ export function Timer({ time }: { time: number }) {
     <div
       aria-live={live}
       aria-atomic="true"
+      className={styles.timer}
       {...{
         role,
       }}
     >
-      {new Date(timeLeft).toISOString().slice(14, 19)}
+      {new Date(timeLeft).toISOString().slice(14, 19)} until battle!
     </div>
   );
 }

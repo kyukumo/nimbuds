@@ -15,6 +15,7 @@ import { PlayerButtons } from "../PlayerButtons";
 import styles from "./index.module.css";
 import { Switch } from "../Switch";
 import { Timer } from "../Timer";
+import { Events } from "../Events";
 
 export function Train() {
   const canAscend = useStore(selectCanActiveBudAscend);
@@ -36,28 +37,20 @@ export function Train() {
           <h1 className="sr-only">Train!</h1>
 
           <div className={styles.heading}>
-            <div>
-              <span className={styles.type} id="bud-description">
-                Basic Nimbud
-              </span>
-
-              <dl aria-describedby="bud-description">
-                <dt className="sr-only">Name:</dt>
-                <dd>{name}</dd>
-              </dl>
-            </div>
+            <dl aria-describedby="bud-description">
+              <dt className="sr-only">Name:</dt>
+              <dd>{name}</dd>
+            </dl>
 
             <MainElementCanvas />
           </div>
         </header>
 
-        <section className={styles.window}>
-          <MainBudCanvas />
+        <MainBudCanvas />
+        <Timer time={phaseDuration} />
 
-          <div className={styles.actions}>
-            <span></span>
-            <span></span>
-
+        <div>
+          <nav className={styles.actions}>
             <Switch />
 
             <button
@@ -72,12 +65,12 @@ export function Train() {
             >
               Ascend!
             </button>
-          </div>
+          </nav>
 
-          <Timer time={phaseDuration} />
-        </section>
+          <Attacks />
+        </div>
 
-        <Attacks />
+        <Events />
 
         <footer>
           <PlayerButtons />

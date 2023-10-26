@@ -23,7 +23,7 @@ const draw = ({
   if (!canvas || !bud) return;
 
   const width = window.innerWidth;
-  const height = width * 0.7;
+  const height = width;
 
   canvas.height = height;
   canvas.width = width;
@@ -38,7 +38,7 @@ const draw = ({
     tile: { x, y },
   } = bud;
 
-  const size = canvas.width / 3;
+  const size = canvas.width;
   const isReducedMotionPreferred = getIsReducedMotionPreferred();
   const bop = !isReducedMotionPreferred && animate ? y + block : y;
 

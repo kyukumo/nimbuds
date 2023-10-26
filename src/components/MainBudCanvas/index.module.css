@@ -1,4 +1,4 @@
 .canvas {
-  aspect-ratio: 10 / 7;
-  width: 100%;
+  max-height: 20dvh;
+  margin: 0 auto;
 }

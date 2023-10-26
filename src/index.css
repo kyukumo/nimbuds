@@ -122,14 +122,12 @@ body {
 }
 
 * {
-  font-family: cursive;
+  font-family: monospace;
 }
 
 button {
-  background-color: transparent;
-  border: 0;
   font-size: 1em;
-  padding: 1em;
+  padding: 0.65em;
 }
 
 canvas {
@@ -138,16 +136,16 @@ canvas {
 }
 
 main {
-  aspect-ratio: 9/16;
-  border-radius: 1em;
-  box-shadow: inset 0 0 0 1em var(--yellow);
+  -webkit-font-smoothing: none;
   box-sizing: border-box;
   font-size: max(3vh, 1rem);
-  line-height: 1.2;
+  font-smooth: never;
+  height: 100dvh;
+  line-height: 1;
   margin: 0 auto;
-  max-height: 100%;
   overflow: hidden;
-  padding: 1.5em 2em;
+  padding: 0.5em;
+  width: 100vw;
 }
 
 /* backgrounds */
