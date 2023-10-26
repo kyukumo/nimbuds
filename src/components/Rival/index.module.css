@@ -13,6 +13,11 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     justify-items: center;
+    width: 100%;
+
+    & canvas {
+      padding: 1em;
+    }
 
     > * {
       grid-column-start: 1;

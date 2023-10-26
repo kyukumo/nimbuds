@@ -1,6 +1,8 @@
 .dialog {
+  box-sizing: border-box;
   inset-block-start: unset;
   max-width: unset;
+  padding: 1em;
   width: 100%;
 
   &::backdrop {

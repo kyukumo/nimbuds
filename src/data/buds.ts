@@ -180,7 +180,7 @@ export const buds: Record<string, Bud> = {
     advantage: [],
     ascends: 20,
     description:
-      "The few who have witnessed its otherworldly aura have professed conflicting feelings of curiosity and trepidation.",
+      "Few have witnessed its otherworldly aura, professing conflicting feelings of curiosity and trepidation.",
     disadvantage: [Element.Dark, Element.Light],
     element: [Element.Dark, Element.Light],
     id: "voidixie",

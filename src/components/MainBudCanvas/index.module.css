@@ -1,4 +1,5 @@
 .canvas {
-  max-height: 20dvh;
+  max-height: 18dvh;
+  max-width: 100%;
   margin: 0 auto;
 }

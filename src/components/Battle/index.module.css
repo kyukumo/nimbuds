@@ -1,46 +1,77 @@
 .battle {
-  & button {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+    padding: 1em;
+  }
+
+  & h1 {
+    font-size: 1em;
+    font-weight: bold;
   }
 
   & h1,
   & p {
     margin: 0;
   }
-}
 
-.fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-
-  &[disabled] {
-    opacity: 0.5;
+  & legend {
+    margin-block-end: 0.5em;
   }
 
-  & .buds {
-    display: grid;
+  & fieldset,
+  & form,
+  & nav,
+  .content {
+    display: flex;
+    flex-direction: column;
     gap: 0.5em;
-    grid-auto-flow: row;
-    grid-auto-rows: auto;
-    grid-template-columns: 1fr 1fr;
   }
 
-  /* TODO: merge with Rival */
-  & .bud {
-    align-items: start;
+  & form {
     display: grid;
+    flex: 1;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    justify-items: center;
-    opacity: 0.5;
+    grid-template-rows: 1fr auto;
+  }
 
-    > * {
-      grid-column-start: 1;
-      grid-row-start: 1;
+  & fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+
+    &[disabled] {
+      opacity: 0.5;
+    }
+
+    & .buds {
+      display: grid;
+      gap: 0.5em;
+      grid-auto-flow: row;
+      grid-auto-rows: auto;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* TODO: merge with Rival */
+    & .bud {
+      align-items: start;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      justify-items: center;
+      opacity: 0.5;
+      max-height: 10dvh;
+
+      > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+      }
+
+      & canvas {
+        padding: 1em;
+      }
     }
   }
 }

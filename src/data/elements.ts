@@ -1,7 +1,7 @@
 import { Element } from "../types";
 
 export const block = 5;
-export const scale = 4;
+export const scale = 5;
 
 export const size = block * scale;
 

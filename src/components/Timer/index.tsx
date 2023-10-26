@@ -38,6 +38,8 @@ export function Timer({ time }: { time: number }) {
     if (timeLeft === warningTime) setState(alert);
   }, [timeLeft, warningTime]);
 
+  const display = new Date(timeLeft).toISOString().slice(14, 19);
+
   return (
     <div
       aria-live={live}
@@ -47,7 +49,8 @@ export function Timer({ time }: { time: number }) {
         role,
       }}
     >
-      {new Date(timeLeft).toISOString().slice(14, 19)} until battle!
+      <span aria-hidden="true">{display}</span>
+      <span className="sr-only">{display} until battle!</span>
     </div>
   );
 }

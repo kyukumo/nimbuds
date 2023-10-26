@@ -22,48 +22,50 @@ export function Battle() {
 
   return (
     <main className={styles.battle}>
-      <header>
-        <h1>Battle!</h1>
-      </header>
+      <Events />
 
-      <section>
-        <fieldset className={styles.fieldset}>
-          <legend>Choose a Target</legend>
+      <div className={styles.content}>
+        <header>
+          <h1>Battle!</h1>
+        </header>
 
-          <div className={styles.buds}>
-            {activeBud && (
-              <div className={styles.bud}>
-                <HitPoints
-                  id="my-hp"
+        <form>
+          <fieldset>
+            <legend>Choose a Target</legend>
+
+            <div className={styles.buds}>
+              {activeBud && (
+                <div className={styles.bud}>
+                  <HitPoints
+                    id="my-hp"
+                    {...{
+                      hp,
+                      level,
+                    }}
+                  />
+
+                  <SubBudCanvas bud={activeBud} />
+                </div>
+              )}
+
+              {rivalActiveBuds.map(({ playerId, ...bud }) => (
+                <Rival
+                  key={`${playerId}-rival-bud`}
                   {...{
-                    hp,
-                    level,
+                    ...bud,
+                    playerId,
                   }}
                 />
+              ))}
+            </div>
+          </fieldset>
 
-                <SubBudCanvas bud={activeBud} />
-              </div>
-            )}
-
-            {rivalActiveBuds.map(({ playerId, ...bud }) => (
-              <Rival
-                key={`${playerId}-rival-bud`}
-                {...{
-                  ...bud,
-                  playerId,
-                }}
-              />
-            ))}
-          </div>
-        </fieldset>
-
-        <nav>
-          <Attacks />
-          <Switch />
-        </nav>
-      </section>
-
-      <Events />
+          <nav>
+            <Switch />
+            <Attacks />
+          </nav>
+        </form>
+      </div>
     </main>
   );
 }

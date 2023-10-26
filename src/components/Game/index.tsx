@@ -1,6 +1,7 @@
 import { useRuneClient } from "../../hooks/useRuneClient";
 import { useStore } from "../../hooks/useStore";
 import {
+  selectActiveBudElements,
   selectGameEnded,
   selectGameOver,
   selectIsSpectator,
@@ -16,11 +17,12 @@ import styles from "./index.module.css";
 export function Game() {
   useRuneClient();
 
+  const elements = useStore(selectActiveBudElements);
+  const ended = useStore(selectGameEnded);
   const gameOver = useStore(selectGameOver);
   const isSpectator = useStore(selectIsSpectator);
   const phase = useStore(selectPhase);
   const ready = useStore(selectReady);
-  const ended = useStore(selectGameEnded);
 
   const changePhase = () =>
     phase === Phase.Battle ? Rune.actions.train() : Rune.actions.battle();
@@ -37,6 +39,11 @@ export function Game() {
 
   return (
     <>
+      <div
+        aria-hidden
+        className={[styles.background, elements?.join("-")].join(" ")}
+      />
+
       <button className={styles.phase} onClick={changePhase} type="button">
         Phase!
       </button>

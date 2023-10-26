@@ -1,17 +1,28 @@
 .players {
   align-items: center;
-  display: flex;
+  gap: 0.5em;
   justify-content: center;
   list-style: none;
   padding: 0;
+
+  &,
+  & li {
+    display: flex;
+  }
 
   & li {
     border-color: var(--black);
     border-style: solid;
     border-width: 0;
 
+    &,
+    & button {
+      flex: 1;
+      max-width: 50dvw;
+    }
+
     & canvas {
-      height: 2em;
+      height: 1.5em;
       width: auto;
     }
   }

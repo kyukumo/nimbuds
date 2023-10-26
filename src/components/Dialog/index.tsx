@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { useDialogContext } from "./useDialogContext";
 import styles from "./index.module.css";
+import { createPortal } from "react-dom";
 
 export function Dialog({
   children,
@@ -34,7 +35,7 @@ export function Dialog({
     return;
   };
 
-  return (
+  return createPortal(
     <dialog className={styles.dialog} onClick={onDialogClick} ref={dialogRef}>
       <form method="dialog">
         <button onClick={close} type="submit">
@@ -44,6 +45,7 @@ export function Dialog({
       </form>
 
       {children}
-    </dialog>
+    </dialog>,
+    document.body
   );
 }

@@ -1,9 +1,16 @@
 .train {
-  display: grid;
-  gap: 0.5em;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   position: relative;
+
+  .content {
+    display: grid;
+    gap: 0.5em;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    height: 100%;
+    padding: 1em;
+  }
 
   & dd,
   & dl,
@@ -12,18 +19,28 @@
     padding: 0;
   }
 
+  & footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    .description {
+      font-size: 0.75em;
+      margin: 0;
+    }
+  }
+
   .actions {
     display: grid;
+    gap: 0.5em;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
   }
 
-  .background {
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-    opacity: 0.65;
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
 
   .heading {
@@ -33,15 +50,19 @@
     line-height: 1;
     justify-content: space-between;
   }
-}
 
-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  .window {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 
-  .description {
-    font-size: 0.75em;
-    margin: 0;
+    & > * {
+      grid-column-start: 1;
+      grid-row-start: 1;
+    }
+
+    .timer {
+      align-self: start;
+    }
   }
 }
