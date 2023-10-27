@@ -1,22 +1,18 @@
 import { useStore } from "../../hooks/useStore";
-import { getHp } from "../../lib/getHp";
 import { selectPlayerId, selectTarget } from "../../selectors";
 import { Bud } from "../../types";
-import { HitPoints } from "../HitPoints";
-import { SubBudCanvas } from "../SubBudCanvas";
+import { BattleBud } from "../BattleBud";
 import styles from "./index.module.css";
 
-type Props = Bud & {
+type Props = {
+  bud: Bud;
   playerId: string;
 };
 
-export function Rival({ playerId, ...bud }: Props) {
+export function Rival({ bud, playerId }: Props) {
   const currentTarget = useStore(selectTarget);
   const checked = playerId === currentTarget;
   const id = useStore(selectPlayerId);
-  const { id: budId, name, stats } = bud;
-  const { hp, level } = stats;
-  const hpId = `${playerId}-${budId}-hp`;
 
   const onChange = () =>
     Rune.actions.target({
@@ -41,23 +37,12 @@ export function Rival({ playerId, ...bud }: Props) {
         }}
       />
 
-      <span className="sr-only">{name}</span>
-
-      <div className={styles.display}>
-        <HitPoints
-          id={hpId}
-          {...{
-            hp,
-            level,
-          }}
-        />
-
-        <SubBudCanvas
-          {...{
-            bud,
-          }}
-        />
-      </div>
+      <BattleBud
+        {...{
+          bud,
+          playerId,
+        }}
+      />
     </label>
   );
 }

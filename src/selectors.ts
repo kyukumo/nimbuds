@@ -62,8 +62,20 @@ export const selectLastEvent = (state: Store) => {
 
 export const selectBuds = (state: Store) => {
   const player = selectPlayer(state);
-  if (!player) return null;
-  return player.buds;
+  if (!player) return [];
+  return player.buds ?? [];
+};
+
+export const selectDefeatedBuds = (state: Store) => {
+  const player = selectPlayer(state);
+  if (!player) return [];
+  return player.defeatedBuds ?? [];
+};
+
+export const selectGameOverBuds = (state: Store) => {
+  const buds = selectBuds(state);
+  const defeatedBuds = selectDefeatedBuds(state);
+  return [...buds, ...defeatedBuds];
 };
 
 export const selectActiveBud = (state: Store) => {
@@ -107,6 +119,11 @@ export const selectActiveBudStats = (state: Store) => {
   return activeBud?.stats;
 };
 
+export const selectActiveBudLevel = (state: Store) => {
+  const stats = selectActiveBudStats(state);
+  return stats?.level ?? 0;
+};
+
 export const selectActiveBudSpeed = (state: Store) => {
   const stats = selectActiveBudStats(state);
   return stats?.speed ?? 0;
@@ -137,18 +154,6 @@ export const selectCanActiveBudAscend = (state: Store) => {
   const ascendsAt = selectActiveBudAscendsAt(state);
   if (!ascendsAt) return false;
   return level >= ascendsAt;
-};
-
-export const selectMyBuds = (state: Store) => {
-  const player = selectPlayer(state);
-  if (!player) return null;
-
-  return player.buds
-    .map(
-      ({ name, element, next }) =>
-        `${name}: ${element.join(", ")}${next ? `; grows to ${next}` : ""}`
-    )
-    .join(", ");
 };
 
 export const selectRivals = (state: Store) => {

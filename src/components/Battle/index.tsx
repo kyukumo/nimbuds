@@ -1,24 +1,20 @@
 import {
   selectActiveBud,
-  selectActiveBudStats,
-  selectBattleType,
+  selectPlayerId,
   selectRivalActiveBuds,
 } from "../../selectors";
 import { useStore } from "../../hooks/useStore";
-import { BattleType } from "../../types";
-import { SubBudCanvas } from "../SubBudCanvas";
 import { Attacks } from "../Attacks";
 import styles from "./index.module.css";
 import { Switch } from "../Switch";
 import { Rival } from "../Rival";
-import { HitPoints } from "../HitPoints";
 import { Events } from "../Events";
+import { BattleBud } from "../BattleBud";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
   const rivalActiveBuds = useStore(selectRivalActiveBuds);
-  const stats = useStore(selectActiveBudStats);
-  const { level, hp } = stats ?? {};
+  const id = useStore(selectPlayerId);
 
   return (
     <main className={styles.battle}>
@@ -35,24 +31,18 @@ export function Battle() {
 
             <div className={styles.buds}>
               {activeBud && (
-                <div className={styles.bud}>
-                  <HitPoints
-                    id="my-hp"
-                    {...{
-                      hp,
-                      level,
-                    }}
-                  />
-
-                  <SubBudCanvas bud={activeBud} />
-                </div>
+                <BattleBud
+                  bud={activeBud}
+                  className={styles.me}
+                  playerId={id}
+                />
               )}
 
               {rivalActiveBuds.map(({ playerId, ...bud }) => (
                 <Rival
                   key={`${playerId}-rival-bud`}
                   {...{
-                    ...bud,
+                    bud,
                     playerId,
                   }}
                 />

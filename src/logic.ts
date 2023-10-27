@@ -1,43 +1,29 @@
 import {
+  BattleType,
+  CurrentBuds,
+  GameOverPlayers,
+  GameState,
   Phase,
   type Player,
   type Players,
-  BattleType,
-  Move,
-  Cooldowns,
-  Buds,
-  Bud,
-  CurrentBuds,
-  GameState,
 } from "./types";
-import { getRandomBud, getStarterBuds } from "./lib/getStarterBuds";
+import { buds, maxLevel } from "./data/buds";
+import { getPlayerForBattle } from "./lib/getPlayerForBattle";
+import { getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
-import { getRandomNumber } from "./lib/getRandomNumber";
-import { buds } from "./data/buds";
-import { getHp } from "./lib/getHp";
-import { moves } from "./data/moves";
+import { reduceCooldowns } from "./lib/reduceCooldowns";
+import { removeDefeatedBuds } from "./lib/removeDefeatedBuds";
+import { setEvent } from "./lib/setEvent";
+import { tryPlayerGameOver } from "./lib/tryPlayerGameOver";
+import { tryRandomEvent } from "./lib/tryRandomEvent";
+import { getRandomTarget } from "./lib/getRandomTarget";
+import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
+import { getGetPlayersWithResetTargets } from "./lib/getGetPlayersWithResetTargets";
 
-const baseXp = 1;
-const maxLevel = 100;
-const eventCount = 10;
-const maxBuds = 3;
-
-const setEvent = ({ event, game }: { event: string; game: GameState }) => {
-  if (game.events.length === eventCount) game.events.shift();
-  game.events.push(event);
-};
-
-// everyone gets a set amount of points/money
-// shop to buy things for your creatures/buy creatures
-// random events happen to give you items/money
-// in the time limit try to train your creatures as much as possible
-// trade creatures/items with each other
-// at the end, battle 2v2, 1v3, or 4v4
-// save a version of your creature to remember it
-
-const createPlayer = (id: string): Player => ({
+const createPlayer = (id: string, playerIds: string[]): Player => ({
   buds: getStarterBuds(),
   cooldowns: {},
+  defeatedBuds: [],
   gameOver: false,
   id,
   inventory: getStarterInventory(),
@@ -45,44 +31,38 @@ const createPlayer = (id: string): Player => ({
   name: id,
   ping: 0,
   stars: 3000,
-  target: null,
+  target: getRandomTarget(id, playerIds),
 });
 
-const createPlayers = (players: Players, id: string) => ({
+const createPlayers = (
+  players: Players,
+  id: string,
+  index: number,
+  playerIds: string[]
+) => ({
   ...players,
-  [id]: createPlayer(id),
+  [id]: createPlayer(id, playerIds),
 });
 
-type CompleteCooldowns = {
-  cooldowns: Cooldowns;
-  complete: Move[];
-};
+const getSetUpdates =
+  (game: GameState) => (gameOvers: string[], id: string) => {
+    reduceCooldowns(game, id);
+    const { phase, players } = game;
 
-const getReducedCooldowns = (
-  all: CompleteCooldowns,
-  [key, value]: [string, number]
-) => {
-  const { cooldowns, complete } = all;
-  const move = <Move>key;
+    if (phase === Phase.Train) tryRandomEvent(game, id);
+    else if (phase === Phase.Battle) {
+      removeDefeatedBuds(game, id);
+      tryPlayerGameOver(game, id);
+    }
 
-  if (!value)
-    return {
-      cooldowns,
-      complete: [...complete, move],
-    };
-
-  return {
-    complete,
-    cooldowns: {
-      ...cooldowns,
-      [move]: value - 1,
-    },
+    const player = players[id];
+    if (player.gameOver) return [...gameOvers, id];
+    return gameOvers;
   };
-};
 
 Rune.initLogic({
   minPlayers: 2,
-  maxPlayers: 4,
+  maxPlayers: 3,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
@@ -90,44 +70,29 @@ Rune.initLogic({
     events: [],
     phase: Phase.Train,
     phases: {
-      [Phase.Battle]: 60 * 3 * 1000, // 3 mins
       [Phase.Train]: 60 * 3 * 1000, // 3 mins
     },
     players: playerIds.reduce(createPlayers, {}),
     playerIds,
   }),
   events: {
-    playerJoined: (id, { game: { playerIds, players } }) => {
-      players[id] = createPlayer(id);
-      playerIds.push(id);
+    playerJoined: (id, { game }) => {
+      game.playerIds.push(id);
+      game.players[id] = createPlayer(id, game.playerIds);
     },
-    playerLeft: (id, { game: { playerIds, players } }) => {
-      const index = playerIds.indexOf(id);
-      playerIds.splice(index, 1);
-      delete players[id];
+    playerLeft: (id, { game }) => {
+      const index = game.playerIds.indexOf(id);
+      game.playerIds.splice(index, 1);
+      delete game.players[id];
     },
   },
   actions: {
-    attack: ({ id, move, speed }, { game: { players } }) => {
-      players[id].cooldowns[move] = 6 - speed;
+    attack: ({ id, move, speed }, { game }) => {
+      game.players[id].cooldowns[move] = 6 - speed;
     },
     battle: (_, { game }) => {
       game.phase = Phase.Battle;
-      const { playerIds, players } = game;
-
-      const setPlayerForBattle = (
-        playerId: string,
-        index: number,
-        playerIds: string[]
-      ) => {
-        const player = players[playerId];
-        const nextPlayerId = index + 1;
-        const targetIndex = nextPlayerId >= playerIds.length ? 0 : nextPlayerId;
-        const target = playerIds[targetIndex];
-        player.target = target;
-      };
-
-      playerIds.forEach(setPlayerForBattle);
+      game.players = game.playerIds.reduce(getPlayerForBattle, game.players);
     },
     train: (_, { game }) => {
       game.phase = Phase.Train;
@@ -176,15 +141,13 @@ Rune.initLogic({
       const activeBud = buds.shift();
       const currentBuds = <CurrentBuds>buds;
       if (activeBud) currentBuds.push(activeBud);
-
-      return;
     },
     setPlayerName: ({ id, name }, { game: { players } }) => {
       const player = players[id];
       player.name = name;
     },
-    target: ({ id, target }, { game: { players } }) => {
-      players[id].target = target;
+    target: ({ id, target }, { game }) => {
+      game.players[id].target = target;
     },
   },
   update: ({ allPlayerIds, game }) => {
@@ -192,217 +155,38 @@ Rune.initLogic({
 
     const {
       duration,
-      phase,
       phases: { [Phase.Train]: trainDuration },
       playerIds,
-      players,
     } = game;
 
     if (duration === trainDuration) {
       game.phase = Phase.Battle;
-
-      const setPlayerForBattle = (
-        playerId: string,
-        index: number,
-        playerIds: string[]
-      ) => {
-        const player = players[playerId];
-        const nextPlayerId = index + 1;
-        const targetIndex = nextPlayerId >= playerIds.length ? 0 : nextPlayerId;
-        const target = playerIds[targetIndex];
-        player.target = target;
-        player.cooldowns = {};
-      };
-
-      playerIds.forEach(setPlayerForBattle);
+      game.players = playerIds.reduce(getPlayerForBattle, game.players);
     }
 
-    const setRandomEvent = (id: string) => {
-      const player = players[id];
-      player.lastEvent = duration;
+    const setUpdates = getSetUpdates(game);
+    const gameOvers = allPlayerIds.reduce(setUpdates, []);
 
-      if (player.buds.length < maxBuds) {
-        const nextBud = getRandomBud();
-        player.buds = [...player.buds, nextBud] as Buds;
-      }
-    };
+    if (game.phase === Phase.Battle) {
+      const won = gameOvers.length === allPlayerIds.length - 1;
 
-    const tryRandomEvent = (id: string) => {
-      const randomDelay = getRandomNumber(60000, 120000);
-      const player = players[id];
-      const { lastEvent } = player;
-      const elapsedTime = duration - lastEvent;
-      if (elapsedTime > randomDelay) setRandomEvent(id);
-    };
+      if (won) {
+        game.ended = true;
+        const getGameOverPlayers = getGetGameOverPlayers(game);
 
-    const reduceCooldowns = (id: string) => {
-      const player = players[id];
-
-      const { complete, cooldowns } = Object.entries(
-        player.cooldowns
-      ).reduce<CompleteCooldowns>(getReducedCooldowns, {
-        cooldowns: {},
-        complete: [],
-      });
-
-      player.cooldowns = cooldowns;
-
-      const levelUp = () => {
-        if (!player.buds.length) return;
-
-        const [
-          {
-            moves: { length },
-            name,
-            stats,
-          },
-        ] = player.buds;
-
-        const { level = 1, xp = 0 } = stats;
-        stats.xp = xp + baseXp * (1 / length);
-        const levelUpXP = Math.ceil((level * 2 - 1) * 1.2);
-
-        console.log(stats.xp >= levelUpXP, stats.xp, levelUpXP);
-        if (stats.xp >= levelUpXP) {
-          stats.level = level + 1;
-          stats.hp = getHp(stats.level);
-
-          setEvent({
-            event: `${name} leveled up to ${stats.level}!`,
-            game,
-          });
-        }
-
-        return;
-      };
-
-      const finishAttack = (move: Move) => {
-        const { target } = player;
-        if (!target) return;
-
-        const [bud] = player.buds;
-        if (!bud) return;
-
-        const { stats: budStats } = bud;
-
-        const rival = players[target];
-        if (!rival.buds.length) return;
-
-        const [rivalBud] = rival.buds;
-        const { advantage, disadvantage, stats: rivalStats } = rivalBud;
-        const { hp: rivalHp = 1, defense: rivalDefense } = rivalStats;
-        const { attack: baseAttack } = budStats;
-
-        const { element, label: moveName } = moves[move];
-        const resist = advantage.includes(element);
-        const weak = disadvantage.includes(element);
-
-        const chance = getRandomNumber(0, 255);
-        const threshold = getRandomNumber(0, 2);
-        const critical = chance <= threshold;
-
-        let attack = baseAttack;
-        if (resist) attack *= 0.5;
-        if (weak) attack *= 2;
-        if (critical) attack *= 1.5;
-
-        const damage = Math.ceil(
-          attack >= rivalDefense
-            ? attack * 2 - rivalDefense
-            : (attack * attack) / rivalDefense
+        Rune.gameOver({
+          players: allPlayerIds.reduce<GameOverPlayers>(getGameOverPlayers, {}),
+        });
+      } else {
+        const getPlayersWithResetTargets = getGetPlayersWithResetTargets(
+          game.playerIds
         );
 
-        rivalStats.hp = rivalHp - damage;
-
-        const event = [
-          `${bud.name} used ${moveName} on ${rivalBud.name}!`,
-          critical && "Critical hit!",
-          resist && "It's ineffective...",
-          weak && "It's effective!",
-        ]
-          .filter(Boolean)
-          .join(" ");
-
-        setEvent({
-          event,
-          game,
-        });
-
-        return;
-      };
-
-      if (phase === Phase.Train) {
-        if (!player.buds.length) return;
-
-        const [
-          {
-            stats: { level = 0 },
-          },
-        ] = player.buds;
-
-        if (level < maxLevel) complete.forEach(levelUp);
-      } else if (phase === Phase.Battle) complete.forEach(finishAttack);
-    };
-
-    const tryPlayerGameOver = (id: string) => {
-      const player = players[id];
-      const gameOver = player.buds.length === 0;
-      player.gameOver = gameOver;
-    };
-
-    const checkDefeatedBuds = (id: string) => {
-      const player = players[id];
-      const { buds } = player;
-
-      const removeDefeatedBud = (all: Buds, bud: Bud) => {
-        const {
-          stats: { hp = 0 },
-        } = bud;
-
-        const defeated = hp <= 0;
-        if (defeated) return all;
-        return [...all, bud] as Buds;
-      };
-
-      player.buds = buds.reduce<Buds>(removeDefeatedBud, []);
-    };
-
-    const setUpdates = (gameOvers: string[], id: string) => {
-      reduceCooldowns(id);
-
-      if (phase === Phase.Train) tryRandomEvent(id);
-      else if (phase === Phase.Battle) {
-        checkDefeatedBuds(id);
-        tryPlayerGameOver(id);
+        game.players = gameOvers.reduce(
+          getPlayersWithResetTargets,
+          game.players
+        );
       }
-
-      const player = players[id];
-      if (player.gameOver) return [...gameOvers, id];
-      return gameOvers;
-    };
-
-    const gameOvers = allPlayerIds.reduce(setUpdates, []);
-    const won = gameOvers.length === allPlayerIds.length - 1;
-
-    if (won) {
-      game.ended = true;
-
-      type GameOverState = number | "WON" | "LOST";
-      type GameOverPlayers = Record<string, GameOverState>;
-
-      const getGameOverPlayers = (all: GameOverPlayers, id: string) => {
-        const { gameOver } = players[id];
-        const value: GameOverState = gameOver ? "LOST" : "WON";
-
-        return {
-          ...all,
-          [id]: value,
-        };
-      };
-
-      Rune.gameOver({
-        players: allPlayerIds.reduce<GameOverPlayers>(getGameOverPlayers, {}),
-      });
     }
   },
 });

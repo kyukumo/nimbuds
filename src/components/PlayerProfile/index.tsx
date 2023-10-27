@@ -6,8 +6,8 @@ export function PlayerProfile({ buds }: { buds: Bud[] }) {
       <h2>Your Rival</h2>
       <p>Train to take down your rivals! This rival has the following buds:</p>
 
-      {buds.map(({ name }) => (
-        <p key={`player-profile-${name}`}>{name}</p>
+      {buds.map(({ id, name }, index) => (
+        <p key={`player-profile-${id}-${index}`}>{name}</p>
       ))}
     </>
   );

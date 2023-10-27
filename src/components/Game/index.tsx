@@ -8,8 +8,10 @@ import {
   selectPhase,
   selectReady,
 } from "../../selectors";
-import { Phase } from "../../types";
+import { Bud, Buds, Phase } from "../../types";
+import { Background } from "../Background";
 import { Battle } from "../Battle";
+import { GameOver } from "../GameOver";
 import { Spectate } from "../Spectate";
 import { Train } from "../Train";
 import styles from "./index.module.css";
@@ -17,7 +19,7 @@ import styles from "./index.module.css";
 export function Game() {
   useRuneClient();
 
-  const elements = useStore(selectActiveBudElements);
+  const element = useStore(selectActiveBudElements);
   const ended = useStore(selectGameEnded);
   const gameOver = useStore(selectGameOver);
   const isSpectator = useStore(selectIsSpectator);
@@ -34,14 +36,15 @@ export function Game() {
     return <Spectate />;
   }
 
-  if (gameOver) return "You lost! :(";
-  if (ended) return "You won!! :)";
+  if (gameOver) return <GameOver title="You Lost! :(" />;
+  if (ended) return <GameOver title="You Won!! :)" />;
 
   return (
     <>
-      <div
-        aria-hidden
-        className={[styles.background, elements?.join("-")].join(" ")}
+      <Background
+        {...{
+          element,
+        }}
       />
 
       <button className={styles.phase} onClick={changePhase} type="button">

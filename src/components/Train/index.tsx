@@ -1,19 +1,20 @@
 import {
   selectActiveBudDescription,
+  selectActiveBudLevel,
   selectActiveBudName,
   selectCanActiveBudAscend,
   selectPlayerId,
   selectTrainPhaseDuration,
 } from "../../selectors";
-import { useStore } from "../../hooks/useStore";
+import styles from "./index.module.css";
+import { Attacks } from "../Attacks";
+import { Events } from "../Events";
 import { MainBudCanvas } from "../MainBudCanvas";
 import { MainElementCanvas } from "../MainElementCanvas";
-import { Attacks } from "../Attacks";
 import { PlayerButtons } from "../PlayerButtons";
-import styles from "./index.module.css";
 import { Switch } from "../Switch";
 import { Timer } from "../Timer";
-import { Events } from "../Events";
+import { useStore } from "../../hooks/useStore";
 
 export function Train() {
   const canAscend = useStore(selectCanActiveBudAscend);
@@ -21,6 +22,7 @@ export function Train() {
   const id = useStore(selectPlayerId);
   const name = useStore(selectActiveBudName);
   const phaseDuration = useStore(selectTrainPhaseDuration);
+  const level = useStore(selectActiveBudLevel);
 
   return (
     <>
@@ -32,7 +34,7 @@ export function Train() {
             <h1 className="sr-only">Train!</h1>
 
             <div className={styles.heading}>
-              <dl aria-describedby="bud-description">
+              <dl>
                 <dt className="sr-only">Name:</dt>
 
                 <dd>
@@ -40,7 +42,17 @@ export function Train() {
                 </dd>
               </dl>
 
-              <MainElementCanvas />
+              <div className={styles.attributes}>
+                <dl>
+                  <dt>
+                    <abbr title="Level">Lv: </abbr>
+                  </dt>
+
+                  <dd>{level}</dd>
+                </dl>
+
+                <MainElementCanvas />
+              </div>
             </div>
           </header>
 

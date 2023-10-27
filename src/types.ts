@@ -1,5 +1,8 @@
 import { RuneClient } from "rune-games-sdk";
 
+export type GameOverState = number | "WON" | "LOST";
+export type GameOverPlayers = Record<string, GameOverState>;
+
 export enum Element {
   Dark = "dark",
   Earth = "earth",
@@ -94,9 +97,15 @@ export type Inventory = [
 
 export type Cooldowns = Partial<Record<Move, number>>;
 
+export type CompleteCooldowns = {
+  cooldowns: Cooldowns;
+  complete: Move[];
+};
+
 export type Player = {
   buds: Buds;
   cooldowns: Cooldowns;
+  defeatedBuds: Buds;
   gameOver: boolean;
   id: string;
   inventory: Inventory;

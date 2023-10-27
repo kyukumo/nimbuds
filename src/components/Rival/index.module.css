@@ -1,27 +1,5 @@
 .rival {
-  align-items: stretch;
-  display: flex;
-  justify-content: stretch;
-
   &.checked {
-    box-shadow: inset 0 0 0 2px hotpink;
-  }
-
-  & .display {
-    align-items: start;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    justify-items: center;
-    width: 100%;
-
-    & canvas {
-      padding: 1em;
-    }
-
-    > * {
-      grid-column-start: 1;
-      grid-row-start: 1;
-    }
+    box-shadow: var(--red-pixel-border);
   }
 }

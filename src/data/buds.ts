@@ -1,5 +1,7 @@
 import { Bud, Element, Move } from "../types";
 
+export const maxLevel = 100;
+
 export const starters = [
   "amazwing",
   "cherubud",

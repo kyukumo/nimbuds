@@ -7,15 +7,17 @@ export function Events() {
 
   return (
     <div className={styles.events}>
-      {events.length ? (
-        <ul>
-          {events.map((event, index) => (
-            <li key={`event-${index}`}>{event}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Train until the timer runs out, then fight your rivals!</p>
-      )}
+      <div>
+        {events.length ? (
+          <ul>
+            {events.map((event, index) => (
+              <li key={`event-${index}`}>{event}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Train until the timer runs out, then fight your rivals!</p>
+        )}
+      </div>
     </div>
   );
 }

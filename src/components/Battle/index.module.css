@@ -27,6 +27,13 @@
   .content {
     display: flex;
     flex-direction: column;
+  }
+
+  & fieldset,
+  & form,
+  & nav {
+    display: flex;
+    flex-direction: column;
     gap: 0.5em;
   }
 
@@ -47,30 +54,17 @@
     }
 
     & .buds {
+      background-color: var(--white);
+      box-shadow: var(--pixel-border);
       display: grid;
-      gap: 0.5em;
       grid-auto-flow: row;
       grid-auto-rows: auto;
       grid-template-columns: 1fr 1fr;
-    }
+      margin: 0.5em;
+      gap: 0.5em;
 
-    /* TODO: merge with Rival */
-    & .bud {
-      align-items: start;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-      justify-items: center;
-      opacity: 0.5;
-      max-height: 10dvh;
-
-      > * {
-        grid-column-start: 1;
-        grid-row-start: 1;
-      }
-
-      & canvas {
-        padding: 1em;
+      & .me {
+        box-shadow: 0 0 0 0.5em var(--black);
       }
     }
   }
