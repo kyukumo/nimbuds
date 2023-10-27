@@ -9,6 +9,7 @@ import { Background } from "../Background";
 import { BattleBud } from "../BattleBud";
 import { ElementCanvas } from "../ElementCanvas";
 import { Events } from "../Events";
+import { SpectatorEvents } from "../SpectatorEvents";
 import { Timer } from "../Timer";
 import styles from "./index.module.css";
 
@@ -27,7 +28,7 @@ export function Spectate() {
       />
 
       <main className={styles.spectate}>
-        <Events />
+        <SpectatorEvents />
 
         <section className={styles.content}>
           <header>

@@ -15,6 +15,7 @@ import { PlayerButtons } from "../PlayerButtons";
 import { Switch } from "../Switch";
 import { Timer } from "../Timer";
 import { useStore } from "../../hooks/useStore";
+import { PlayerEvents } from "../PlayerEvents";
 
 export function Train() {
   const canAscend = useStore(selectCanActiveBudAscend);
@@ -27,14 +28,14 @@ export function Train() {
   return (
     <>
       <main className={styles.train}>
-        <Events />
+        <PlayerEvents />
 
         <div className={styles.content}>
           <header>
             <h1 className="sr-only">Train!</h1>
 
             <div className={styles.heading}>
-              <dl>
+              <dl aria-describedby="bud-description">
                 <dt className="sr-only">Name:</dt>
 
                 <dd>
@@ -65,9 +66,9 @@ export function Train() {
           </div>
 
           <div className={styles.choices}>
-            <nav className={styles.actions}>
-              <Switch />
+            <Attacks />
 
+            <nav className={styles.actions}>
               <button
                 className={styles.ascend}
                 disabled={!canAscend}
@@ -80,15 +81,19 @@ export function Train() {
               >
                 Ascend!
               </button>
-            </nav>
 
-            <Attacks />
+              <Switch />
+            </nav>
           </div>
 
           <footer>
             <PlayerButtons />
 
-            {description && <p className={styles.description}>{description}</p>}
+            {description && (
+              <p className={styles.description} id="bud-description">
+                {description}
+              </p>
+            )}
           </footer>
         </div>
       </main>

@@ -8,8 +8,8 @@ import { Attacks } from "../Attacks";
 import styles from "./index.module.css";
 import { Switch } from "../Switch";
 import { Rival } from "../Rival";
-import { Events } from "../Events";
 import { BattleBud } from "../BattleBud";
+import { SpectatorEvents } from "../SpectatorEvents";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
@@ -18,7 +18,7 @@ export function Battle() {
 
   return (
     <main className={styles.battle}>
-      <Events />
+      <SpectatorEvents />
 
       <div className={styles.content}>
         <header>

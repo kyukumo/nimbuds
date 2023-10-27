@@ -40,7 +40,7 @@ export function GameOver({ title }: { title: string }) {
         </div>
 
         <p>
-          Don't worry, you'll meet {joinNamesWithSerialComma(gameOverBuds)}{" "}
+          Don't worry, you'll find {joinNamesWithSerialComma(gameOverBuds)}{" "}
           again someday!
         </p>
       </section>

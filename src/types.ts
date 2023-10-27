@@ -106,6 +106,7 @@ export type Player = {
   buds: Buds;
   cooldowns: Cooldowns;
   defeatedBuds: Buds;
+  events: string[];
   gameOver: boolean;
   id: string;
   inventory: Inventory;

@@ -2,11 +2,29 @@ import { moves } from "./data/moves";
 import { Store } from "./hooks/useStore";
 import { Bud, Move, Phase, Player } from "./types";
 
-export const selectEvents = (state: Store) => state.events;
-
 export const selectReady = (state: Store) => state.ready;
 
 export const selectPlayer = (state: Store) => state.player;
+
+// function getZip<T>(a: T[]) {
+//   return (all: T[], b: T, index: number) => [...all, a[index], b];
+// }
+
+// const mergeEvents = (a: string[], b: string[]) => {
+//   const longer = a.length > b.length;
+//   const main = longer ? a : b;
+//   const sub = !longer ? b : a;
+//   const zip = getZip<string>(sub);
+//   const result = main.reduce(zip, []);
+//   return result;
+// };
+
+export const selectPlayerEvents = (state: Store) => {
+  const player = selectPlayer(state);
+  return player?.events ?? [];
+};
+
+export const selectEvents = (state: Store) => state.events;
 
 export const selectGameEnded = (state: Store) => state.ended;
 

@@ -19,7 +19,6 @@
   }
 
   & header,
-  .content,
   .level,
   .stats {
     gap: 0.5em;
@@ -51,6 +50,7 @@
 
   .content {
     flex: 1;
+    gap: 1em;
     padding: 1em;
   }
 

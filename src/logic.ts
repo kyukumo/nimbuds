@@ -1,5 +1,6 @@
 import {
   BattleType,
+  Bud,
   CurrentBuds,
   GameOverPlayers,
   GameState,
@@ -13,7 +14,7 @@ import { getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
 import { reduceCooldowns } from "./lib/reduceCooldowns";
 import { removeDefeatedBuds } from "./lib/removeDefeatedBuds";
-import { setEvent } from "./lib/setEvent";
+import { setEvents } from "./lib/setEvent";
 import { tryPlayerGameOver } from "./lib/tryPlayerGameOver";
 import { tryRandomEvent } from "./lib/tryRandomEvent";
 import { getRandomTarget } from "./lib/getRandomTarget";
@@ -24,6 +25,7 @@ const createPlayer = (id: string, playerIds: string[]): Player => ({
   buds: getStarterBuds(),
   cooldowns: {},
   defeatedBuds: [],
+  events: [],
   gameOver: false,
   id,
   inventory: getStarterInventory(),
@@ -126,21 +128,42 @@ Rune.initLogic({
       player.buds[0] = nextBud;
       player.cooldowns = {};
 
-      setEvent({
-        event: `${bud.name} ascended to ${nextBud.name}!`,
+      const event = `${bud.name} ascended to ${nextBud.name}!`;
+
+      setEvents({
         game,
+        events: {
+          player: event,
+          public: event,
+          rival: `Your rival's ${bud.name} ascended to ${nextBud.name}!`,
+        },
+        id,
       });
     },
-    switch: ({ id }, { game: { players } }) => {
-      const player = players[id];
-      const { buds, cooldowns } = player;
+    switch: ({ id }, { game }) => {
+      const player = game.players[id];
+      const { cooldowns } = player;
 
       const hasCooldowns = Boolean(Object.keys(cooldowns).length);
       if (hasCooldowns) return;
 
-      const activeBud = buds.shift();
-      const currentBuds = <CurrentBuds>buds;
-      if (activeBud) currentBuds.push(activeBud);
+      const previousBud = player.buds.shift();
+
+      if (previousBud) {
+        (player.buds as Bud[]).push(previousBud);
+        const [activeBud] = player.buds;
+        const event = `${previousBud?.name} switched with ${activeBud?.name}!`;
+
+        setEvents({
+          game,
+          events: {
+            player: event,
+            public: event,
+            rival: `Your rival's ${event}`,
+          },
+          id,
+        });
+      }
     },
     setPlayerName: ({ id, name }, { game: { players } }) => {
       const player = players[id];

@@ -29,7 +29,7 @@ export const starters = [
 export const buds: Record<string, Bud> = {
   spookecko: {
     advantage: [],
-    ascends: 10,
+    ascends: 3,
     description:
       "This mysterious and eerie reptile lurks in the shadows, using its ghastly powers to frighten and confuse opponents.",
     disadvantage: [Element.Light],
@@ -51,7 +51,7 @@ export const buds: Record<string, Bud> = {
   },
   shadile: {
     advantage: [],
-    ascends: 20,
+    ascends: 4,
     description:
       "It lurks in the depths of the night, preying on the fears and weaknesses of its opponents with its sinister powers.",
     disadvantage: [Element.Light],
@@ -95,7 +95,7 @@ export const buds: Record<string, Bud> = {
   },
   smoldit: {
     advantage: [Element.Wind],
-    ascends: 20,
+    ascends: 7,
     description: "The smoldering embodiment of lingering spectral energy.",
     disadvantage: [Element.Light, Element.Water],
     element: [Element.Dark, Element.Fire],
@@ -137,7 +137,7 @@ export const buds: Record<string, Bud> = {
   },
   specalf: {
     advantage: [Element.Water],
-    ascends: 20,
+    ascends: 5,
     description:
       "Awaiting the return of its doting parent, this bovine animal conceals itself beneath a veil of spectral flora.",
     disadvantage: [Element.Light, Element.Wind],
@@ -180,7 +180,7 @@ export const buds: Record<string, Bud> = {
   },
   voidixie: {
     advantage: [],
-    ascends: 20,
+    ascends: 7,
     description:
       "Few have witnessed its otherworldly aura, professing conflicting feelings of curiosity and trepidation.",
     disadvantage: [Element.Dark, Element.Light],
@@ -223,7 +223,7 @@ export const buds: Record<string, Bud> = {
   },
   gloominnow: {
     advantage: [Element.Fire],
-    ascends: 10,
+    ascends: 5,
     description:
       "A glint from its shimmering, iridescent scales will catch your eye from deep below the waters.",
     disadvantage: [Element.Earth, Element.Light],
@@ -245,7 +245,7 @@ export const buds: Record<string, Bud> = {
   },
   barrabyss: {
     advantage: [Element.Fire],
-    ascends: 20,
+    ascends: 8,
     description:
       "Be careful where you swim. Legend has it that when you see its eerie, glowing eyes, it's already too late for you.",
     disadvantage: [Element.Earth, Element.Light],
@@ -289,7 +289,7 @@ export const buds: Record<string, Bud> = {
   },
   nebulon: {
     advantage: [Element.Earth],
-    ascends: 10,
+    ascends: 4,
     description:
       "Often mistaken for an unidentified flying object, it has a markedly unassuming face.",
     disadvantage: [Element.Fire, Element.Light],
@@ -332,7 +332,7 @@ export const buds: Record<string, Bud> = {
   },
   snakelit: {
     advantage: [Element.Wind],
-    ascends: 10,
+    ascends: 4,
     description: "An emerald, fiery glow emits from this serpentine creature.",
     disadvantage: [Element.Water],
     element: [Element.Fire],
@@ -353,7 +353,7 @@ export const buds: Record<string, Bud> = {
   },
   serpyro: {
     advantage: [Element.Wind],
-    ascends: 20,
+    ascends: 8,
     description:
       "It uses the scorching jade flames emitting from its tail to extinguish its opponents.",
     disadvantage: [Element.Water],
@@ -397,7 +397,7 @@ export const buds: Record<string, Bud> = {
   },
   oakindle: {
     advantage: [Element.Water, Element.Wind],
-    ascends: 20,
+    ascends: 5,
     description: "A small seedling engulfed in flames.",
     disadvantage: [],
     element: [Element.Earth, Element.Fire],
@@ -459,7 +459,7 @@ export const buds: Record<string, Bud> = {
   },
   flagoon: {
     advantage: [Element.Fire, Element.Wind],
-    ascends: 10,
+    ascends: 4,
     description:
       "It releases infernal steam to drive intruders away from its den.",
     disadvantage: [Element.Earth],
@@ -481,7 +481,7 @@ export const buds: Record<string, Bud> = {
   },
   blazesea: {
     advantage: [Element.Fire, Element.Wind],
-    ascends: 20,
+    ascends: 8,
     description:
       "It is widely known that Blazesea should not be approached. It unceasingly combusts as it maintains a cooling aura of water around its body.",
     disadvantage: [Element.Earth],
@@ -525,7 +525,7 @@ export const buds: Record<string, Bud> = {
   },
   flarva: {
     advantage: [Element.Earth, Element.Wind],
-    ascends: 10,
+    ascends: 3,
     description:
       "On a clear summer night, you can see the faint blue glow of Flarva swarming on the trees.",
     disadvantage: [Element.Water],
@@ -547,7 +547,7 @@ export const buds: Record<string, Bud> = {
   },
   chrysfire: {
     advantage: [Element.Earth, Element.Wind],
-    ascends: 20,
+    ascends: 6,
     description:
       "Its shell is warm to the touch. Wildfire experts relocate Chrysfire away from forests before they hatch.",
     disadvantage: [Element.Water],
@@ -611,7 +611,7 @@ export const buds: Record<string, Bud> = {
   },
   cherubud: {
     advantage: [Element.Water],
-    ascends: 20,
+    ascends: 5,
     description:
       "It has a serene nature and captivating aroma that will bring peace to anyone in its presence.",
     disadvantage: [Element.Dark, Element.Wind],
@@ -654,7 +654,7 @@ export const buds: Record<string, Bud> = {
   },
   sproutide: {
     advantage: [Element.Fire, Element.Water],
-    ascends: 20,
+    ascends: 7,
     description:
       "A playful dragon hatchling born from a river, embodying the energy of nature.",
     disadvantage: [Element.Wind],
@@ -697,7 +697,7 @@ export const buds: Record<string, Bud> = {
   },
   windeed: {
     advantage: [Element.Earth, Element.Water],
-    ascends: 20,
+    ascends: 7,
     description:
       "It hides among planted beetroots, zipping into the sky before it is picked.",
     disadvantage: [Element.Fire],
@@ -740,7 +740,7 @@ export const buds: Record<string, Bud> = {
   },
   flitten: {
     advantage: [],
-    ascends: 20,
+    ascends: 7,
     description:
       "It's known for its mischievous, playful nature. It manipulates your dreams, hoping to be fed when you wake.",
     disadvantage: [Element.Dark],
@@ -783,7 +783,7 @@ export const buds: Record<string, Bud> = {
   },
   silten: {
     advantage: [Element.Fire],
-    ascends: 10,
+    ascends: 4,
     description:
       "It posesses a protective shell that provides for it remarkable resilience and adaptability.",
     disadvantage: [Element.Dark, Element.Earth],
@@ -805,7 +805,7 @@ export const buds: Record<string, Bud> = {
   },
   boglow: {
     advantage: [Element.Fire],
-    ascends: 20,
+    ascends: 7,
     description:
       "A tiny luminescent creature with a resilient body. It thrives in extreme aquatic environments.",
     disadvantage: [Element.Dark, Element.Earth],
@@ -849,7 +849,7 @@ export const buds: Record<string, Bud> = {
   },
   amazwing: {
     advantage: [Element.Earth],
-    ascends: 10,
+    ascends: 5,
     description:
       "Tales of cupid can usually be attributed to Amazwing. It spreads love and joy as it flies.",
     disadvantage: [Element.Dark, Element.Fire],
@@ -871,7 +871,7 @@ export const buds: Record<string, Bud> = {
   },
   featherall: {
     advantage: [Element.Earth],
-    ascends: 20,
+    ascends: 8,
     description:
       "It enchants the hearts of those it pierces with its tail feathers.",
     disadvantage: [Element.Dark, Element.Fire],
@@ -915,7 +915,7 @@ export const buds: Record<string, Bud> = {
   },
   luxureef: {
     advantage: [Element.Fire],
-    ascends: 20,
+    ascends: 7,
     description:
       "Vibrant coral climbs its body. It is capable of producing captivating displays of bioluminescence.",
     disadvantage: [Element.Earth],
@@ -958,7 +958,7 @@ export const buds: Record<string, Bud> = {
   },
   galephin: {
     advantage: [Element.Earth, Element.Fire],
-    ascends: 20,
+    ascends: 7,
     description:
       "Its sleek dolphin-like body allows it to soar through the sky. Funnel clouds form in its trail.",
     disadvantage: [],
@@ -1001,7 +1001,7 @@ export const buds: Record<string, Bud> = {
   },
   lopilot: {
     advantage: [Element.Earth],
-    ascends: 20,
+    ascends: 7,
     description:
       "Its large ears allow it to effortlessly navigate the winds. Lost travelers are guided by Lopilot to safety.",
     disadvantage: [Element.Fire],

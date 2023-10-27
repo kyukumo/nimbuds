@@ -1,6 +1,6 @@
 import { GameState } from "../types";
 import { getHp } from "./getHp";
-import { setEvent } from "./setEvent";
+import { setEvent, setEvents, setRivalsEvent } from "./setEvent";
 
 const baseXp = 1;
 
@@ -24,9 +24,14 @@ export const getLevelUp = (game: GameState, id: string) => () => {
     stats.level = level + 1;
     stats.hp = getHp(stats.level);
 
-    setEvent({
-      event: `${name} leveled up to ${stats.level}!`,
+    setEvents({
       game,
+      events: {
+        player: `${name} leveled up to ${stats.level}!`,
+        public: `${name} leveled up to ${stats.level}!`,
+        rival: `Your rival's ${name} leveled up to ${stats.level}!`,
+      },
+      id,
     });
   }
 };

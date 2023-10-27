@@ -1,17 +1,29 @@
 import { Buds, GameState } from "../types";
 import { getRandomNumber } from "./getRandomNumber";
 import { getRandomBud } from "./getStarterBuds";
+import { setEvents } from "./setEvent";
 
 const maxBuds = 3;
 
 const setRandomEvent = (game: GameState, id: string) => {
-  const { duration, players } = game;
-  const player = players[id];
-  player.lastEvent = duration;
+  const player = game.players[id];
+  if (!player) return;
+
+  player.lastEvent = game.duration;
 
   if (player.buds.length < maxBuds) {
     const nextBud = getRandomBud();
     player.buds = [...player.buds, nextBud] as Buds;
+
+    setEvents({
+      game,
+      events: {
+        player: `You befriended ${nextBud.name}!`,
+        public: `${nextBud.name} was befriended!`,
+        rival: `Your rival befriended ${nextBud.name}!`,
+      },
+      id,
+    });
   }
 };
 
