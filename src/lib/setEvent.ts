@@ -1,6 +1,6 @@
 import { GameState } from "../types";
 
-const eventCount = 10;
+const eventCount = 30;
 
 export const setEvent = ({
   event,

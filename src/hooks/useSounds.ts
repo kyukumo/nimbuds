@@ -5,7 +5,5 @@ import { useStore } from "./useStore";
 export const useSounds = () => {
   const playerSounds = useStore(selectPlayerSounds);
   const sounds = useStore(selectSounds);
-
-  useSound(playerSounds);
-  useSound(sounds);
+  useSound([...playerSounds, ...sounds]);
 };

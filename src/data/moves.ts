@@ -1,19 +1,4 @@
 import { Element, Move } from "../types";
-import dark from "../sounds/dark.ogg";
-import earth from "../sounds/earth.ogg";
-import fire from "../sounds/fire.ogg";
-import light from "../sounds/light.ogg";
-import water from "../sounds/water.ogg";
-import wind from "../sounds/wind.ogg";
-
-export const paths = {
-  [Element.Dark]: dark,
-  [Element.Earth]: earth,
-  [Element.Fire]: fire,
-  [Element.Light]: light,
-  [Element.Water]: water,
-  [Element.Wind]: wind,
-};
 
 export const moves = {
   [Move.Blaze]: {

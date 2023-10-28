@@ -1,10 +1,9 @@
-import spritesUrl from "../../images/sprites.png";
 import { Element } from "../../types";
 import { block, size, tile } from "../../data/elements";
 import { useEffect, useState } from "react";
 
 const sprites = new Image();
-sprites.src = spritesUrl;
+sprites.src = "./images/sprites.png";
 
 const draw = ({
   canvas,

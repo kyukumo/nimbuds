@@ -37,6 +37,7 @@ export const removeDefeatedBuds = (game: GameState, id: string) => {
 
   player.buds = nextBuds as Buds;
   player.defeatedBuds = [...defeatedBuds, ...nextDefeatedBuds] as Buds;
+  player.cooldowns = {};
 
   const setDefeatedBudEvent = ({ name }: Bud) =>
     setEvent({

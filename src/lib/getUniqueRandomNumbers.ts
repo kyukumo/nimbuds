@@ -1,4 +1,4 @@
-const getNumber = (_, index: number) => index;
+const getNumber = (_: number, index: number) => index;
 const sortRandom = () => Math.random() - 0.5;
 
 export const getUniqueRandomNumbers = (count: number, length = 10) => {

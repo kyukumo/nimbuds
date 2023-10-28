@@ -1,9 +1,9 @@
-import spritesUrl from "../../images/sprites.png";
 import { Bud } from "../../types";
 import { getIsReducedMotionPreferred } from "../../lib/getIsReducedMotionPreferred";
 import { useAnimate } from "../../hooks/useAnimate";
 import { useEffect, useRef } from "react";
 
+const spritesUrl = "./images/sprites.png";
 const block = 10;
 
 const draw = ({

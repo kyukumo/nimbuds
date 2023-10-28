@@ -1,6 +1,6 @@
 import { GameState } from "../types";
 import { getHp } from "./getHp";
-import { setEvent, setEvents, setRivalsEvent } from "./setEvent";
+import { setEvents } from "./setEvent";
 
 const baseXp = 1;
 

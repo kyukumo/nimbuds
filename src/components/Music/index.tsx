@@ -1,6 +1,7 @@
 import { useState } from "react";
-import bgm from "../../sounds/bgm.ogg";
 import styles from "./index.module.css";
+
+const bgm = "./sounds/bgm.ogg";
 
 export function Music() {
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement>();

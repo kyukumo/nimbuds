@@ -5,6 +5,7 @@ const getIsGameOver = ({ gameOver }: Player) => gameOver;
 
 export const tryPlayerGameOver = (game: GameState, id: string) => {
   const { [id]: player, ...rivals } = game.players;
+
   const isLastPlayer = Object.values(rivals).every(getIsGameOver);
 
   if (!isLastPlayer) {
