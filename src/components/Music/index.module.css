@@ -1,0 +1,21 @@
+.button {
+  aspect-ratio: 1 / 1;
+  background-color: transparent;
+  margin: 0 0.5em 0.5em 0;
+  padding: 0;
+  width: 2em;
+
+  &::before {
+    content: none;
+  }
+
+  &:focus {
+    box-shadow: 0.25em 0.25em 0 0 var(--black);
+    outline: 0;
+  }
+
+  .note {
+    font-size: 2em;
+    line-height: 1;
+  }
+}

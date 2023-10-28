@@ -1,6 +1,10 @@
 import styles from "./index.module.css";
 import { Bud } from "../../types";
-import { selectGameOverBuds } from "../../selectors";
+import {
+  selectGameOverBuds,
+  selectPlayerId,
+  selectWinningBuds,
+} from "../../selectors";
 import { useStore } from "../../hooks/useStore";
 import { SubBudCanvas } from "../SubBudCanvas";
 import { Background } from "../Background";
@@ -14,8 +18,15 @@ const joinNamesWithSerialComma = (buds: Bud[]) =>
     .join(buds.length <= 2 ? " " : ", ");
 
 export function GameOver({ title }: { title: string }) {
+  const id = useStore(selectPlayerId);
+  const spectating = !id;
+
   const gameOverBuds = useStore(selectGameOverBuds);
-  const [{ element }] = gameOverBuds;
+  const winningBuds = useStore(selectWinningBuds);
+  const buds = spectating ? winningBuds : gameOverBuds;
+  const [{ element }] = buds;
+
+  const budsLabel = joinNamesWithSerialComma(buds);
 
   return (
     <>
@@ -29,7 +40,7 @@ export function GameOver({ title }: { title: string }) {
         <h1>{title}</h1>
 
         <div className={styles.buds}>
-          {gameOverBuds.map((bud, index) => (
+          {buds.map((bud, index) => (
             <SubBudCanvas
               key={`game-over-${bud.id}-${index.toString()}`}
               {...{
@@ -39,10 +50,14 @@ export function GameOver({ title }: { title: string }) {
           ))}
         </div>
 
-        <p>
-          Don't worry, you'll find {joinNamesWithSerialComma(gameOverBuds)}{" "}
-          again someday!
-        </p>
+        {
+          <p>
+            {spectating
+              ? `Next time, you can join the fray and find ${budsLabel}!`
+              : `Don't worry, you'll befriend 
+              ${budsLabel} again soon!`}
+          </p>
+        }
       </section>
     </>
   );

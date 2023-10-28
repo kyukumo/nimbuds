@@ -113,6 +113,7 @@ export type Player = {
   lastEvent: number;
   name: string;
   ping: number;
+  sounds: string[];
   stars: number;
   target: string | null;
 };
@@ -141,6 +142,7 @@ export interface GameState {
   phases: Phases;
   players: Players;
   playerIds: string[];
+  sounds: string[];
 }
 
 export type GameActions = {
@@ -155,6 +157,7 @@ export type GameActions = {
   }) => void;
   ascend: ({ id }: { id: string }) => void;
   battle: () => void;
+  clearSounds: ({ id, sounds }: { id: string; sounds: string[] }) => void;
   setPlayerName: ({ id, name }: { id: string; name: string }) => void;
   switch: ({ id }: { id: string }) => void;
   target: ({ id, target }: { id: string; target: string }) => void;

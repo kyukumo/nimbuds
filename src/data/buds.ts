@@ -289,7 +289,7 @@ export const buds: Record<string, Bud> = {
   },
   nebulon: {
     advantage: [Element.Earth],
-    ascends: 4,
+    ascends: 6,
     description:
       "Often mistaken for an unidentified flying object, it has a markedly unassuming face.",
     disadvantage: [Element.Fire, Element.Light],

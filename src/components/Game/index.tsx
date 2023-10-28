@@ -1,4 +1,6 @@
 import { useRuneClient } from "../../hooks/useRuneClient";
+import { useSound } from "../../hooks/useSound";
+import { useSounds } from "../../hooks/useSounds";
 import { useStore } from "../../hooks/useStore";
 import {
   selectActiveBudElements,
@@ -8,16 +10,16 @@ import {
   selectPhase,
   selectReady,
 } from "../../selectors";
-import { Bud, Buds, Phase } from "../../types";
+import { Phase } from "../../types";
 import { Background } from "../Background";
 import { Battle } from "../Battle";
 import { GameOver } from "../GameOver";
 import { Spectate } from "../Spectate";
 import { Train } from "../Train";
-import styles from "./index.module.css";
 
 export function Game() {
   useRuneClient();
+  useSounds();
 
   const element = useStore(selectActiveBudElements);
   const ended = useStore(selectGameEnded);
@@ -26,13 +28,10 @@ export function Game() {
   const phase = useStore(selectPhase);
   const ready = useStore(selectReady);
 
-  const changePhase = () =>
-    phase === Phase.Battle ? Rune.actions.train() : Rune.actions.battle();
-
   if (!ready) return "Loading!";
 
   if (isSpectator) {
-    if (ended) return "Game over!";
+    if (ended) return <GameOver title="Game Over!" />;
     return <Spectate />;
   }
 
@@ -46,10 +45,6 @@ export function Game() {
           element,
         }}
       />
-
-      <button className={styles.phase} onClick={changePhase} type="button">
-        Phase!
-      </button>
 
       {phase === Phase.Battle ? <Battle /> : <Train />}
     </>

@@ -4,6 +4,8 @@ import { Bud, Move, Phase, Player } from "./types";
 
 export const selectReady = (state: Store) => state.ready;
 
+export const selectSounds = (state: Store) => state.sounds;
+
 export const selectPlayer = (state: Store) => state.player;
 
 // function getZip<T>(a: T[]) {
@@ -43,6 +45,11 @@ export const selectCooldowns = (state: Store) => {
   return player?.cooldowns;
 };
 
+export const selectPlayerSounds = (state: Store) => {
+  const player = selectPlayer(state);
+  return player?.sounds ?? [];
+};
+
 export const selectHasCooldown = (state: Store) => {
   const cooldowns = selectCooldowns(state);
   if (!cooldowns) return false;
@@ -58,6 +65,19 @@ export const selectTrainPhaseDuration = (state: Store) => {
 };
 
 export const selectPlayers = (state: Store) => state.players;
+
+const getWinner = ({ gameOver }: Player) => !gameOver;
+
+export const selectWinner = (state: Store) => {
+  const players = selectPlayers(state);
+  const winner = Object.values(players).find(getWinner);
+  return winner;
+};
+
+export const selectWinningBuds = (state: Store) => {
+  const winner = selectWinner(state);
+  return winner?.buds ?? [];
+};
 
 export const selectPhase = (state: Store) => state.phase;
 

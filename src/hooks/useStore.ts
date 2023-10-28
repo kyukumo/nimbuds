@@ -19,6 +19,7 @@ export type Store = {
   player: Player | null;
   players: Players;
   ready: boolean;
+  sounds: string[];
   setGame: (params: {
     game: GameState;
     yourPlayerId: string | undefined;
@@ -35,8 +36,17 @@ export const useStore = create<Store>((set) => ({
   player: null,
   players: {},
   ready: false,
+  sounds: [],
   setGame: ({
-    game: { duration, ended, events, phase, phases, players: allPlayers },
+    game: {
+      duration,
+      ended,
+      events,
+      phase,
+      phases,
+      players: allPlayers,
+      sounds,
+    },
     yourPlayerId = "",
   }) =>
     set(
@@ -50,6 +60,7 @@ export const useStore = create<Store>((set) => ({
         state.player = player;
         state.players = players;
         state.ready = true;
+        state.sounds = sounds;
       })
     ),
 }));
