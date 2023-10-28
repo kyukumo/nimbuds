@@ -20,6 +20,7 @@ export function PlayerButton({ buds }: Player) {
       </DialogButton>
 
       <Dialog
+        title={<h2>Your Rival</h2>}
         {...{
           close,
         }}

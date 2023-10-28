@@ -1,14 +1,29 @@
 import { Bud } from "../../types";
+import { SubBudCanvas } from "../SubBudCanvas";
+import styles from "./index.module.css";
 
 export function PlayerProfile({ buds }: { buds: Bud[] }) {
   return (
     <>
-      <h2>Your Rival</h2>
       <p>Train to take down your rivals! This rival has the following buds:</p>
 
-      {buds.map(({ id, name }, index) => (
-        <p key={`player-profile-${id}-${index}`}>{name}</p>
-      ))}
+      <ul className={styles.buds}>
+        {buds.map((bud, index) => {
+          const { name, id } = bud;
+
+          return (
+            <li key={`player-profile-${id}-${index.toString()}`}>
+              <SubBudCanvas
+                {...{
+                  bud,
+                }}
+              />
+
+              <strong>{name}</strong>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 }

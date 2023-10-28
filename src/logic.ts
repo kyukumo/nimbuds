@@ -1,7 +1,6 @@
 import {
   BattleType,
   Bud,
-  CurrentBuds,
   GameOverPlayers,
   GameState,
   Phase,
@@ -82,7 +81,7 @@ Rune.initLogic({
     events: [],
     phase: Phase.Train,
     phases: {
-      [Phase.Train]: 60 * 0.2 * 1000, // 3 mins
+      [Phase.Train]: 60 * 10 * 1000, // 3 mins
     },
     players: playerIds.reduce(createPlayers, {}),
     playerIds,
@@ -113,11 +112,11 @@ Rune.initLogic({
   actions: {
     attack: ({ id, move, speed }, { game }) => {
       const cooldown = 6 - speed;
-      const player = game.players[id];
 
-      if (game.phase === Phase.Train) player.cooldowns[move] = cooldown;
+      if (game.phase === Phase.Train)
+        game.players[id].cooldowns[move] = cooldown;
       else
-        player.cooldowns = {
+        game.players[id].cooldowns = {
           [move]: cooldown,
         };
     },
@@ -126,16 +125,14 @@ Rune.initLogic({
       game.players = game.playerIds.reduce(getPlayerForBattle, game.players);
     },
     clearSounds: ({ id, sounds }, { game }) => {
-      const { phase, players } = game;
-      const player = players[id];
-
+      const { phase } = game;
       const isNotComplete = (sound: string) => !sounds.includes(sound);
 
       if (phase === Phase.Battle) {
         game.sounds = game.sounds.filter(isNotComplete);
       } else {
-        const { sounds: currentSounds } = player;
-        player.sounds = currentSounds.filter(isNotComplete);
+        const { sounds: currentSounds } = game.players[id];
+        game.players[id].sounds = currentSounds.filter(isNotComplete);
       }
     },
     train: (_, { game }) => {

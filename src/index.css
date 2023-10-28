@@ -19,6 +19,8 @@
   --red-pixel-border: -0.5em 0 0 0 var(--red), 0.5em 0 0 0 var(--red),
     0 -0.5em 0 0 var(--red), 0 0.5em 0 0 var(--red);
 
+  --alt-pixel-border: 0.25em 0.25em 0 0 var(--black);
+
   --dark-1: #bbbbbb;
   --dark-2: #d1d1d1;
   --dark-3: #e8e8e7;
@@ -139,9 +141,9 @@ html,
 }
 
 body {
-  overflow: hidden;
   font-size: max(3vh, 1rem);
   line-height: 1;
+  overflow: hidden;
 }
 
 * {

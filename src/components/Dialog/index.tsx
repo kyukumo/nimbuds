@@ -6,9 +6,11 @@ import { createPortal } from "react-dom";
 export function Dialog({
   children,
   close,
+  title,
 }: {
   children: ReactNode;
   close: () => void;
+  title: ReactNode;
 }) {
   const { dialogRef } = useDialogContext();
 
@@ -37,12 +39,16 @@ export function Dialog({
 
   return createPortal(
     <dialog className={styles.dialog} onClick={onDialogClick} ref={dialogRef}>
-      <form method="dialog">
-        <button onClick={close} type="submit">
-          <span aria-hidden="true">&times;</span>
-          <span className="sr-only">Close</span>
-        </button>
-      </form>
+      <header>
+        {title}
+
+        <form method="dialog">
+          <button onClick={close} type="submit">
+            <span aria-hidden="true">&times;</span>
+            <span className="sr-only">Close</span>
+          </button>
+        </form>
+      </header>
 
       {children}
     </dialog>,
