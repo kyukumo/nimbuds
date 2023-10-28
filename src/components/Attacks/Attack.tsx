@@ -1,5 +1,5 @@
 import { useStore } from "../../hooks/useStore";
-import { selectActiveBudSpeed, selectPlayerId } from "../../selectors";
+import { selectActiveBudSpeed } from "../../selectors";
 import { Element, Move } from "../../types";
 import { SubElementCanvas } from "../SubElementCanvas";
 import styles from "./index.module.css";
@@ -17,17 +17,14 @@ export function Attack({
   label: string;
   move: Move;
 }) {
-  const id = useStore(selectPlayerId);
   const speed = useStore(selectActiveBudSpeed);
   const disabled = groupDisabled || typeof cooldown !== "undefined";
 
-  const attack = () => {
+  const attack = () =>
     Rune.actions.attack({
-      id,
       move,
       speed,
     });
-  };
 
   const progressBarId = `${move}-progress`;
 

@@ -13,13 +13,13 @@
   --yellow: var(--light);
   --red: var(--fire);
 
-  --space: 0.5em;
+  --space: 0.65em;
   --space-lg: calc(var(--space) * 2);
   --unspace: calc(var(--space) * -1);
   --space-sm: calc(var(--space) / 2);
   --unspace-sm: calc(var(--space-sm) * -1);
 
-  --small-font: 0.75em;
+  --small-font: 0.85em;
 
   --pixel-border: var(--unspace) 0 0 0 var(--black),
     var(--space) 0 0 0 var(--black), 0 var(--unspace) 0 0 var(--black),

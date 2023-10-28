@@ -21,21 +21,29 @@ import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
 import { getGetPlayersWithResetTargets } from "./lib/getGetPlayersWithResetTargets";
 import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
 
-const createPlayer = (id: string, playerIds: string[]): Player => ({
-  buds: getStarterBuds(),
-  cooldowns: {},
-  defeatedBuds: [],
-  events: [],
-  gameOver: false,
-  id,
-  inventory: getStarterInventory(),
-  lastEvent: Rune.gameTime() / 1000,
-  name: id,
-  ping: 0,
-  sounds: [],
-  stars: 3000,
-  target: getRandomTarget(id, playerIds),
-});
+const createPlayer = (id: string, playerIds: string[]): Player => {
+  const buds = getStarterBuds();
+  const [{ id: starterId }] = buds;
+  const starters = [starterId];
+
+  return {
+    lastAction: 0,
+    buds,
+    cooldowns: {},
+    defeatedBuds: [],
+    events: [],
+    gameOver: false,
+    id,
+    inventory: getStarterInventory(),
+    lastEvent: 0,
+    name: id,
+    ping: 0,
+    sounds: [],
+    stars: 3000,
+    starters,
+    target: getRandomTarget(id, playerIds),
+  };
+};
 
 const createPlayers = (
   players: Players,
@@ -65,7 +73,7 @@ const getSetUpdates =
 
 Rune.initLogic({
   minPlayers: 1,
-  maxPlayers: 3,
+  maxPlayers: 4,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
@@ -80,62 +88,66 @@ Rune.initLogic({
     sounds: [],
   }),
   events: {
-    playerJoined: (id, { game }) => {
-      game.playerIds.push(id);
-      game.players[id] = createPlayer(id, game.playerIds);
+    playerJoined: (id, { game: { players, playerIds } }) => {
+      playerIds.push(id);
+      players[id] = createPlayer(id, playerIds);
 
-      if (game.playerIds.length > 1) {
-        const [playerOneId] = game.playerIds;
-        const playerOne = game.players[playerOneId];
+      if (playerIds.length > 1) {
+        const [playerOneId] = playerIds;
+        const playerOne = players[playerOneId];
 
         if (!playerOne.target)
-          game.players[playerOneId].target = getRandomTarget(
-            playerOneId,
-            game.playerIds
-          );
+          playerOne.target = getRandomTarget(playerOneId, playerIds);
       }
     },
     playerLeft: (id, { game }) => {
-      const index = game.playerIds.indexOf(id);
-      game.playerIds.splice(index, 1);
-      delete game.players[id];
-      const { players, playerIds } = game;
+      const { playerIds, players } = game;
+      const index = playerIds.indexOf(id);
+      playerIds.splice(index, 1);
+      delete players[id];
       const getPlayersWithNewTargets = getGetPlayersWithNewTargets(id);
       game.players = playerIds.reduce(getPlayersWithNewTargets, players);
     },
   },
   actions: {
-    attack: ({ id, move, speed }, { game }) => {
+    attack: ({ move, speed }, { game, playerId }) => {
       const cooldown = 6 - speed;
+      const { phase, players } = game;
 
-      if (game.phase === Phase.Train)
-        game.players[id].cooldowns[move] = cooldown;
+      const player = players[playerId];
+      if (!player) return;
+
+      console.log(
+        "Attacking",
+        playerId,
+        cooldown,
+        player.lastAction,
+        game.duration
+      );
+
+      player.lastAction = Rune.gameTime();
+
+      if (phase === Phase.Train) player.cooldowns[move] = cooldown;
       else
-        game.players[id].cooldowns = {
+        player.cooldowns = {
           [move]: cooldown,
         };
     },
-    battle: (_, { game }) => {
-      game.phase = Phase.Battle;
-      game.players = game.playerIds.reduce(getPlayerForBattle, game.players);
-    },
-    clearSounds: ({ id, sounds }, { game }) => {
-      const { phase } = game;
-      const isNotComplete = (sound: string) => !sounds.includes(sound);
+    clearSounds: ({ sounds: nextSounds }, { game, playerId }) => {
+      const { phase, players, sounds } = game;
+      const isNotComplete = (sound: string) => !nextSounds.includes(sound);
 
-      if (phase === Phase.Battle) {
-        game.sounds = game.sounds.filter(isNotComplete);
-      } else {
-        const { sounds: currentSounds } = game.players[id];
-        game.players[id].sounds = currentSounds.filter(isNotComplete);
+      if (phase === Phase.Battle) game.sounds = sounds.filter(isNotComplete);
+      else {
+        const { sounds: currentSounds } = players[playerId];
+        players[playerId].sounds = currentSounds.filter(isNotComplete);
       }
     },
-    train: (_, { game }) => {
-      game.phase = Phase.Train;
-    },
-    ascend: ({ id }, { game }) => {
+    ascend: (_, { game, playerId }) => {
       const { players } = game;
-      const player = players[id];
+
+      const player = players[playerId];
+      if (!player) return;
 
       const [bud] = player.buds;
       if (!bud) return;
@@ -169,13 +181,14 @@ Rune.initLogic({
         events: {
           player: event,
           public: event,
-          rival: `Rival's ${bud.name} ascended to ${nextBud.name}!`,
+          rival: `Your rival's ${bud.name} ascended to ${nextBud.name}!`,
         },
-        id,
+        id: playerId,
       });
     },
-    switch: ({ id }, { game }) => {
-      const player = game.players[id];
+    switch: (_, { game, playerId }) => {
+      const { players } = game;
+      const player = players[playerId];
       const { cooldowns } = player;
 
       const hasCooldowns = Boolean(Object.keys(cooldowns).length);
@@ -193,14 +206,14 @@ Rune.initLogic({
           events: {
             player: event,
             public: event,
-            rival: `Rival's ${event}`,
+            rival: `Your rival's ${event}`,
           },
-          id,
+          id: playerId,
         });
       }
     },
-    target: ({ id, target }, { game }) => {
-      game.players[id].target = target;
+    target: ({ target }, { game, playerId }) => {
+      game.players[playerId].target = target;
     },
   },
   update: ({ allPlayerIds, game }) => {
@@ -209,12 +222,11 @@ Rune.initLogic({
     const {
       duration,
       phases: { [Phase.Train]: trainDuration },
-      playerIds,
     } = game;
 
     if (duration === trainDuration) {
       game.phase = Phase.Battle;
-      game.players = playerIds.reduce(getPlayerForBattle, game.players);
+      game.players = game.playerIds.reduce(getPlayerForBattle, game.players);
     }
 
     const setUpdates = getSetUpdates(game);

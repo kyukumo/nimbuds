@@ -9,9 +9,7 @@
   width: 100%;
 
   & canvas {
-    margin-top: var(--space);
-    margin-bottom: var(--unspace);
-    padding: var(--space-lg);
+    margin-top: calc(var(--space-sm) + var(--space-lg));
   }
 
   > * {

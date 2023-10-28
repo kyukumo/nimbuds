@@ -7,7 +7,8 @@ export const getReducedCooldowns = (
   const { cooldowns, complete } = all;
   const move = <Move>key;
 
-  if (!value)
+  const nextValue = value - 1;
+  if (!nextValue)
     return {
       cooldowns,
       complete: [...complete, move],
@@ -17,7 +18,7 @@ export const getReducedCooldowns = (
     complete,
     cooldowns: {
       ...cooldowns,
-      [move]: value - 1,
+      [move]: nextValue,
     },
   };
 };

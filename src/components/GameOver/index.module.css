@@ -12,7 +12,7 @@
   & .buds {
     display: flex;
     flex-direction: column;
-    gap: var(--space);
+    gap: var(--space-lg);
 
     & canvas {
       margin: 0 auto;

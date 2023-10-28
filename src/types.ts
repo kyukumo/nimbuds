@@ -109,12 +109,14 @@ export type Player = {
   events: string[];
   gameOver: boolean;
   id: string;
+  lastAction: number;
   inventory: Inventory;
   lastEvent: number;
   name: string;
   ping: number;
   sounds: string[];
   stars: number;
+  starters: string[];
   target: string | null;
 };
 
@@ -146,21 +148,11 @@ export interface GameState {
 }
 
 export type GameActions = {
-  attack: ({
-    id,
-    move,
-    speed,
-  }: {
-    id: string;
-    move: Move;
-    speed: number;
-  }) => void;
-  ascend: ({ id }: { id: string }) => void;
-  battle: () => void;
-  clearSounds: ({ id, sounds }: { id: string; sounds: string[] }) => void;
-  switch: ({ id }: { id: string }) => void;
-  target: ({ id, target }: { id: string; target: string }) => void;
-  train: () => void;
+  attack: ({ move, speed }: { move: Move; speed: number }) => void;
+  ascend: () => void;
+  clearSounds: ({ sounds }: { sounds: string[] }) => void;
+  switch: () => void;
+  target: ({ target }: { target: string }) => void;
 };
 
 declare global {

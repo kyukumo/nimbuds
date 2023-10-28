@@ -5,7 +5,9 @@ import { setEvents } from "./setEvent";
 const baseXp = 1;
 
 export const getLevelUp = (game: GameState, id: string) => () => {
-  const player = game.players[id];
+  const { players } = game;
+
+  const player = players[id];
   if (!player?.buds.length) return;
 
   const [
@@ -29,7 +31,7 @@ export const getLevelUp = (game: GameState, id: string) => () => {
       events: {
         player: `${name} leveled up to ${stats.level}!`,
         public: `${name} leveled up to ${stats.level}!`,
-        rival: `Rival's ${name} leveled up to ${stats.level}!`,
+        rival: `Your rival's ${name} leveled up to ${stats.level}!`,
       },
       id,
     });

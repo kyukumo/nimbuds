@@ -34,8 +34,8 @@ export function Game() {
     return <Spectate />;
   }
 
-  if (gameOver) return <GameOver title="You Lost! :(" />;
-  if (ended) return <GameOver title="You Won!! :)" />;
+  if (gameOver) return <GameOver title="You Lost!" />;
+  if (ended) return <GameOver title="You Won!!" />;
 
   return (
     <>

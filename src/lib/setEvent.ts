@@ -11,13 +11,15 @@ export const setEvent = ({
   game: GameState;
   id?: string;
 }) => {
+  const { events, players } = game;
+
   if (id) {
-    const player = game.players[id];
+    const player = players[id];
     if (player.events.length === eventCount) player.events.shift();
     player.events.push(event);
   } else {
-    if (game.events.length === eventCount) game.events.shift();
-    game.events.push(event);
+    if (events.length === eventCount) events.shift();
+    events.push(event);
   }
 };
 
@@ -37,7 +39,8 @@ export const setRivalsEvent = ({
       id: rivalId,
     });
 
-  const playerIds = Object.keys(game.players);
+  const { players } = game;
+  const playerIds = Object.keys(players);
   const index = playerIds.indexOf(id);
   playerIds.splice(index, 1);
   playerIds.forEach(setRivalEvents);

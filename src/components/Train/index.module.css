@@ -63,7 +63,11 @@
       }
 
       & dl {
-        gap: var(--space);
+        gap: var(--space-sm);
+      }
+
+      & dd {
+        font-weight: bold;
       }
     }
   }

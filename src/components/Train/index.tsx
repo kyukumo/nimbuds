@@ -71,11 +71,7 @@ export function Train() {
               <button
                 className={styles.ascend}
                 disabled={!canAscend}
-                onClick={() =>
-                  Rune.actions.ascend({
-                    id,
-                  })
-                }
+                onClick={() => Rune.actions.ascend()}
                 type="button"
               >
                 Ascend!

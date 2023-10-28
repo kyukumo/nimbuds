@@ -1,5 +1,5 @@
 import { buds, starters } from "../data/buds";
-import { Bud, Buds } from "../types";
+import { Bud, CurrentBuds } from "../types";
 import { getHp } from "./getHp";
 import { getRandomNumber } from "./getRandomNumber";
 import { getUniqueRandomNumbers } from "./getUniqueRandomNumbers";
@@ -19,8 +19,11 @@ const getBud = (index: number) => {
   } as Bud;
 };
 
-export const getRandomBud = () => {
-  const index = getRandomNumber(0, starters.length - 1);
+const getStarterIndex = (id: string) => starters.indexOf(id);
+
+export const getRandomBud = (excludedIds?: string[]) => {
+  const exclude = excludedIds?.map(getStarterIndex) ?? [];
+  const index = getRandomNumber(0, starters.length - 1, exclude);
   const bud = getBud(index);
   return bud;
 };
@@ -30,4 +33,4 @@ const getRandomBuds = (count = 3) => {
   return numbers.map(getBud);
 };
 
-export const getStarterBuds = () => getRandomBuds(1) as Buds;
+export const getStarterBuds = () => getRandomBuds(3) as CurrentBuds;

@@ -15,7 +15,7 @@ export const tryPlayerGameOver = (game: GameState, id: string) => {
     if (isNewGameOver)
       setEvent({
         game,
-        event: `A player whited out!`,
+        event: `A rival wiped out!`,
       });
 
     player.gameOver = gameOver;

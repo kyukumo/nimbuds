@@ -5,7 +5,8 @@ import { setEvent } from "./setEvent";
 
 export const getFinishAttack =
   (game: GameState, id: string) => (move: Move) => {
-    const player = game.players[id];
+    const { players } = game;
+    const player = players[id];
     if (!player) return;
 
     const { target } = player;
@@ -15,7 +16,7 @@ export const getFinishAttack =
     if (!bud) return;
 
     const { stats: budStats } = bud;
-    const rival = game.players[target];
+    const rival = players[target];
     if (!rival?.buds.length) return;
 
     const [rivalBud] = rival.buds;

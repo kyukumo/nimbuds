@@ -7,6 +7,9 @@ import path from "node:path";
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "", // Makes paths relative
+  server: {
+    hmr: false,
+  },
   plugins: [
     qrcode(), // only applies in dev mode
     react(),

@@ -20,7 +20,9 @@ export const reduceCooldowns = (game: GameState, id: string) => {
     complete: [],
   });
 
-  game.players[id].cooldowns = cooldowns;
+  console.log("Cooldowns", cooldowns, player.lastAction, game.duration);
+
+  player.cooldowns = cooldowns;
   const sounds: string[] = complete.map(getMoveSound);
 
   if (phase === Phase.Train) {
@@ -38,7 +40,7 @@ export const reduceCooldowns = (game: GameState, id: string) => {
     }
 
     const { sounds: currentSounds } = player;
-    game.players[id].sounds = [...currentSounds, ...sounds];
+    player.sounds = [...currentSounds, ...sounds];
   } else if (phase === Phase.Battle) {
     const finishAttack = getFinishAttack(game, id);
     complete.forEach(finishAttack);

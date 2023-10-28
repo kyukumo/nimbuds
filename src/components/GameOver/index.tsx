@@ -8,6 +8,7 @@ import {
 import { useStore } from "../../hooks/useStore";
 import { SubBudCanvas } from "../SubBudCanvas";
 import { Background } from "../Background";
+import { Music } from "../Music";
 
 const addAnd = (index: number, length: number, text: string) =>
   [index && index === length - 1 && "and", text].filter(Boolean).join(" ");
@@ -37,7 +38,11 @@ export function GameOver({ title }: { title: string }) {
       />
 
       <section className={styles.gameOver}>
-        <h1>{title}</h1>
+        <header>
+          <Music />
+
+          <h1>{title}</h1>
+        </header>
 
         <div className={styles.buds}>
           {buds.map((bud, index) => (

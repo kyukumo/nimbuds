@@ -1,0 +1,6 @@
+.icons {
+  display: flex;
+  padding-top: var(--space);
+  align-items: center;
+  justify-content: end;
+}

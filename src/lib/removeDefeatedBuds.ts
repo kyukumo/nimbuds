@@ -27,7 +27,9 @@ const removeDefeatedBud = (all: NextBuds, bud: Bud) => {
 };
 
 export const removeDefeatedBuds = (game: GameState, id: string) => {
-  const player = game.players[id];
+  const { players } = game;
+
+  const player = players[id];
   const { buds, defeatedBuds } = player;
 
   const { nextBuds, nextDefeatedBuds } = [...buds].reduce(removeDefeatedBud, {
@@ -37,13 +39,23 @@ export const removeDefeatedBuds = (game: GameState, id: string) => {
 
   player.buds = nextBuds as Buds;
   player.defeatedBuds = [...defeatedBuds, ...nextDefeatedBuds] as Buds;
-  player.cooldowns = {};
 
-  const setDefeatedBudEvent = ({ name }: Bud) =>
+  if (nextDefeatedBuds.length) player.cooldowns = {};
+
+  const setDefeatedBudEvent = ({ name }: Bud) => {
     setEvent({
       game,
       event: `${name} was defeated!`,
     });
+
+    const [nextBud] = player.buds;
+
+    if (nextBud)
+      setEvent({
+        game,
+        event: `${nextBud.name} was called out!`,
+      });
+  };
 
   nextDefeatedBuds.forEach(setDefeatedBudEvent);
 };

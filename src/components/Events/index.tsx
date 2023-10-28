@@ -1,3 +1,4 @@
+import { Icons } from "../Icons";
 import styles from "./index.module.css";
 
 export function Events({ events }: { events: string[] }) {
@@ -18,6 +19,8 @@ export function Events({ events }: { events: string[] }) {
           )}
         </div>
       </div>
+
+      <Icons />
     </div>
   );
 }
