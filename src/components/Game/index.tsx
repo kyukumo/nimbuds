@@ -1,5 +1,4 @@
 import { useRuneClient } from "../../hooks/useRuneClient";
-import { useSound } from "../../hooks/useSound";
 import { useSounds } from "../../hooks/useSounds";
 import { useStore } from "../../hooks/useStore";
 import {

@@ -29,7 +29,7 @@ export const getLevelUp = (game: GameState, id: string) => () => {
       events: {
         player: `${name} leveled up to ${stats.level}!`,
         public: `${name} leveled up to ${stats.level}!`,
-        rival: `Your rival's ${name} leveled up to ${stats.level}!`,
+        rival: `Rival's ${name} leveled up to ${stats.level}!`,
       },
       id,
     });

@@ -5,11 +5,11 @@
 
   .content {
     display: grid;
-    gap: 0.5em;
+    gap: var(--space);
     grid-template-columns: 1fr;
     grid-template-rows: auto auto 1fr auto;
     height: 100%;
-    padding: 1em;
+    padding: var(--space-lg);
   }
 
   & dd,
@@ -22,35 +22,39 @@
   & footer {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: var(--space);
 
     .description {
-      font-size: 0.75em;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      display: -webkit-box;
+      font-size: var(--small-font);
       margin: 0;
+      overflow: hidden;
     }
   }
 
   .actions {
     display: grid;
-    gap: 0.5em;
+    gap: var(--space);
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
   }
 
   .choices {
     display: flex;
-    gap: 0.5em;
+    gap: var(--space);
     flex-direction: column-reverse;
   }
 
   .heading {
     align-items: center;
     display: flex;
-    gap: 1em;
+    gap: var(--space-lg);
     justify-content: space-between;
 
     .attributes {
-      gap: 1em;
+      gap: var(--space-lg);
 
       &,
       & dl {
@@ -59,7 +63,7 @@
       }
 
       & dl {
-        gap: 0.5em;
+        gap: var(--space);
       }
     }
   }

@@ -8,7 +8,6 @@ import { Phase } from "../../types";
 import { Background } from "../Background";
 import { BattleBud } from "../BattleBud";
 import { ElementCanvas } from "../ElementCanvas";
-import { Events } from "../Events";
 import { SpectatorEvents } from "../SpectatorEvents";
 import { Timer } from "../Timer";
 import styles from "./index.module.css";

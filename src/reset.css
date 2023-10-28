@@ -28,6 +28,16 @@ h6 {
   font-size: 1em;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-weight: bold;
+}
+
 abbr {
   text-decoration: none;
 }

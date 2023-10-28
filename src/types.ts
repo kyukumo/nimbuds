@@ -158,7 +158,6 @@ export type GameActions = {
   ascend: ({ id }: { id: string }) => void;
   battle: () => void;
   clearSounds: ({ id, sounds }: { id: string; sounds: string[] }) => void;
-  setPlayerName: ({ id, name }: { id: string; name: string }) => void;
   switch: ({ id }: { id: string }) => void;
   target: ({ id, target }: { id: string; target: string }) => void;
   train: () => void;

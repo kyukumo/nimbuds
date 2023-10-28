@@ -1,7 +1,7 @@
 .button {
   aspect-ratio: 1 / 1;
   background-color: transparent;
-  margin: 0 0.5em 0.5em 0;
+  margin: 0 var(--space) var(--space) 0;
   padding: 0;
   min-width: 2em;
 

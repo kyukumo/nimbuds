@@ -19,15 +19,7 @@ import { tryRandomEvent } from "./lib/tryRandomEvent";
 import { getRandomTarget } from "./lib/getRandomTarget";
 import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
 import { getGetPlayersWithResetTargets } from "./lib/getGetPlayersWithResetTargets";
-
-const getGetPlayersWithNewTargets =
-  (leavingTarget: string) =>
-  (all: Players, playerId: string, index: number, playerIds: string[]) => {
-    const player = all[playerId];
-    const isLeaving = player.target === leavingTarget;
-    if (isLeaving) player.target = getRandomTarget(playerId, playerIds);
-    return all;
-  };
+import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
 
 const createPlayer = (id: string, playerIds: string[]): Player => ({
   buds: getStarterBuds(),
@@ -81,7 +73,7 @@ Rune.initLogic({
     events: [],
     phase: Phase.Train,
     phases: {
-      [Phase.Train]: 60 * 10 * 1000, // 3 mins
+      [Phase.Train]: 60 * 3 * 1000, // 3 mins
     },
     players: playerIds.reduce(createPlayers, {}),
     playerIds,
@@ -97,7 +89,10 @@ Rune.initLogic({
         const playerOne = game.players[playerOneId];
 
         if (!playerOne.target)
-          playerOne.target = getRandomTarget(playerOneId, game.playerIds);
+          game.players[playerOneId].target = getRandomTarget(
+            playerOneId,
+            game.playerIds
+          );
       }
     },
     playerLeft: (id, { game }) => {
@@ -174,7 +169,7 @@ Rune.initLogic({
         events: {
           player: event,
           public: event,
-          rival: `Your rival's ${bud.name} ascended to ${nextBud.name}!`,
+          rival: `Rival's ${bud.name} ascended to ${nextBud.name}!`,
         },
         id,
       });
@@ -198,15 +193,11 @@ Rune.initLogic({
           events: {
             player: event,
             public: event,
-            rival: `Your rival's ${event}`,
+            rival: `Rival's ${event}`,
           },
           id,
         });
       }
-    },
-    setPlayerName: ({ id, name }, { game: { players } }) => {
-      const player = players[id];
-      player.name = name;
     },
     target: ({ id, target }, { game }) => {
       game.players[id].target = target;

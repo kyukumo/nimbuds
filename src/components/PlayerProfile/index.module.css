@@ -1,6 +1,6 @@
 .buds {
   align-items: center;
-  gap: 1em;
+  gap: var(--space-lg);
   justify-content: center;
   list-style: none;
   padding: 0;
@@ -13,7 +13,7 @@
   & li {
     flex-direction: column;
     flex: 1;
-    gap: 0.5em;
+    gap: var(--space);
     text-align: center;
 
     &,

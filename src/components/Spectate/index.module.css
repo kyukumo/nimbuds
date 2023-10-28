@@ -2,7 +2,7 @@
   & header {
     & dl {
       display: inline-grid;
-      gap: 0.25em;
+      gap: var(--space-sm);
       grid-auto-flow: row;
       grid-auto-rows: auto;
       grid-template-columns: auto auto;
@@ -21,7 +21,7 @@
   & header,
   .level,
   .stats {
-    gap: 0.5em;
+    gap: var(--space);
   }
 
   &,
@@ -33,12 +33,12 @@
   .buds {
     background-color: var(--white);
     box-shadow: var(--pixel-border);
-    padding: 0.5em;
-    margin: 0.5em;
+    padding: var(--space);
+    margin: var(--space);
 
     & ul {
       display: grid;
-      gap: 0.5em 1em;
+      gap: var(--space) var(--space-lg);
       grid-auto-flow: row;
       grid-auto-rows: auto;
       grid-template-columns: 1fr 1fr;
@@ -50,8 +50,8 @@
 
   .content {
     flex: 1;
-    gap: 1em;
-    padding: 1em;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
   }
 
   .stats {

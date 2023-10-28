@@ -20,7 +20,7 @@ const setRandomEvent = (game: GameState, id: string) => {
       events: {
         player: `You befriended ${nextBud.name}!`,
         public: `${nextBud.name} was befriended!`,
-        rival: `Your rival befriended ${nextBud.name}!`,
+        rival: `Rival befriended ${nextBud.name}!`,
       },
       id,
     });

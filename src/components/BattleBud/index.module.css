@@ -5,13 +5,13 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   justify-items: center;
-  padding: 0.5em;
+  padding: var(--space);
   width: 100%;
 
   & canvas {
-    margin-top: 0.5em;
-    margin-bottom: -0.5em;
-    padding: 1em;
+    margin-top: var(--space);
+    margin-bottom: var(--unspace);
+    padding: var(--space-lg);
   }
 
   > * {

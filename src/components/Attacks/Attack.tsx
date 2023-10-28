@@ -1,4 +1,3 @@
-import { moves, paths } from "../../data/moves";
 import { useStore } from "../../hooks/useStore";
 import { selectActiveBudSpeed, selectPlayerId } from "../../selectors";
 import { Element, Move } from "../../types";

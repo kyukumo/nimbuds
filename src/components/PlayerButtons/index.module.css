@@ -1,6 +1,6 @@
 .players {
   align-items: center;
-  gap: 0.5em;
+  gap: var(--space);
   justify-content: center;
   list-style: none;
   padding: 0;
@@ -22,7 +22,7 @@
     }
 
     & canvas {
-      height: 1.5em;
+      height: calc(var(--space-lg) * 1.5);
       width: auto;
     }
   }

@@ -8,7 +8,6 @@ import {
 } from "../../selectors";
 import styles from "./index.module.css";
 import { Attacks } from "../Attacks";
-import { Events } from "../Events";
 import { MainBudCanvas } from "../MainBudCanvas";
 import { MainElementCanvas } from "../MainElementCanvas";
 import { PlayerButtons } from "../PlayerButtons";

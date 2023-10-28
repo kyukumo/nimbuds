@@ -6,7 +6,7 @@
     background-color: var(--white);
     border: 0;
     box-shadow: var(--alt-pixel-border);
-    height: 0.5em;
+    height: var(--space);
   }
 
   &::-webkit-meter-bar {

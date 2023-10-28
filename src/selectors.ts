@@ -8,19 +8,6 @@ export const selectSounds = (state: Store) => state.sounds;
 
 export const selectPlayer = (state: Store) => state.player;
 
-// function getZip<T>(a: T[]) {
-//   return (all: T[], b: T, index: number) => [...all, a[index], b];
-// }
-
-// const mergeEvents = (a: string[], b: string[]) => {
-//   const longer = a.length > b.length;
-//   const main = longer ? a : b;
-//   const sub = !longer ? b : a;
-//   const zip = getZip<string>(sub);
-//   const result = main.reduce(zip, []);
-//   return result;
-// };
-
 export const selectPlayerEvents = (state: Store) => {
   const player = selectPlayer(state);
   return player?.events ?? [];
@@ -81,8 +68,6 @@ export const selectWinningBuds = (state: Store) => {
 
 export const selectPhase = (state: Store) => state.phase;
 
-export const selectBattleType = (state: Store) => state.battleType;
-
 export const selectPlayerId = (state: Store) => {
   const player = selectPlayer(state);
   return player?.id ?? "";
@@ -91,11 +76,6 @@ export const selectPlayerId = (state: Store) => {
 export const selectIsSpectator = (state: Store) => {
   const id = selectPlayerId(state);
   return !id;
-};
-
-export const selectLastEvent = (state: Store) => {
-  const player = selectPlayer(state);
-  return player?.lastEvent ?? null;
 };
 
 export const selectBuds = (state: Store) => {

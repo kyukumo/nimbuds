@@ -6,7 +6,7 @@
   & .attacks {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: var(--space);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -18,7 +18,7 @@
         align-items: center;
         display: flex;
         flex: 1;
-        gap: 1em;
+        gap: var(--space-lg);
 
         &.disabled {
           opacity: 0.5;
