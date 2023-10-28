@@ -10,7 +10,6 @@ import { Switch } from "../Switch";
 import { Rival } from "../Rival";
 import { BattleBud } from "../BattleBud";
 import { SpectatorEvents } from "../SpectatorEvents";
-import { Icons } from "../Icons";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);

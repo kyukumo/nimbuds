@@ -3,7 +3,6 @@ import {
   selectActiveBudLevel,
   selectActiveBudName,
   selectCanActiveBudAscend,
-  selectPlayerId,
   selectTrainPhaseDuration,
 } from "../../selectors";
 import styles from "./index.module.css";
@@ -19,7 +18,6 @@ import { PlayerEvents } from "../PlayerEvents";
 export function Train() {
   const canAscend = useStore(selectCanActiveBudAscend);
   const description = useStore(selectActiveBudDescription);
-  const id = useStore(selectPlayerId);
   const name = useStore(selectActiveBudName);
   const phaseDuration = useStore(selectTrainPhaseDuration);
   const level = useStore(selectActiveBudLevel);
