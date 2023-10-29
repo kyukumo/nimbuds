@@ -117,14 +117,6 @@ Rune.initLogic({
       const player = players[playerId];
       if (!player) return;
 
-      console.log(
-        "Attacking",
-        playerId,
-        cooldown,
-        player.lastAction,
-        game.duration
-      );
-
       player.lastAction = Rune.gameTime();
 
       if (phase === Phase.Train) player.cooldowns[move] = cooldown;

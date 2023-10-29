@@ -204,7 +204,6 @@ canvas {
 }
 
 main {
-  -webkit-font-smoothing: none;
   box-sizing: border-box;
   height: 100dvh;
   margin: 0 auto;

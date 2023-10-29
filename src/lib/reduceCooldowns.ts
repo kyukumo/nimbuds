@@ -20,8 +20,6 @@ export const reduceCooldowns = (game: GameState, id: string) => {
     complete: [],
   });
 
-  console.log("Cooldowns", cooldowns, player.lastAction, game.duration);
-
   player.cooldowns = cooldowns;
   const sounds: string[] = complete.map(getMoveSound);
 

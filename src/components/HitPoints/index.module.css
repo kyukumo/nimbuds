@@ -4,6 +4,7 @@
   &,
   &::-webkit-meter-bar {
     background-color: var(--white);
+    background-image: none;
     border: 0;
     box-shadow: var(--alt-pixel-border);
     height: var(--space);

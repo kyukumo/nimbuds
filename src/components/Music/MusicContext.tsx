@@ -3,7 +3,7 @@ import {
   RefObject,
   createContext,
   createRef,
-  useEffect,
+  useLayoutEffect,
   useRef,
 } from "react";
 
@@ -17,13 +17,14 @@ export const MusicContext = createContext<Context>({
   toggle: null,
 });
 
-const bgm = "./sounds/bgm.ogg";
+const bgm = "./sounds/bgm.mp3";
 
 export function MusicProvider({ children }: { children: ReactNode }) {
   const musicRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     musicRef.current = new Audio(bgm);
+    musicRef.current.load();
     musicRef.current.loop = true;
     musicRef.current.volume = 0.1;
   }, []);
