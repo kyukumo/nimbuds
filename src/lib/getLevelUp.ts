@@ -10,28 +10,27 @@ export const getLevelUp = (game: GameState, id: string) => () => {
   const player = players[id];
   if (!player?.buds.length) return;
 
-  const [
-    {
-      moves: { length },
-      name,
-      stats,
-    },
-  ] = player.buds;
+  const [bud] = player.buds;
 
-  const { level = 1, xp = 0 } = stats;
-  stats.xp = xp + baseXp * (1 / length);
+  const {
+    moves: { length },
+    name,
+    stats: { level = 1, xp = 0 },
+  } = bud;
+
+  bud.stats.xp = xp + baseXp * (1 / length);
   const levelUpXP = Math.ceil((level * 2 - 1) * 1.2);
 
-  if (stats.xp >= levelUpXP) {
-    stats.level = level + 1;
-    stats.hp = getHp(stats.level);
+  if (bud.stats.xp >= levelUpXP) {
+    bud.stats.level = level + 1;
+    bud.stats.hp = getHp(bud.stats.level);
 
     setEvents({
       game,
       events: {
-        player: `${name} leveled up to ${stats.level}!`,
-        public: `${name} leveled up to ${stats.level}!`,
-        rival: `Your rival's ${name} leveled up to ${stats.level}!`,
+        player: `${name} leveled up to ${bud.stats.level}!`,
+        public: `${name} leveled up to ${bud.stats.level}!`,
+        rival: `Your rival's ${name} leveled up to ${bud.stats.level}!`,
       },
       id,
     });

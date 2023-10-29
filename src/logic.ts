@@ -141,8 +141,9 @@ Rune.initLogic({
 
       if (phase === Phase.Battle) game.sounds = sounds.filter(isNotComplete);
       else {
-        const { sounds: currentSounds } = players[playerId];
-        players[playerId].sounds = currentSounds.filter(isNotComplete);
+        const player = players[playerId];
+        const { sounds: currentSounds } = player;
+        player.sounds = currentSounds.filter(isNotComplete);
       }
     },
     ascend: (_, { game, playerId }) => {
