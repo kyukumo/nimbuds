@@ -895,7 +895,7 @@ export const buds: Record<string, Bud> = {
   enchantalon: {
     advantage: [Element.Earth],
     description:
-      "It is a graceful and affectionate parter, but it lulls its enemies into a false sense of security with its enchanting melodies.",
+      "It is a graceful and affectionate partner, but it lulls its enemies into a false sense of security with its enchanting melodies.",
     disadvantage: [Element.Dark, Element.Fire],
     element: [Element.Light, Element.Wind],
     id: "enchantalon",

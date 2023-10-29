@@ -59,14 +59,18 @@ export function GameOver({ title }: { title: string }) {
           ))}
         </div>
 
-        {
+        <footer>
           <p>
             {spectating
               ? `Next time, you can join the fray and find ${budsLabel}!`
               : `Don't worry, you'll befriend 
-              ${budsLabel} again soon!`}
+        ${budsLabel} again soon!`}
           </p>
-        }
+
+          {!spectating && <p>Thanks for playing!</p>}
+
+          <img alt="Nimbuds" src="./images/logo.png" />
+        </footer>
       </section>
     </>
   );
