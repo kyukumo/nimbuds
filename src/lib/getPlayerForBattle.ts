@@ -1,13 +1,8 @@
-import { Players } from "../types";
+import { GameState } from "../types";
 
-export const getPlayerForBattle = (all: Players, playerId: string) => {
-  const player = all[playerId];
-
-  return {
-    ...all,
-    [playerId]: {
-      ...player,
-      cooldowns: {},
-    },
+export const getSetPlayerForBattle =
+  ({ players }: GameState) =>
+  (playerId: string) => {
+    const player = players[playerId];
+    player.cooldowns = {};
   };
-};

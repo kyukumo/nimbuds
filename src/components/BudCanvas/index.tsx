@@ -1,7 +1,7 @@
 import { Bud } from "../../types";
 import { getIsReducedMotionPreferred } from "../../lib/getIsReducedMotionPreferred";
 import { useAnimate } from "../../hooks/useAnimate";
-import { useEffect, useRef } from "react";
+import { HTMLAttributes, useEffect, useRef } from "react";
 
 const spritesUrl = "./images/sprites.png";
 const block = 10;
@@ -46,13 +46,11 @@ const draw = ({
   context.drawImage(sprites, x, bop, block, block, dx, dy, size, size);
 };
 
-export function BudCanvas({
-  bud,
-  className,
-}: {
-  bud: Bud;
-  className?: CSSModuleClasses[string];
-}) {
+export type CanvasProps = HTMLAttributes<HTMLCanvasElement> & {
+  bud?: Bud;
+};
+
+export function BudCanvas({ bud, ...props }: CanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const spritesRef = useRef<HTMLImageElement>(new Image());
 
@@ -70,13 +68,5 @@ export function BudCanvas({
 
   useAnimate(render);
 
-  return (
-    <canvas
-      aria-label={bud?.name}
-      ref={canvasRef}
-      {...{
-        className,
-      }}
-    />
-  );
+  return <canvas aria-label={bud?.name} ref={canvasRef} {...props} />;
 }

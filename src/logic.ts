@@ -8,7 +8,7 @@ import {
   type Players,
 } from "./types";
 import { buds, maxLevel } from "./data/buds";
-import { getPlayerForBattle } from "./lib/getPlayerForBattle";
+import { getSetPlayerForBattle } from "./lib/getPlayerForBattle";
 import { getStarterBuds } from "./lib/getStarterBuds";
 import { getStarterInventory } from "./lib/getStarterInventory";
 import { reduceCooldowns } from "./lib/reduceCooldowns";
@@ -18,8 +18,8 @@ import { tryPlayerGameOver } from "./lib/tryPlayerGameOver";
 import { tryRandomEvent } from "./lib/tryRandomEvent";
 import { getRandomTarget } from "./lib/getRandomTarget";
 import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
-import { getGetPlayersWithResetTargets } from "./lib/getGetPlayersWithResetTargets";
 import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
+import { getSetPlayersWithResetTargets } from "./lib/getSetPlayersWithResetTargets";
 
 const createPlayer = (id: string, playerIds: string[]): Player => {
   const buds = getStarterBuds();
@@ -58,15 +58,15 @@ const createPlayers = (
 const getSetUpdates =
   (game: GameState) => (gameOvers: string[], id: string) => {
     reduceCooldowns(game, id);
-    const { phase, players } = game;
+    const { phase } = game;
 
     if (phase === Phase.Train) tryRandomEvent(game, id);
-    else if (phase === Phase.Battle) {
+    else {
       removeDefeatedBuds(game, id);
       tryPlayerGameOver(game, id);
     }
 
-    const player = players[id];
+    const player = game.players[id];
     if (player.gameOver) return [...gameOvers, id];
     return gameOvers;
   };
@@ -111,18 +111,30 @@ Rune.initLogic({
   },
   actions: {
     attack: ({ move, speed }, { game, playerId }) => {
-      const cooldown = 6 - speed;
+      const duration = (6 - speed) * 1000;
       const { phase, players } = game;
 
       const player = players[playerId];
       if (!player) return;
 
-      player.lastAction = Rune.gameTime();
+      const time = Rune.gameTime();
+      player.lastAction = time;
 
-      if (phase === Phase.Train) player.cooldowns[move] = cooldown;
-      else
+      if (phase === Phase.Train) {
+        const cooldown = player.cooldowns[move] ?? {
+          duration,
+        };
+
+        player.cooldowns[move] = {
+          ...cooldown,
+          time,
+        };
+      } else
         player.cooldowns = {
-          [move]: cooldown,
+          [move]: {
+            duration,
+            time,
+          },
         };
     },
     clearSounds: ({ sounds: nextSounds }, { game, playerId }) => {
@@ -218,7 +230,8 @@ Rune.initLogic({
 
     if (duration === trainDuration) {
       game.phase = Phase.Battle;
-      game.players = game.playerIds.reduce(getPlayerForBattle, game.players);
+      const setPlayerForBattle = getSetPlayerForBattle(game);
+      game.playerIds.forEach(setPlayerForBattle);
     }
 
     const setUpdates = getSetUpdates(game);
@@ -235,14 +248,12 @@ Rune.initLogic({
           players: allPlayerIds.reduce<GameOverPlayers>(getGameOverPlayers, {}),
         });
       } else {
-        const getPlayersWithResetTargets = getGetPlayersWithResetTargets(
-          game.playerIds
+        const setPlayersWithResetTargets = getSetPlayersWithResetTargets(
+          game,
+          allPlayerIds
         );
 
-        game.players = gameOvers.reduce(
-          getPlayersWithResetTargets,
-          game.players
-        );
+        gameOvers.forEach(setPlayersWithResetTargets);
       }
     }
   },

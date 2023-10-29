@@ -7,12 +7,14 @@ import { buds } from "../../data/buds";
 
 export function Help() {
   const mascot = buds.wispyre;
-  console.log(mascot);
 
   return (
     <DialogProvider>
       <DialogButton className={styles.button}>
-        <span className={styles.icon}>?</span>
+        <span className={styles.icon}>
+          <span aria-hidden="true">?</span>
+          <span className="sr-only">View How to Play Nimbuds</span>
+        </span>
       </DialogButton>
 
       <Dialog
@@ -21,9 +23,9 @@ export function Help() {
           close,
         }}
       >
-        <SubBudCanvas bud={mascot} />
+        <SubBudCanvas aria-describedby="help-bud-description" bud={mascot} />
 
-        <p>This is a Nimbud!</p>
+        <p id="help-bud-description">This is a Nimbud!</p>
 
         <p>
           For 3 minutes, you'll befriend up to 3 Nimbuds and train them to
@@ -39,10 +41,10 @@ export function Help() {
 
         <p>
           Finally, battle your rivals in an all-out{" "}
-          <abbr title="four versus four">4v4</abbr> match!
+          <abbr title="four versus four player">4v4</abbr> match!
         </p>
 
-        <p>Gain mastery of type matchups and befriend all the Nimbuds!</p>
+        <p>Gain mastery of type matchups and befriend all of the Nimbuds!</p>
       </Dialog>
     </DialogProvider>
   );

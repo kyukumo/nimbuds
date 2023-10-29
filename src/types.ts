@@ -95,7 +95,12 @@ export type Inventory = [
   Item?
 ];
 
-export type Cooldowns = Partial<Record<Move, number>>;
+export type Cooldown = {
+  duration: number;
+  time: number;
+};
+
+export type Cooldowns = Partial<Record<Move, Cooldown>>;
 
 export type CompleteCooldowns = {
   cooldowns: Cooldowns;

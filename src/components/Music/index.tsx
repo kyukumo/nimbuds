@@ -13,7 +13,10 @@ export function Music() {
         onClick,
       }}
     >
-      <span className={styles.icon}>♫</span>
+      <span className={styles.icon}>
+        <span aria-hidden="true">♫</span>
+        <span className="sr-only">Toggle Playing Music</span>
+      </span>
     </button>
   );
 }

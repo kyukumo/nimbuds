@@ -1,26 +1,31 @@
-import { CompleteCooldowns, GameState, Move, Phase } from "../types";
+import { GameState, Move, Phase } from "../types";
 import { getFinishAttack } from "./getFinishAttack";
 import { getLevelUp } from "./getLevelUp";
-import { getReducedCooldowns } from "./getReducedCooldowns";
+import { getGetCompleteCooldowns } from "./getGetCompleteCooldowns";
 import { maxLevel } from "../data/buds";
 import { moves } from "../data/moves";
 
 const getMoveSound = (move: Move) => moves[move].element;
 
 export const reduceCooldowns = (game: GameState, id: string) => {
-  const { phase, players } = game;
+  const { duration, phase, players } = game;
 
   const player = players[id];
   if (!player) return;
 
-  const { complete, cooldowns } = Object.entries(
-    player.cooldowns
-  ).reduce<CompleteCooldowns>(getReducedCooldowns, {
-    cooldowns: {},
-    complete: [],
-  });
+  const hasCooldowns = Boolean(Object.keys(player.cooldowns).length);
+  if (!hasCooldowns) return;
 
-  player.cooldowns = cooldowns;
+  const getCompleteCooldowns = getGetCompleteCooldowns(duration);
+
+  const complete = Object.entries(player.cooldowns).reduce<Move[]>(
+    getCompleteCooldowns,
+    []
+  );
+
+  const removeCooldown = (move: Move) => delete player.cooldowns[move];
+  complete.forEach(removeCooldown);
+
   const sounds: string[] = complete.map(getMoveSound);
 
   if (phase === Phase.Train) {
