@@ -2,6 +2,7 @@ import {
   selectActiveBud,
   selectPlayerId,
   selectRivalActiveBuds,
+  selectTarget,
 } from "../../selectors";
 import { useStore } from "../../hooks/useStore";
 import { Attacks } from "../Attacks";
@@ -13,6 +14,7 @@ import { SpectatorEvents } from "../SpectatorEvents";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
+  const currentTarget = useStore(selectTarget);
   const rivalActiveBuds = useStore(selectRivalActiveBuds);
   const id = useStore(selectPlayerId);
 
@@ -39,13 +41,20 @@ export function Battle() {
               )}
 
               {rivalActiveBuds.map(({ playerId, ...bud }) => (
-                <Rival
-                  key={`${playerId}-rival-bud`}
-                  {...{
-                    bud,
-                    playerId,
-                  }}
-                />
+                <>
+                  <div className="sr-only" role="status">
+                    {playerId === currentTarget &&
+                      `You're targeting ${bud.name}`}
+                  </div>
+
+                  <Rival
+                    key={`${playerId}-rival-bud`}
+                    {...{
+                      bud,
+                      playerId,
+                    }}
+                  />
+                </>
               ))}
             </div>
           </fieldset>

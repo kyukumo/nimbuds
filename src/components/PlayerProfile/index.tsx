@@ -14,6 +14,7 @@ export function PlayerProfile({ buds }: { buds: Bud[] }) {
           return (
             <li key={`player-profile-${id}-${index.toString()}`}>
               <SubBudCanvas
+                aria-hidden="true"
                 {...{
                   bud,
                 }}

@@ -35,7 +35,10 @@ export function Spectate() {
 
             <dl>
               <dt>Phase:</dt>
-              <dd>{phase === Phase.Train ? "Training" : "Battling"}</dd>
+
+              <dd aria-live="polite" aria-atomic="false">
+                {phase === Phase.Train ? "Training" : "Battling"}
+              </dd>
 
               {phase === Phase.Train && (
                 <>

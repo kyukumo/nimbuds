@@ -2,6 +2,7 @@ import {
   selectActiveBudDescription,
   selectActiveBudLevel,
   selectActiveBudName,
+  selectAscendedActiveBudName,
   selectCanActiveBudAscend,
   selectTrainPhaseDuration,
 } from "../../selectors";
@@ -17,6 +18,7 @@ import { PlayerEvents } from "../PlayerEvents";
 
 export function Train() {
   const canAscend = useStore(selectCanActiveBudAscend);
+  const ascended = useStore(selectAscendedActiveBudName);
   const description = useStore(selectActiveBudDescription);
   const name = useStore(selectActiveBudName);
   const phaseDuration = useStore(selectTrainPhaseDuration);
@@ -26,6 +28,10 @@ export function Train() {
     <>
       <main className={styles.train}>
         <PlayerEvents />
+
+        <div className="sr-only" role="status">
+          {canAscend && `${name} can now ascend to ${ascended}!`}
+        </div>
 
         <div className={styles.content}>
           <header>
@@ -83,7 +89,11 @@ export function Train() {
             <PlayerButtons />
 
             {description && (
-              <p className={styles.description} id="bud-description">
+              <p
+                aria-live="polite"
+                className={styles.description}
+                id="bud-description"
+              >
                 {description}
               </p>
             )}

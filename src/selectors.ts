@@ -1,3 +1,4 @@
+import { buds } from "./data/buds";
 import { moves } from "./data/moves";
 import { Store } from "./hooks/useStore";
 import { Bud, Move, Phase, Player } from "./types";
@@ -156,6 +157,12 @@ export const selectActiveBudElements = (state: Store) => {
 export const selectAscendedActiveBud = (state: Store) => {
   const activeBud = selectActiveBud(state);
   return activeBud?.next;
+};
+
+export const selectAscendedActiveBudName = (state: Store) => {
+  const ascension = selectAscendedActiveBud(state);
+  if (!ascension) return null;
+  return buds[ascension].name;
 };
 
 export const selectActiveBudAscendsAt = (state: Store) => {
