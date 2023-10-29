@@ -21,8 +21,15 @@ import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
 import { getSetPlayersWithResetTargets } from "./lib/getSetPlayersWithResetTargets";
 import { moves } from "./data/moves";
 
-const createPlayer = (id: string, playerIds: string[]): Player => {
-  const buds = getStarterBuds();
+const oneMinute = 60000;
+
+const createPlayer = (
+  id: string,
+  playerIds: string[],
+  duration = 0
+): Player => {
+  const numberOfBuds = Math.max(Math.ceil(duration / oneMinute), 1);
+  const buds = getStarterBuds(numberOfBuds);
   const [{ id: starterId }] = buds;
   const starters = [starterId];
 
@@ -72,7 +79,7 @@ const getSetUpdates =
 
 Rune.initLogic({
   minPlayers: 1,
-  maxPlayers: 4,
+  maxPlayers: 3,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
@@ -88,9 +95,9 @@ Rune.initLogic({
   }),
   events: {
     playerJoined: (id, { game }) => {
-      const { playerIds } = game;
+      const { duration, playerIds } = game;
       game.playerIds.push(id);
-      game.players[id] = createPlayer(id, playerIds);
+      game.players[id] = createPlayer(id, playerIds, duration);
 
       if (playerIds.length > 1) {
         const [playerOneId] = playerIds;
