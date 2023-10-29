@@ -45,6 +45,12 @@ export function Help() {
         </p>
 
         <p>Gain mastery of type matchups and befriend all of the Nimbuds!</p>
+
+        <p>
+          <small>
+            Created by <em className={styles.highlight}>@kyukumo</em>
+          </small>
+        </p>
       </Dialog>
     </DialogProvider>
   );

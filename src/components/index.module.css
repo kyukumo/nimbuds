@@ -19,3 +19,8 @@
     line-height: 1;
   }
 }
+
+.highlight {
+  color: var(--water);
+  font-style: normal;
+}

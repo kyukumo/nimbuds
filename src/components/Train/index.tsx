@@ -1,5 +1,6 @@
 import {
   selectActiveBudDescription,
+  selectActiveBudElements,
   selectActiveBudLevel,
   selectActiveBudName,
   selectAscendedActiveBudName,
@@ -24,10 +25,11 @@ export function Train() {
   const name = useStore(selectActiveBudName);
   const phaseDuration = useStore(selectTrainPhaseDuration);
   const level = useStore(selectActiveBudLevel);
+  const elements = useStore(selectActiveBudElements);
 
   return (
     <>
-      <main className={styles.train}>
+      <main className={[styles.train, elements?.join("-")].join(" ")}>
         <Header>
           <PlayerEvents />
         </Header>

@@ -72,7 +72,7 @@ const getSetUpdates =
 
 Rune.initLogic({
   minPlayers: 1,
-  maxPlayers: 4,
+  maxPlayers: 3,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
@@ -80,32 +80,33 @@ Rune.initLogic({
     events: [],
     phase: Phase.Train,
     phases: {
-      [Phase.Train]: 60 * 3 * 1000, // 3 mins
+      [Phase.Train]: 60 * 0.2 * 1000, // 3 mins
     },
     players: playerIds.reduce(createPlayers, {}),
     playerIds,
     sounds: [],
   }),
   events: {
-    playerJoined: (id, { game: { players, playerIds } }) => {
-      playerIds.push(id);
-      players[id] = createPlayer(id, playerIds);
+    playerJoined: (id, { game }) => {
+      const { playerIds } = game;
+      game.playerIds.push(id);
+      game.players[id] = createPlayer(id, playerIds);
 
       if (playerIds.length > 1) {
         const [playerOneId] = playerIds;
-        const playerOne = players[playerOneId];
+        const playerOne = game.players[playerOneId];
 
         if (!playerOne.target)
           playerOne.target = getRandomTarget(playerOneId, playerIds);
       }
     },
-    playerLeft: (id, { game }) => {
-      const { playerIds, players } = game;
-      const index = playerIds.indexOf(id);
+    playerLeft: (playerId, { game }) => {
+      const { playerIds } = game;
+      const index = playerIds.indexOf(playerId);
       playerIds.splice(index, 1);
-      delete players[id];
-      const getPlayersWithNewTargets = getGetPlayersWithNewTargets(id);
-      game.players = playerIds.reduce(getPlayersWithNewTargets, players);
+      delete game.players[playerId];
+      const getPlayersWithNewTargets = getGetPlayersWithNewTargets(playerId);
+      game.players = playerIds.reduce(getPlayersWithNewTargets, game.players);
     },
   },
   actions: {
@@ -117,10 +118,10 @@ Rune.initLogic({
       if (!player) return;
 
       if (player.cooldowns[move]) {
-        const { label } = moves[move];
+        const { element, label } = moves[move];
 
         setEvent({
-          event: `${label} has to recharge!`,
+          event: `<span class="${element}">${label}</span> has to recharge!`,
           game,
           id: playerId,
         });
@@ -188,14 +189,17 @@ Rune.initLogic({
       player.buds[0] = nextBud;
       player.cooldowns = {};
 
-      const event = `${bud.name} ascended to ${nextBud.name}!`;
+      const { element } = nextBud;
+      const elements = element.join("-");
+
+      const event = `<span class="${elements}">${bud.name}</span> ascended to <span class="${elements}">${nextBud.name}</span>!`;
 
       setEvents({
         game,
         events: {
           player: event,
           public: event,
-          rival: `Your rival's ${bud.name} ascended to ${nextBud.name}!`,
+          rival: `Your rival's ${event}`,
         },
         id: playerId,
       });
@@ -212,8 +216,12 @@ Rune.initLogic({
 
       if (previousBud) {
         (player.buds as Bud[]).push(previousBud);
+
         const [activeBud] = player.buds;
-        const event = `${previousBud?.name} switched with ${activeBud?.name}!`;
+        const previousElements = previousBud.element.join("-");
+        const nextElements = activeBud?.element.join("-") ?? "";
+
+        const event = `<span class="${previousElements}">${previousBud?.name}</span> switched with <span class="${nextElements}">${activeBud?.name}</span>!`;
 
         setEvents({
           game,

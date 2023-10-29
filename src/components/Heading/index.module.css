@@ -1,4 +1,5 @@
 .heading {
+  align-items: center;
   display: flex;
   gap: var(--space);
   padding: 0 var(--space);
@@ -8,6 +9,8 @@
   }
 
   & img {
+    min-width: 8em;
+    max-width: 16em;
     width: 100%;
   }
 }

@@ -62,9 +62,20 @@ export const selectWinner = (state: Store) => {
   return winner;
 };
 
-export const selectWinningBuds = (state: Store) => {
+export const selectWinnerBuds = (state: Store) => {
   const winner = selectWinner(state);
   return winner?.buds ?? [];
+};
+
+export const selectWinnerDefeatedBuds = (state: Store) => {
+  const winner = selectWinner(state);
+  return winner?.defeatedBuds ?? [];
+};
+
+export const selectWinningBuds = (state: Store) => {
+  const buds = selectWinnerBuds(state);
+  const defeatedBuds = selectWinnerDefeatedBuds(state);
+  return [...buds, ...defeatedBuds];
 };
 
 export const selectPhase = (state: Store) => state.phase;

@@ -1,5 +1,4 @@
 import { CurrentBuds, GameState } from "../types";
-import { getRandomNumber } from "./getRandomNumber";
 import { getRandomBud } from "./getStarterBuds";
 import { setEvents } from "./setEvent";
 
@@ -19,12 +18,15 @@ const setRandomEvent = (game: GameState, id: string) => {
     player.buds = [...player.buds, nextBud] as CurrentBuds;
     player.starters = [...player.starters, nextBud.id];
 
+    const { element, name } = nextBud;
+    const elements = element.join("-");
+
     setEvents({
       game,
       events: {
-        player: `You befriended ${nextBud.name}!`,
-        public: `${nextBud.name} was befriended!`,
-        rival: `Your rival befriended ${nextBud.name}!`,
+        player: `You befriended <span class="${elements}">${name}</span>!`,
+        public: `<span class="${elements}">${name}</span> was befriended!`,
+        rival: `Your rival befriended <span class="${elements}">${name}</span>!`,
       },
       id,
     });

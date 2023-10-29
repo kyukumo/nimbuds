@@ -1,7 +1,12 @@
 .header {
   display: flex;
   flex-direction: column-reverse;
-  gap: var(--space-lg);
+  gap: var(--space);
   height: 100%;
+  min-height: 8rem;
   overflow: hidden;
+
+  &.short {
+    min-height: 0;
+  }
 }

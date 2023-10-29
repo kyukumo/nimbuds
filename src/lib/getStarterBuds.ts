@@ -33,4 +33,4 @@ const getRandomBuds = (count = 3) => {
   return numbers.map(getBud);
 };
 
-export const getStarterBuds = () => getRandomBuds(1) as CurrentBuds;
+export const getStarterBuds = () => getRandomBuds(3) as CurrentBuds;

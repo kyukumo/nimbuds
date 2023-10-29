@@ -218,12 +218,78 @@ main {
   height: 100dvh;
   margin: 0 auto;
   overflow: auto;
-  width: 100vw;
+  width: 100dvw;
+
+  &.dark,
+  &.dark-fire,
+  &.dark-earth,
+  &.dark-light,
+  &.dark-water,
+  &.dark-wind,
+  &.fire,
+  &.red,
+  &.earth-fire,
+  &.fire-light,
+  &.fire-water,
+  &.fire-wind,
+  &.earth,
+  &.green,
+  &.earth-light,
+  &.earth-water,
+  &.earth-wind,
+  &.light,
+  &.light-water,
+  &.light-wind,
+  &.water,
+  &.blue,
+  &.water-wind,
+  &.wind {
+    &::before {
+      position: fixed;
+    }
+  }
 }
 
 /* backgrounds */
 
-.dark {
+.dark,
+.dark-fire,
+.dark-earth,
+.dark-light,
+.dark-water,
+.dark-wind,
+.fire,
+.red,
+.earth-fire,
+.fire-light,
+.fire-water,
+.fire-wind,
+.earth,
+.green,
+.earth-light,
+.earth-water,
+.earth-wind,
+.light,
+.light-water,
+.light-wind,
+.water,
+.blue,
+.water-wind,
+.wind {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    height: 100%;
+    opacity: 0.65;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
+.dark::before {
   background-image: linear-gradient(
     to top,
     var(--dark) 0%,
@@ -239,7 +305,7 @@ main {
   );
 }
 
-.dark-fire {
+.dark-fire::before {
   background-image: linear-gradient(
     to bottom,
     var(--dark) 0%,
@@ -255,7 +321,7 @@ main {
   );
 }
 
-.dark-earth {
+.dark-earth::before {
   background-image: linear-gradient(
     to bottom,
     var(--dark) 0%,
@@ -271,7 +337,7 @@ main {
   );
 }
 
-.dark-light {
+.dark-light::before {
   background-image: linear-gradient(
     to bottom,
     var(--dark) 0%,
@@ -287,7 +353,7 @@ main {
   );
 }
 
-.dark-water {
+.dark-water::before {
   background-image: linear-gradient(
     to bottom,
     var(--dark) 0%,
@@ -303,7 +369,7 @@ main {
   );
 }
 
-.dark-wind {
+.dark-wind::before {
   background-image: linear-gradient(
     to bottom,
     var(--dark) 0%,
@@ -319,7 +385,8 @@ main {
   );
 }
 
-.fire {
+.fire::before,
+.red::before {
   background-image: linear-gradient(
     to top,
     var(--fire) 0%,
@@ -335,7 +402,7 @@ main {
   );
 }
 
-.earth-fire {
+.earth-fire::before {
   background-image: linear-gradient(
     to bottom,
     var(--earth) 0%,
@@ -351,7 +418,7 @@ main {
   );
 }
 
-.fire-light {
+.fire-light::before {
   background-image: linear-gradient(
     to bottom,
     var(--fire) 0%,
@@ -367,7 +434,7 @@ main {
   );
 }
 
-.fire-water {
+.fire-water::before {
   background-image: linear-gradient(
     to bottom,
     var(--fire) 0%,
@@ -383,7 +450,7 @@ main {
   );
 }
 
-.fire-wind {
+.fire-wind::before {
   background-image: linear-gradient(
     to bottom,
     var(--fire) 0%,
@@ -399,7 +466,8 @@ main {
   );
 }
 
-.earth {
+.earth::before,
+.green::before {
   background-image: linear-gradient(
     to top,
     var(--earth) 0%,
@@ -415,7 +483,7 @@ main {
   );
 }
 
-.earth-light {
+.earth-light::before {
   background-image: linear-gradient(
     to bottom,
     var(--earth) 0%,
@@ -431,7 +499,7 @@ main {
   );
 }
 
-.earth-water {
+.earth-water::before {
   background-image: linear-gradient(
     to bottom,
     var(--earth) 0%,
@@ -447,7 +515,7 @@ main {
   );
 }
 
-.earth-wind {
+.earth-wind::before {
   background-image: linear-gradient(
     to bottom,
     var(--earth) 0%,
@@ -463,7 +531,7 @@ main {
   );
 }
 
-.light {
+.light::before {
   background-image: linear-gradient(
     to top,
     var(--light) 0%,
@@ -479,7 +547,7 @@ main {
   );
 }
 
-.light-water {
+.light-water::before {
   background-image: linear-gradient(
     to bottom,
     var(--light) 0%,
@@ -495,7 +563,7 @@ main {
   );
 }
 
-.light-wind {
+.light-wind::before {
   background-image: linear-gradient(
     to bottom,
     var(--light) 0%,
@@ -511,7 +579,8 @@ main {
   );
 }
 
-.water {
+.water::before,
+.blue::before {
   background-image: linear-gradient(
     to top,
     var(--water) 0%,
@@ -527,7 +596,7 @@ main {
   );
 }
 
-.water-wind {
+.water-wind::before {
   background-image: linear-gradient(
     to bottom,
     var(--water) 0%,
@@ -543,7 +612,7 @@ main {
   );
 }
 
-.wind {
+.wind::before {
   background-image: linear-gradient(
     to top,
     var(--wind) 0%,

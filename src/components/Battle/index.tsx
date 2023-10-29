@@ -1,5 +1,6 @@
 import {
   selectActiveBud,
+  selectActiveBudElements,
   selectPlayerId,
   selectRivalActiveBuds,
   selectTarget,
@@ -15,12 +16,13 @@ import { Header } from "../Header";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
+  const elements = useStore(selectActiveBudElements);
   const currentTarget = useStore(selectTarget);
   const rivalActiveBuds = useStore(selectRivalActiveBuds);
   const id = useStore(selectPlayerId);
 
   return (
-    <main className={styles.battle}>
+    <main className={[styles.battle, elements?.join("-")].join(" ")}>
       <Header>
         <SpectatorEvents />
       </Header>

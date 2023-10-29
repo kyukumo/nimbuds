@@ -42,18 +42,21 @@ export const removeDefeatedBuds = (game: GameState, id: string) => {
 
   if (nextDefeatedBuds.length) player.cooldowns = {};
 
-  const setDefeatedBudEvent = ({ name }: Bud) => {
+  const setDefeatedBudEvent = ({ element, name }: Bud) => {
+    const previousElements = element.join("-");
+
     setEvent({
       game,
-      event: `${name} was defeated!`,
+      event: `<span class="${previousElements}">${name}</span> was defeated!`,
     });
 
     const [nextBud] = player.buds;
+    const nextElements = nextBud?.element.join("-") ?? "";
 
     if (nextBud)
       setEvent({
         game,
-        event: `${nextBud.name} was called out!`,
+        event: `<span class="${nextElements}">${nextBud.name}</span> was called out!`,
       });
   };
 

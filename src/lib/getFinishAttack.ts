@@ -45,11 +45,14 @@ export const getFinishAttack =
 
     rivalStats.hp = rivalHp - damage;
 
+    const budElements = bud.element.join("-");
+    const rivalElements = rivalBud.element.join("-");
+
     const event = [
-      `${bud.name} used ${moveName} on ${rivalBud.name}!`,
-      critical && "Critical hit!",
-      resist && "It's ineffective...",
-      weak && "It's effective!",
+      `<span class="${budElements}">${bud.name}</span> used <span class="${element}">${moveName}</span> on <span class="${rivalElements}">${rivalBud.name}</span>!`,
+      critical && `<span class="fire">Critical hit!</span>`,
+      resist && `<span class="water">It's ineffective...</span>`,
+      weak && `<span class="earth">It's effective!</span>`,
     ]
       .filter(Boolean)
       .join(" ");

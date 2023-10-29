@@ -25,12 +25,16 @@ export const getLevelUp = (game: GameState, id: string) => () => {
     bud.stats.level = level + 1;
     bud.stats.hp = getHp(bud.stats.level);
 
+    const elements = bud.element.join("-");
+
+    const event = `<span class="${elements}">${name}</span> leveled up to <span class="earth">${bud.stats.level}</span>!`;
+
     setEvents({
       game,
       events: {
-        player: `${name} leveled up to ${bud.stats.level}!`,
-        public: `${name} leveled up to ${bud.stats.level}!`,
-        rival: `Your rival's ${name} leveled up to ${bud.stats.level}!`,
+        player: event,
+        public: event,
+        rival: `Your rival's ${event}`,
       },
       id,
     });

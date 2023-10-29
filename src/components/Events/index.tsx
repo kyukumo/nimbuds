@@ -10,7 +10,12 @@ export function Events({ events }: { events: string[] }) {
           className={events.length ? styles.show : styles.hide}
         >
           {events.map((event, index) => (
-            <li key={`event-${index.toString()}`}>{event}</li>
+            <li
+              key={`event-${index.toString()}`}
+              dangerouslySetInnerHTML={{
+                __html: event,
+              }}
+            />
           ))}
         </ul>
 

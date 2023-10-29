@@ -10,11 +10,13 @@
   border-width: 0 0 var(--space);
   box-sizing: border-box;
   display: flex;
+  flex: 1;
   gap: var(--space);
   height: 100%;
-  min-height: calc((var(--base-event-size) * 4) + (var(--space) * 2));
   overflow: auto;
   padding: var(--space);
+  position: relative;
+  z-index: 0;
 
   .hide {
     visibility: hidden;
@@ -30,8 +32,19 @@
   }
 
   & ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
     list-style: none;
     padding: 0;
+
+    & span {
+      display: inline-block;
+
+      &::before {
+        opacity: 0.5;
+      }
+    }
   }
 
   .content {
