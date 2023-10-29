@@ -1,10 +1,16 @@
+import { HTMLAttributes } from "react";
 import { Element } from "../types";
 import { ElementCanvas } from "./ElementCanvas";
 
-export function SubElementCanvas({ element }: { element: Element }) {
+type Props = HTMLAttributes<HTMLCanvasElement> & {
+  element: Element;
+};
+
+export function SubElementCanvas({ element, ...props }: Props) {
   return (
     <ElementCanvas
       {...{
+        ...props,
         elements: [element],
       }}
     />

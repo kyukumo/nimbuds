@@ -1,3 +1,4 @@
+import { elementLabel } from "../../data/elements";
 import { useStore } from "../../hooks/useStore";
 import { selectActiveBudSpeed } from "../../selectors";
 import { Cooldown, Element, Move } from "../../types";
@@ -26,7 +27,7 @@ export function Attack({
       speed,
     });
 
-  const progressBarId = `${move}-progress`;
+  const moveType = `${elementLabel[element]} element move`;
 
   return (
     <li>
@@ -36,6 +37,7 @@ export function Attack({
         type="button"
       >
         <SubElementCanvas
+          aria-label={moveType}
           {...{
             element,
           }}
@@ -44,10 +46,9 @@ export function Attack({
         <span>{label}</span>
       </button>
 
-      <div className="sr-only">
-        <label htmlFor={progressBarId}>Loading:</label>
-        <progress aria-busy={disabled} id={progressBarId} />
-      </div>
+      <p className="sr-only" role="status">
+        {disabled ? `${label} is on cool down` : `${label} is ready to use`}
+      </p>
     </li>
   );
 }

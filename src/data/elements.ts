@@ -49,3 +49,12 @@ export const advantage: Record<Element, Element> = {
   [Element.Water]: Element.Fire,
   [Element.Wind]: Element.Earth,
 };
+
+export const elementLabel = {
+  [Element.Dark]: "Dark",
+  [Element.Earth]: "Earth",
+  [Element.Fire]: "Fire",
+  [Element.Light]: "Light",
+  [Element.Water]: "Water",
+  [Element.Wind]: "Wind",
+};

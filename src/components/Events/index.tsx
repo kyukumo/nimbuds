@@ -6,15 +6,17 @@ export function Events({ events }: { events: string[] }) {
     <div className={styles.events}>
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          {events.length ? (
-            <ul>
-              {events.map((event, index) => (
-                <li aria-live="polite" key={`event-${index}`}>
-                  {event}
-                </li>
-              ))}
-            </ul>
-          ) : (
+          <ul
+            aria-live="polite"
+            aria-atomic="false"
+            className={events.length ? styles.show : styles.hide}
+          >
+            {events.map((event, index) => (
+              <li key={`event-${index}`}>{event}</li>
+            ))}
+          </ul>
+
+          {!events.length && (
             <p>Train until the timer runs out, then battle your rivals!</p>
           )}
         </div>

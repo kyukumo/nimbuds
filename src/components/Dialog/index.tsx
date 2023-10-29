@@ -5,14 +5,13 @@ import { createPortal } from "react-dom";
 
 export function Dialog({
   children,
-  close,
   title,
 }: {
   children: ReactNode;
-  close: () => void;
   title: ReactNode;
 }) {
-  const { dialogRef } = useDialogContext();
+  const { close, dialogRef, isOpen } = useDialogContext();
+  const handleClose = () => close?.();
 
   const onDialogClick = ({
     clientX,
@@ -33,17 +32,22 @@ export function Dialog({
       left <= clientX &&
       clientX <= left + width;
 
-    if (!inDialog) dialogRef.current?.close();
+    if (!inDialog) handleClose();
     return;
   };
 
   return createPortal(
-    <dialog className={styles.dialog} onClick={onDialogClick} ref={dialogRef}>
+    <dialog
+      aria-hidden={!isOpen}
+      className={styles.dialog}
+      onClick={onDialogClick}
+      ref={dialogRef}
+    >
       <header>
         {title}
 
-        <form method="dialog">
-          <button onClick={close} type="submit">
+        <form method="dialog" onSubmit={handleClose}>
+          <button type="submit">
             <span aria-hidden="true">&times;</span>
             <span className="sr-only">Close</span>
           </button>

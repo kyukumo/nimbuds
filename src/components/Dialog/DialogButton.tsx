@@ -6,15 +6,15 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {
 }
 
 export function DialogButton({ children, onClick, ...props }: Props) {
-  const { dialogRef } = useDialogContext();
+  const { open } = useDialogContext();
 
-  const open = (event: React.MouseEvent<HTMLButtonElement>) => {
-    dialogRef.current?.showModal();
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    open?.();
     onClick?.(event);
   };
 
   return (
-    <button onClick={open} {...props}>
+    <button onClick={handleOpen} {...props}>
       {children}
     </button>
   );

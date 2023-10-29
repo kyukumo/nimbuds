@@ -17,12 +17,7 @@ export function Help() {
         </span>
       </DialogButton>
 
-      <Dialog
-        title={<h2>How to Play Nimbuds</h2>}
-        {...{
-          close,
-        }}
-      >
+      <Dialog title={<h2>How to Play Nimbuds</h2>}>
         <SubBudCanvas aria-describedby="help-bud-description" bud={mascot} />
 
         <p id="help-bud-description">This is a Nimbud!</p>

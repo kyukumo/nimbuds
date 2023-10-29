@@ -17,6 +17,10 @@
     background-color: #00000080;
   }
 
+  &[aria-hidden="true"] {
+    visibility: hidden;
+  }
+
   & form {
     align-items: center;
     display: flex;

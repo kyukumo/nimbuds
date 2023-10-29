@@ -1,6 +1,6 @@
 import { Element } from "../types";
 import { block, size, tile } from "../data/elements";
-import { useEffect, useState } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 
 const sprites = new Image();
 sprites.src = "./images/sprites.png";
@@ -35,7 +35,11 @@ const draw = ({
   else sprites.addEventListener("load", onImageLoad);
 };
 
-export function ElementCanvas({ elements }: { elements: Element[] | null }) {
+type Props = HTMLAttributes<HTMLCanvasElement> & {
+  elements: Element[] | null;
+};
+
+export function ElementCanvas({ elements, ...props }: Props) {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -51,5 +55,7 @@ export function ElementCanvas({ elements }: { elements: Element[] | null }) {
     return () => window.removeEventListener("resize", render);
   }, [canvas, elements]);
 
-  return <canvas aria-label={elements?.join(", ")} ref={setCanvas} />;
+  return (
+    <canvas aria-label={elements?.join(", ")} ref={setCanvas} {...props} />
+  );
 }
