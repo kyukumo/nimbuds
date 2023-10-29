@@ -14,6 +14,7 @@ import { PlayerButtons } from "../PlayerButtons";
 import { Switch } from "../Switch";
 import { Timer } from "../Timer";
 import { useStore } from "../../hooks/useStore";
+import { Header } from "../Header";
 import { PlayerEvents } from "../PlayerEvents";
 
 export function Train() {
@@ -27,7 +28,9 @@ export function Train() {
   return (
     <>
       <main className={styles.train}>
-        <PlayerEvents />
+        <Header>
+          <PlayerEvents />
+        </Header>
 
         <div className="sr-only" role="status">
           {canAscend && `${name} can now ascend to ${ascended}!`}
@@ -35,13 +38,13 @@ export function Train() {
 
         <div className={styles.content}>
           <header>
-            <h1 className="sr-only">Train!</h1>
+            <h2 className="sr-only">Train!</h2>
 
             <div className={styles.heading}>
               <dl aria-describedby="bud-description">
                 <dt className="sr-only">Name:</dt>
 
-                <dd>
+                <dd className={styles.name}>
                   <strong>{name}</strong>
                 </dd>
               </dl>

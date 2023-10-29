@@ -8,6 +8,7 @@ import { Phase } from "../../types";
 import { Background } from "../Background";
 import { BattleBud } from "../BattleBud";
 import { ElementCanvas } from "../ElementCanvas";
+import { Header } from "../Header";
 import { SpectatorEvents } from "../SpectatorEvents";
 import { Timer } from "../Timer";
 import styles from "./index.module.css";
@@ -27,11 +28,13 @@ export function Spectate() {
       />
 
       <main className={styles.spectate}>
-        <SpectatorEvents />
+        <Header>
+          <SpectatorEvents />
+        </Header>
 
         <section className={styles.content}>
-          <header>
-            <h1>You're Spectating</h1>
+          <header className={styles.header}>
+            <h2>You're Spectating</h2>
 
             <dl>
               <dt>Phase:</dt>

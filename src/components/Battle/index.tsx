@@ -11,6 +11,7 @@ import { Switch } from "../Switch";
 import { Rival } from "../Rival";
 import { BattleBud } from "../BattleBud";
 import { SpectatorEvents } from "../SpectatorEvents";
+import { Header } from "../Header";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
@@ -20,11 +21,13 @@ export function Battle() {
 
   return (
     <main className={styles.battle}>
-      <SpectatorEvents />
+      <Header>
+        <SpectatorEvents />
+      </Header>
 
       <div className={styles.content}>
         <header>
-          <h1>Battle!</h1>
+          <h2>Battle!</h2>
         </header>
 
         <form>

@@ -7,11 +7,6 @@
     padding: var(--space-lg);
   }
 
-  & h1,
-  & p {
-    margin: 0;
-  }
-
   & legend {
     margin-block-end: var(--space);
   }

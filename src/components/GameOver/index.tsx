@@ -10,6 +10,7 @@ import { SubBudCanvas } from "../SubBudCanvas";
 import { Background } from "../Background";
 import { Music } from "../Music";
 import { Help } from "../Help";
+import { Header } from "../Header";
 
 const addAnd = (index: number, length: number, text: string) =>
   [index && index === length - 1 && "and", text].filter(Boolean).join(" ");
@@ -39,38 +40,33 @@ export function GameOver({ title }: { title: string }) {
       />
 
       <section className={styles.gameOver}>
-        <header>
-          <nav>
-            <Music />
-            <Help />
-          </nav>
+        <Header />
 
-          <h1>{title}</h1>
-        </header>
+        <div className={styles.content}>
+          <strong>{title}</strong>
 
-        <div className={styles.buds}>
-          {buds.map((bud, index) => (
-            <SubBudCanvas
-              key={`game-over-${bud.id}-${index.toString()}`}
-              {...{
-                bud,
-              }}
-            />
-          ))}
-        </div>
+          <div className={styles.buds}>
+            {buds.map((bud, index) => (
+              <SubBudCanvas
+                key={`game-over-${bud.id}-${index.toString()}`}
+                {...{
+                  bud,
+                }}
+              />
+            ))}
+          </div>
 
-        <footer>
-          <p>
-            {spectating
-              ? `Next time, you can join the fray and find ${budsLabel}!`
-              : `Don't worry, you'll befriend 
+          <footer>
+            <p>
+              {spectating
+                ? `Next time, you can join the fray and befriend ${budsLabel}!`
+                : `Don't worry, you'll befriend 
         ${budsLabel} again soon!`}
-          </p>
+            </p>
 
-          {!spectating && <p>Thanks for playing!</p>}
-
-          <img alt="Nimbuds" src="./images/logo.png" />
-        </footer>
+            {!spectating && <p>Thanks for playing!</p>}
+          </footer>
+        </div>
       </section>
     </>
   );

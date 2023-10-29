@@ -11,15 +11,13 @@ export const setEvent = ({
   game: GameState;
   id?: string;
 }) => {
-  const { events, players } = game;
-
   if (id) {
-    const player = players[id];
+    const player = game.players[id];
     if (player.events.length === eventCount) player.events.shift();
     player.events.push(event);
   } else {
-    if (events.length === eventCount) events.shift();
-    events.push(event);
+    if (game.events.length === eventCount) game.events.shift();
+    game.events.push(event);
   }
 };
 

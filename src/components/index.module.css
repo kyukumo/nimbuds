@@ -1,8 +1,8 @@
 .button {
   aspect-ratio: 1 / 1;
   background-color: transparent;
-  margin: 0 var(--space) var(--space) 0;
-  padding: 0;
+  margin: 0 var(--space-sm) var(--space-sm) 0;
+  padding: var(--space-sm) 0 0 var(--space-sm);
   min-width: 2em;
 
   &::before {
@@ -15,7 +15,7 @@
   }
 
   .icon {
-    font-size: 2em;
+    font-size: 1.5em;
     line-height: 1;
   }
 }

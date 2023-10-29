@@ -12,13 +12,14 @@ import { getSetPlayerForBattle } from "./lib/getPlayerForBattle";
 import { getStarterBuds } from "./lib/getStarterBuds";
 import { reduceCooldowns } from "./lib/reduceCooldowns";
 import { removeDefeatedBuds } from "./lib/removeDefeatedBuds";
-import { setEvents } from "./lib/setEvent";
+import { setEvent, setEvents } from "./lib/setEvent";
 import { tryPlayerGameOver } from "./lib/tryPlayerGameOver";
 import { tryRandomEvent } from "./lib/tryRandomEvent";
 import { getRandomTarget } from "./lib/getRandomTarget";
 import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
 import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
 import { getSetPlayersWithResetTargets } from "./lib/getSetPlayersWithResetTargets";
+import { moves } from "./data/moves";
 
 const createPlayer = (id: string, playerIds: string[]): Player => {
   const buds = getStarterBuds();
@@ -114,6 +115,16 @@ Rune.initLogic({
 
       const player = players[playerId];
       if (!player) return;
+
+      if (player.cooldowns[move]) {
+        const { label } = moves[move];
+
+        setEvent({
+          event: `${label} has to recharge!`,
+          game,
+          id: playerId,
+        });
+      }
 
       const time = Rune.gameTime();
       player.lastAction = time;

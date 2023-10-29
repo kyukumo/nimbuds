@@ -1,0 +1,7 @@
+.header {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-lg);
+  height: 100%;
+  overflow: hidden;
+}

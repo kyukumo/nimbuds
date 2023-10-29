@@ -1,3 +1,11 @@
+@font-face {
+  font-display: swap;
+  font-family: "Matchup";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/MatchupPro.woff") format("woff");
+}
+
 :root {
   --fire: #ff4200;
   --wind: #9394fe;
@@ -13,13 +21,13 @@
   --yellow: var(--light);
   --red: var(--fire);
 
-  --space: 0.65em;
+  --space: 0.4em;
   --space-lg: calc(var(--space) * 2);
   --unspace: calc(var(--space) * -1);
   --space-sm: calc(var(--space) / 2);
   --unspace-sm: calc(var(--space-sm) * -1);
 
-  --small-font: 0.85em;
+  --small-font: 0.8em;
 
   --pixel-border: var(--unspace) 0 0 0 var(--black),
     var(--space) 0 0 0 var(--black), 0 var(--unspace) 0 0 var(--black),
@@ -152,8 +160,8 @@ html,
 
 body,
 button {
-  font-size: max(2.25vh, 1rem);
-  line-height: 1;
+  font-size: max(3.5vh, 1rem);
+  line-height: 0.75;
 }
 
 body {
@@ -162,7 +170,7 @@ body {
 }
 
 * {
-  font-family: Consolas, "Lucida Console", Monaco, monospace;
+  font-family: "Matchup", Consolas, "Lucida Console", Monaco, monospace;
 }
 
 button {

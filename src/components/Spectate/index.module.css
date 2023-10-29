@@ -1,5 +1,5 @@
 .spectate {
-  & header {
+  .header {
     & dl {
       display: inline-grid;
       gap: var(--space-sm);
@@ -11,21 +11,21 @@
   }
 
   &,
-  & header,
+  .header,
   .content,
   .level,
   .stats {
     display: flex;
   }
 
-  & header,
+  .header,
   .level,
   .stats {
     gap: var(--space);
   }
 
   &,
-  & header,
+  .header,
   .content {
     flex-direction: column;
   }

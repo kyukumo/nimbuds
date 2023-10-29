@@ -1,0 +1,13 @@
+.heading {
+  display: flex;
+  gap: var(--space);
+  padding: 0 var(--space);
+
+  & h1 {
+    flex: 1;
+  }
+
+  & img {
+    width: 100%;
+  }
+}

@@ -31,12 +31,13 @@ const setRandomEvent = (game: GameState, id: string) => {
   }
 };
 
+const delay = 60000;
+
 export const tryRandomEvent = (game: GameState, id: string) => {
-  const randomDelay = getRandomNumber(60000, 120000);
   const { duration, players } = game;
   const player = players[id];
   if (!player) return;
   const { lastEvent } = player;
   const elapsedTime = duration - lastEvent;
-  if (elapsedTime > randomDelay) setRandomEvent(game, id);
+  if (elapsedTime > delay) setRandomEvent(game, id);
 };
