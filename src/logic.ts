@@ -72,7 +72,7 @@ const getSetUpdates =
 
 Rune.initLogic({
   minPlayers: 1,
-  maxPlayers: 3,
+  maxPlayers: 4,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
@@ -80,7 +80,7 @@ Rune.initLogic({
     events: [],
     phase: Phase.Train,
     phases: {
-      [Phase.Train]: 60 * 0.2 * 1000, // 3 mins
+      [Phase.Train]: 60 * 3 * 1000, // 3 mins
     },
     players: playerIds.reduce(createPlayers, {}),
     playerIds,

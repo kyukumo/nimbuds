@@ -23,15 +23,18 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const musicRef = useRef<HTMLAudioElement | null>(null);
 
   useLayoutEffect(() => {
-    musicRef.current = new Audio(bgm);
-    musicRef.current.load();
-    musicRef.current.loop = true;
-    musicRef.current.volume = 0.1;
+    if (!musicRef.current) {
+      musicRef.current = new Audio(bgm);
+      musicRef.current.load();
+      musicRef.current.loop = true;
+      musicRef.current.volume = 0.1;
+      musicRef.current.autoplay = true;
+    }
   }, []);
 
-  const toggle = () =>
+  const toggle = async () =>
     musicRef.current?.paused
-      ? musicRef.current?.play()
+      ? await musicRef.current?.play()
       : musicRef.current?.pause();
 
   return (
