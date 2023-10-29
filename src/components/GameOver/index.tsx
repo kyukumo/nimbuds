@@ -9,6 +9,7 @@ import { useStore } from "../../hooks/useStore";
 import { SubBudCanvas } from "../SubBudCanvas";
 import { Background } from "../Background";
 import { Music } from "../Music";
+import { Help } from "../Help";
 
 const addAnd = (index: number, length: number, text: string) =>
   [index && index === length - 1 && "and", text].filter(Boolean).join(" ");
@@ -39,7 +40,10 @@ export function GameOver({ title }: { title: string }) {
 
       <section className={styles.gameOver}>
         <header>
-          <Music />
+          <nav>
+            <Music />
+            <Help />
+          </nav>
 
           <h1>{title}</h1>
         </header>

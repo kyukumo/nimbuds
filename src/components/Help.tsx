@@ -18,6 +18,8 @@ export function Help() {
       </DialogButton>
 
       <Dialog title={<h2>How to Play Nimbuds</h2>}>
+        <img alt="" src="./images/logo.png" />
+
         <SubBudCanvas aria-describedby="help-bud-description" bud={mascot} />
 
         <p id="help-bud-description">This is a Nimbud!</p>
@@ -27,7 +29,10 @@ export function Help() {
           ascension.
         </p>
 
-        <p>Use moves to build XP and level up. Ascend when you can!</p>
+        <p>
+          Use moves to build <abbr title="Experience Points">XP</abbr> and level
+          up. Ascend when you can!
+        </p>
 
         <p>
           You can switch between Nimbuds to train them all. You can also view

@@ -8,7 +8,7 @@
   gap: var(--space);
   inset-block-start: unset;
   max-width: unset;
-  overflow: visible;
+  overflow: auto;
   padding: var(--space-lg);
   position: relative;
   width: 100%;

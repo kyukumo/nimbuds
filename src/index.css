@@ -198,7 +198,8 @@ button {
   }
 }
 
-canvas {
+canvas,
+img {
   background-color: transparent;
   image-rendering: pixelated;
 }
