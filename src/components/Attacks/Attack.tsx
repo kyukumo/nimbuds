@@ -1,6 +1,6 @@
 import { useStore } from "../../hooks/useStore";
 import { selectActiveBudSpeed } from "../../selectors";
-import { Element, Move } from "../../types";
+import { Cooldown, Element, Move } from "../../types";
 import { SubElementCanvas } from "../SubElementCanvas";
 import styles from "./index.module.css";
 
@@ -11,7 +11,7 @@ export function Attack({
   label,
   move,
 }: {
-  cooldown?: number;
+  cooldown?: Cooldown;
   disabled?: boolean;
   element: Element;
   label: string;

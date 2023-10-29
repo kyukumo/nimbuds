@@ -1,5 +1,5 @@
-import { Element } from "../../types";
-import { block, size, tile } from "../../data/elements";
+import { Element } from "../types";
+import { block, size, tile } from "../data/elements";
 import { useEffect, useState } from "react";
 
 const sprites = new Image();

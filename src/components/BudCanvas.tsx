@@ -1,6 +1,6 @@
-import { Bud } from "../../types";
-import { getIsReducedMotionPreferred } from "../../lib/getIsReducedMotionPreferred";
-import { useAnimate } from "../../hooks/useAnimate";
+import { Bud } from "../types";
+import { getIsReducedMotionPreferred } from "../lib/getIsReducedMotionPreferred";
+import { useAnimate } from "../hooks/useAnimate";
 import { HTMLAttributes, useEffect, useRef } from "react";
 
 const spritesUrl = "./images/sprites.png";

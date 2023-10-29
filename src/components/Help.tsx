@@ -1,9 +1,9 @@
-import styles from "../index.module.css";
-import { Dialog } from "../Dialog";
-import { DialogButton } from "../Dialog/DialogButton";
-import { DialogProvider } from "../Dialog/DialogContext";
-import { SubBudCanvas } from "../SubBudCanvas";
-import { buds } from "../../data/buds";
+import styles from "./index.module.css";
+import { Dialog } from "./Dialog";
+import { DialogButton } from "./Dialog/DialogButton";
+import { DialogProvider } from "./Dialog/DialogContext";
+import { SubBudCanvas } from "./SubBudCanvas";
+import { buds } from "../data/buds";
 
 export function Help() {
   const mascot = buds.wispyre;

@@ -10,7 +10,6 @@ import {
 import { buds, maxLevel } from "./data/buds";
 import { getSetPlayerForBattle } from "./lib/getPlayerForBattle";
 import { getStarterBuds } from "./lib/getStarterBuds";
-import { getStarterInventory } from "./lib/getStarterInventory";
 import { reduceCooldowns } from "./lib/reduceCooldowns";
 import { removeDefeatedBuds } from "./lib/removeDefeatedBuds";
 import { setEvents } from "./lib/setEvent";
@@ -34,7 +33,6 @@ const createPlayer = (id: string, playerIds: string[]): Player => {
     events: [],
     gameOver: false,
     id,
-    inventory: getStarterInventory(),
     lastEvent: 0,
     name: id,
     ping: 0,

@@ -1,5 +1,5 @@
-import { Element } from "../../types";
-import { ElementCanvas } from "../ElementCanvas";
+import { Element } from "../types";
+import { ElementCanvas } from "./ElementCanvas";
 
 export function SubElementCanvas({ element }: { element: Element }) {
   return (

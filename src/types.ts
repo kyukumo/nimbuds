@@ -115,7 +115,6 @@ export type Player = {
   gameOver: boolean;
   id: string;
   lastAction: number;
-  inventory: Inventory;
   lastEvent: number;
   name: string;
   ping: number;
