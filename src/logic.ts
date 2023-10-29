@@ -79,7 +79,7 @@ const getSetUpdates =
 
 Rune.initLogic({
   minPlayers: 1,
-  maxPlayers: 3,
+  maxPlayers: 4,
   setup: (playerIds) => ({
     battleType: BattleType.Four,
     duration: 0,
