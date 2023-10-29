@@ -195,6 +195,7 @@ Rune.initLogic({
 
       player.buds[0] = nextBud;
       player.cooldowns = {};
+      player.sounds.push("ascend");
 
       const { element } = nextBud;
       const elements = element.join("-");

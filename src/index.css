@@ -171,6 +171,7 @@ body {
 
 * {
   font-family: "Matchup", Consolas, "Lucida Console", Monaco, monospace;
+  -webkit-font-smoothing: never;
 }
 
 button {

@@ -197,6 +197,11 @@ export const selectRivals = (state: Store) => {
   return Object.values(players);
 };
 
+export const selectHasRivals = (state: Store) => {
+  const rivals = selectRivals(state);
+  return Boolean(rivals.length);
+};
+
 interface RivalBud extends Bud {
   playerId: string;
 }
