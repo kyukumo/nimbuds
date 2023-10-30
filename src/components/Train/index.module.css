@@ -64,10 +64,6 @@
       & dl {
         gap: var(--space-sm);
       }
-
-      & dd {
-        font-weight: bold;
-      }
     }
   }
 
