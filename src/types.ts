@@ -114,7 +114,6 @@ export type Player = {
   events: string[];
   gameOver: boolean;
   id: string;
-  lastAction: number;
   lastEvent: number;
   name: string;
   ping: number;

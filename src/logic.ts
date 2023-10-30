@@ -34,7 +34,6 @@ const createPlayer = (
   const starters = [starterId];
 
   return {
-    lastAction: 0,
     buds,
     cooldowns: {},
     defeatedBuds: [],
@@ -119,7 +118,7 @@ Rune.initLogic({
   actions: {
     attack: ({ move, speed }, { game, playerId }) => {
       const duration = (6 - speed) * 1000;
-      const { phase, players } = game;
+      const { duration: time, phase, players } = game;
 
       const player = players[playerId];
       if (!player) return;
@@ -133,9 +132,6 @@ Rune.initLogic({
           id: playerId,
         });
       }
-
-      const time = Rune.gameTime();
-      player.lastAction = time;
 
       if (phase === Phase.Train) {
         const cooldown = player.cooldowns[move] ?? {
@@ -247,10 +243,10 @@ Rune.initLogic({
     },
   },
   update: ({ allPlayerIds, game }) => {
-    game.duration = Rune.gameTime();
+    const duration = Rune.gameTime();
+    game.duration = duration;
 
     const {
-      duration,
       phases: { [Phase.Train]: trainDuration },
     } = game;
 
