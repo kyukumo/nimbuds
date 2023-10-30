@@ -3,7 +3,7 @@
   font-family: "Matchup";
   font-style: normal;
   font-weight: normal;
-  src: url("./fonts/MatchupPro.woff") format("woff");
+  src: url("/fonts/MatchupPro.woff") format("woff");
 }
 
 :root {
