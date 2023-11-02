@@ -1,8 +1,7 @@
+import { maxBuds } from "../data/buds";
 import { CurrentBuds, GameState } from "../types";
 import { getRandomBud } from "./getStarterBuds";
 import { setEvents } from "./setEvent";
-
-const maxBuds = 3;
 
 const setRandomEvent = (game: GameState, id: string) => {
   const { players } = game;

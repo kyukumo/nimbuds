@@ -13,6 +13,7 @@ import { Rival } from "../Rival";
 import { BattleBud } from "../BattleBud";
 import { SpectatorEvents } from "../SpectatorEvents";
 import { Header } from "../Header";
+import { Fragment } from "react";
 
 export function Battle() {
   const activeBud = useStore(selectActiveBud);
@@ -46,20 +47,19 @@ export function Battle() {
               )}
 
               {rivalActiveBuds.map(({ playerId, ...bud }) => (
-                <>
-                  <div className="sr-only" role="status">
+                <Fragment key={`${playerId}-rival-bud`}>
+                  <output className="sr-only">
                     {playerId === currentTarget &&
                       `You're targeting ${bud.name}`}
-                  </div>
+                  </output>
 
                   <Rival
-                    key={`${playerId}-rival-bud`}
                     {...{
                       bud,
                       playerId,
                     }}
                   />
-                </>
+                </Fragment>
               ))}
             </div>
           </fieldset>

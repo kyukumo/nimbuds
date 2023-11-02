@@ -2,7 +2,7 @@ import { GameState } from "../types";
 import { getRandomTarget } from "./getRandomTarget";
 
 export const getSetPlayersWithResetTargets =
-  ({ players }: GameState, playerIds: string[]) =>
+  ({ players, playerIds }: GameState) =>
   (targetId: string) => {
     const setPlayerWithResetTarget = (playerId: string) => {
       const player = players[playerId];

@@ -7,7 +7,7 @@ import {
   type Player,
   type Players,
 } from "./types";
-import { buds, maxLevel } from "./data/buds";
+import { buds, maxBuds, maxLevel } from "./data/buds";
 import { getSetPlayerForBattle } from "./lib/getPlayerForBattle";
 import { getStarterBuds } from "./lib/getStarterBuds";
 import { reduceCooldowns } from "./lib/reduceCooldowns";
@@ -28,7 +28,11 @@ const createPlayer = (
   playerIds: string[],
   duration = 0
 ): Player => {
-  const numberOfBuds = Math.max(Math.ceil(duration / oneMinute), 1);
+  const numberOfBuds = Math.min(
+    Math.max(Math.ceil(duration / oneMinute), 1),
+    maxBuds
+  );
+
   const buds = getStarterBuds(numberOfBuds);
   const [{ id: starterId }] = buds;
   const starters = [starterId];
@@ -246,6 +250,8 @@ Rune.initLogic({
     const duration = Rune.gameTime();
     game.duration = duration;
 
+    console.log(duration);
+
     const {
       phases: { [Phase.Train]: trainDuration },
     } = game;
@@ -270,10 +276,7 @@ Rune.initLogic({
           players: allPlayerIds.reduce<GameOverPlayers>(getGameOverPlayers, {}),
         });
       } else {
-        const setPlayersWithResetTargets = getSetPlayersWithResetTargets(
-          game,
-          allPlayerIds
-        );
+        const setPlayersWithResetTargets = getSetPlayersWithResetTargets(game);
 
         gameOvers.forEach(setPlayersWithResetTargets);
       }

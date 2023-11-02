@@ -37,8 +37,7 @@ export const setRivalsEvent = ({
       id: rivalId,
     });
 
-  const { players } = game;
-  const playerIds = Object.keys(players);
+  const playerIds = [...game.playerIds];
   const index = playerIds.indexOf(id);
   playerIds.splice(index, 1);
   playerIds.forEach(setRivalEvents);
