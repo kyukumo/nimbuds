@@ -14,15 +14,19 @@ const removeDefeatedBud = (all: NextBuds, bud: Bud) => {
   const { nextDefeatedBuds, nextBuds } = all;
   const isDefeated = hp <= 0;
 
+  const nextBud = {
+    ...bud,
+  };
+
   if (isDefeated)
     return {
       ...all,
-      nextDefeatedBuds: [...nextDefeatedBuds, bud],
+      nextDefeatedBuds: [...nextDefeatedBuds, nextBud],
     };
 
   return {
     ...all,
-    nextBuds: [...nextBuds, bud],
+    nextBuds: [...nextBuds, nextBud],
   };
 };
 
