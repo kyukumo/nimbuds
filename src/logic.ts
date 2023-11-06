@@ -20,7 +20,6 @@ import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
 import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
 import { getSetPlayersWithResetTargets } from "./lib/getSetPlayersWithResetTargets";
 import { moves } from "./data/moves";
-import { sortByKeys } from "./lib/sortByKeys";
 
 const oneMinute = 60000;
 
@@ -218,9 +217,7 @@ Rune.initLogic({
       const player = players[playerId];
       const { cooldowns } = player;
 
-      const hasCooldowns = Boolean(
-        Object.keys(cooldowns).sort(sortByKeys).length
-      );
+      const hasCooldowns = Boolean(Object.keys(cooldowns).sort().length);
 
       if (hasCooldowns) return;
 

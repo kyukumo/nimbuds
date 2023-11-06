@@ -1,10 +1,9 @@
-import { Cooldown, GameState, Move, Phase } from "../types";
+import { GameState, Move, Phase } from "../types";
 import { getFinishAttack } from "./getFinishAttack";
 import { getLevelUp } from "./getLevelUp";
 import { getGetCompleteCooldowns } from "./getGetCompleteCooldowns";
 import { maxLevel } from "../data/buds";
 import { moves } from "../data/moves";
-import { sortByKeys, sortEntriesByKeys } from "./sortByKeys";
 
 const getMoveSound = (move: Move) => moves[move].element;
 
@@ -14,16 +13,14 @@ export const reduceCooldowns = (game: GameState, id: string) => {
   const player = players[id];
   if (!player) return;
 
-  const hasCooldowns = Boolean(
-    Object.keys(player.cooldowns).sort(sortByKeys).length
-  );
+  const hasCooldowns = Boolean(Object.keys(player.cooldowns).sort().length);
 
   if (!hasCooldowns) return;
 
   const getCompleteCooldowns = getGetCompleteCooldowns(duration);
 
   const complete = Object.entries(player.cooldowns)
-    .sort(sortEntriesByKeys<Cooldown>)
+    .sort()
     .reduce<Move[]>(getCompleteCooldowns, []);
 
   const removeCooldown = (move: Move) => delete player.cooldowns[move];
