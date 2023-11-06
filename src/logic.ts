@@ -20,6 +20,7 @@ import { getGetGameOverPlayers } from "./lib/getGameOverPlayers";
 import { getGetPlayersWithNewTargets } from "./lib/getGetPlayersWithNewTargets";
 import { getSetPlayersWithResetTargets } from "./lib/getSetPlayersWithResetTargets";
 import { moves } from "./data/moves";
+import { sortByKeys } from "./lib/sortByKeys";
 
 const oneMinute = 60000;
 
@@ -217,7 +218,10 @@ Rune.initLogic({
       const player = players[playerId];
       const { cooldowns } = player;
 
-      const hasCooldowns = Boolean(Object.keys(cooldowns).length);
+      const hasCooldowns = Boolean(
+        Object.keys(cooldowns).sort(sortByKeys).length
+      );
+
       if (hasCooldowns) return;
 
       const previousBud = player.buds.shift();
@@ -249,8 +253,6 @@ Rune.initLogic({
   update: ({ allPlayerIds, game }) => {
     const duration = Rune.gameTime();
     game.duration = duration;
-
-    console.log(duration);
 
     const {
       phases: { [Phase.Train]: trainDuration },
