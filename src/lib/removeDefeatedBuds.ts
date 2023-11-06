@@ -1,4 +1,4 @@
-import { Bud, Buds, GameState } from "../types";
+import { Bud, CurrentBuds, GameState } from "../types";
 import { setEvent } from "./setEvent";
 
 type NextBuds = {
@@ -41,8 +41,8 @@ export const removeDefeatedBuds = (game: GameState, id: string) => {
     nextDefeatedBuds: [],
   });
 
-  player.buds = nextBuds as Buds;
-  player.defeatedBuds = [...defeatedBuds, ...nextDefeatedBuds] as Buds;
+  player.buds = nextBuds as CurrentBuds;
+  player.defeatedBuds = [...defeatedBuds, ...nextDefeatedBuds] as CurrentBuds;
 
   if (nextDefeatedBuds.length) player.cooldowns = {};
 

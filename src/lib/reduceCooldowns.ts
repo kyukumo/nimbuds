@@ -14,7 +14,6 @@ export const reduceCooldowns = (game: GameState, id: string) => {
   if (!player) return;
 
   const hasCooldowns = Boolean(Object.keys(player.cooldowns).sort().length);
-
   if (!hasCooldowns) return;
 
   const getCompleteCooldowns = getGetCompleteCooldowns(duration);
@@ -42,11 +41,10 @@ export const reduceCooldowns = (game: GameState, id: string) => {
       complete.forEach(levelUp);
     }
 
-    const { sounds: currentSounds } = player;
-    player.sounds = [...currentSounds, ...sounds];
+    player.sounds.push(...sounds);
   } else if (phase === Phase.Battle) {
     const finishAttack = getFinishAttack(game, id);
     complete.forEach(finishAttack);
-    game.sounds = [...game.sounds, ...sounds];
+    game.sounds.push(...sounds);
   }
 };

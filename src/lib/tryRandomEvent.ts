@@ -14,8 +14,8 @@ const setRandomEvent = (game: GameState, id: string) => {
   if (player.buds.length < maxBuds) {
     const nextBud = getRandomBud(player.starters);
 
-    player.buds = [...player.buds, nextBud] as CurrentBuds;
-    player.starters = [...player.starters, nextBud.id];
+    (player.buds as CurrentBuds).push(nextBud);
+    player.starters.push(nextBud.id);
 
     const { element, name } = nextBud;
     const elements = element.join("-");

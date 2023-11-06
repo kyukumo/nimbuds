@@ -1,6 +1,6 @@
 import {
   BattleType,
-  Bud,
+  CurrentBuds,
   GameOverPlayers,
   GameState,
   Phase,
@@ -218,13 +218,12 @@ Rune.initLogic({
       const { cooldowns } = player;
 
       const hasCooldowns = Boolean(Object.keys(cooldowns).sort().length);
-
       if (hasCooldowns) throw Rune.invalidAction();
 
       const previousBud = player.buds.shift();
 
       if (previousBud) {
-        (player.buds as Bud[]).push(previousBud);
+        (player.buds as CurrentBuds).push(previousBud);
 
         const [activeBud] = player.buds;
         const previousElements = previousBud.element.join("-");
