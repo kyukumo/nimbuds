@@ -125,7 +125,7 @@ Rune.initLogic({
       const { duration: time, phase, players } = game;
 
       const player = players[playerId];
-      if (!player) return;
+      if (!player) throw Rune.invalidAction();
 
       if (player.cooldowns[move]) {
         const { element, label } = moves[move];
@@ -169,19 +169,19 @@ Rune.initLogic({
       const { players } = game;
 
       const player = players[playerId];
-      if (!player) return;
+      if (!player) throw Rune.invalidAction();
 
       const [bud] = player.buds;
-      if (!bud) return;
+      if (!bud) throw Rune.invalidAction();
 
       const { ascends = maxLevel, next } = bud;
-      if (!next) return;
+      if (!next) throw Rune.invalidAction();
 
       const {
         stats: { hp, level = 1, xp },
       } = bud;
 
-      if (level < ascends) return;
+      if (level < ascends) throw Rune.invalidAction();
 
       const nextBud = {
         ...buds[next],
@@ -219,7 +219,7 @@ Rune.initLogic({
 
       const hasCooldowns = Boolean(Object.keys(cooldowns).sort().length);
 
-      if (hasCooldowns) return;
+      if (hasCooldowns) throw Rune.invalidAction();
 
       const previousBud = player.buds.shift();
 
@@ -247,7 +247,7 @@ Rune.initLogic({
       game.players[playerId].target = target;
     },
   },
-  update: ({ allPlayerIds, game }) => {
+  update: ({ game }) => {
     const duration = Rune.gameTime();
     game.duration = duration;
 
@@ -262,21 +262,23 @@ Rune.initLogic({
     }
 
     const setUpdates = getSetUpdates(game);
-    const gameOvers = allPlayerIds.reduce(setUpdates, []);
+    const gameOvers = game.playerIds.reduce(setUpdates, []);
 
     if (game.phase === Phase.Battle) {
-      const won = gameOvers.length === allPlayerIds.length - 1;
+      const won = gameOvers.length === game.playerIds.length - 1;
 
       if (won) {
         game.ended = true;
         const getGameOverPlayers = getGetGameOverPlayers(game);
 
         Rune.gameOver({
-          players: allPlayerIds.reduce<GameOverPlayers>(getGameOverPlayers, {}),
+          players: game.playerIds.reduce<GameOverPlayers>(
+            getGameOverPlayers,
+            {}
+          ),
         });
       } else {
         const setPlayersWithResetTargets = getSetPlayersWithResetTargets(game);
-
         gameOvers.forEach(setPlayersWithResetTargets);
       }
     }
